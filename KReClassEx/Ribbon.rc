@@ -1,0 +1,38 @@
+// ******************************************************************************
+// * This is an automatically generated file containing the ribbon resource for *
+// * your application.                                                          *
+// ******************************************************************************
+
+#include ".\Ribbon.h"
+
+STRINGTABLE 
+BEGIN
+    ID_TAB_HOME_LabelTitle_RESID L"Home" /* LabelTitle ID_TAB_HOME_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_TAB_MODIFY_LabelTitle_RESID L"Modify" /* LabelTitle ID_TAB_MODIFY_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_TAB_SETTINGS_LabelTitle_RESID L"Settings" /* LabelTitle ID_TAB_SETTINGS_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_GROUP_PROJECT_LabelTitle_RESID L"Project" /* LabelTitle ID_GROUP_PROJECT_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    GroupClipboard_LabelTitle_RESID L"Label:GroupClipboard" /* LabelTitle GroupClipboard_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    GroupView_LabelTitle_RESID L"Label:GroupView" /* LabelTitle GroupView_LabelTitle_RESID: (null) */
+END
+
+APPLICATION_RIBBON    UIFILE    "Ribbon.bml"
