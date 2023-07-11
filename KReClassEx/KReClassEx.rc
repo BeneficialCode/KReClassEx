@@ -14,26 +14,6 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// Chinese (Simplified, PRC) resources
-
-#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
-LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
-#pragma code_page(936)
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// Bitmap
-//
-
-ID_EDIT_UNDO            BITMAP                  "res\\Undo.bmp"
-
-ID_BTN_RESET            BITMAP                  "res\\reset.bmp"
-
-#endif    // Chinese (Simplified, PRC) resources
-/////////////////////////////////////////////////////////////////////////////
-
-
-/////////////////////////////////////////////////////////////////////////////
 // English (United States) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
@@ -335,11 +315,6 @@ END
 STRINGTABLE
 BEGIN
     ATL_IDS_MRU_FILE        "Open this document"
-END
-
-STRINGTABLE
-BEGIN
-    ID_BTN_RESET            "Reset the project\nReset"
 END
 
 #endif    // English (United States) resources

@@ -4,9 +4,6 @@
 //
 #define IDD_ABOUTBOX                    100
 #define IDR_MAINFRAME                   128
-#define IDB_BITMAP1                     201
-#define IDB_BITMAP2                     202
-#define ID_BTN_RESET                    202
 
 // Next default values for new objects
 // 

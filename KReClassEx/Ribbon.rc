@@ -7,6 +7,246 @@
 
 STRINGTABLE 
 BEGIN
+    ID_BTN_RESET_LabelTitle_RESID L"Reset" /* LabelTitle ID_BTN_RESET_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_BTN_RESET_TooltipTitle_RESID L"Reset" /* TooltipTitle ID_BTN_RESET_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_BTN_RESET_TooltipDescription_RESID L"Reset the project" /* TooltipDescription ID_BTN_RESET_TooltipDescription_RESID: (null) */
+END
+
+ID_BTN_RESET_LargeImages_RESID    BITMAP    ".\\res\\home_large_reset.bmp" /* LargeImages ID_BTN_RESET_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ID_BTN_SELECT_LabelTitle_RESID L"Select" /* LabelTitle ID_BTN_SELECT_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_BTN_SELECT_TooltipTitle_RESID L"Select" /* TooltipTitle ID_BTN_SELECT_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_BTN_SELECT_TooltipDescription_RESID L"Select the kernel module" /* TooltipDescription ID_BTN_SELECT_TooltipDescription_RESID: (null) */
+END
+
+ID_BTN_SELECT_LargeImages_RESID    BITMAP    ".\\res\\home_large_select.bmp" /* LargeImages ID_BTN_SELECT_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ID_BTN_NEW_LabelTitle_RESID L"New" /* LabelTitle ID_BTN_NEW_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_BTN_NEW_TooltipTitle_RESID L"New" /* TooltipTitle ID_BTN_NEW_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_BTN_NEW_TooltipDescription_RESID L"New a class" /* TooltipDescription ID_BTN_NEW_TooltipDescription_RESID: (null) */
+END
+
+ID_BTN_NEW_LargeImages_RESID    BITMAP    ".\\res\\home_large_class.bmp" /* LargeImages ID_BTN_NEW_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ID_BTN_EDIT_LabelTitle_RESID L"Edit" /* LabelTitle ID_BTN_EDIT_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_BTN_EDIT_TooltipTitle_RESID L"Edit" /* TooltipTitle ID_BTN_EDIT_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_BTN_EDIT_TooltipDescription_RESID L"Select a class to edit" /* TooltipDescription ID_BTN_EDIT_TooltipDescription_RESID: (null) */
+END
+
+ID_BTN_EDIT_LargeImages_RESID    BITMAP    ".\\res\\home_large_edit.bmp" /* LargeImages ID_BTN_EDIT_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ID_BTN_DELETE_LabelTitle_RESID L"Delete" /* LabelTitle ID_BTN_DELETE_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_BTN_DELETE_TooltipTitle_RESID L"Delete" /* TooltipTitle ID_BTN_DELETE_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_BTN_DELETE_TooltipDescription_RESID L"Delete a class" /* TooltipDescription ID_BTN_DELETE_TooltipDescription_RESID: (null) */
+END
+
+ID_BTN_DELETE_SmallImages_RESID    BITMAP    ".\\res\\home_small_delete.bmp" /* SmallImages ID_BTN_DELETE_SmallImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ID_BTN_CLEAN_UP_LabelTitle_RESID L"Clean Up" /* LabelTitle ID_BTN_CLEAN_UP_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_BTN_CLEAN_UP_TooltipTitle_RESID L"Clean Up" /* TooltipTitle ID_BTN_CLEAN_UP_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_BTN_CLEAN_UP_TooltipDescription_RESID L"Clean Up" /* TooltipDescription ID_BTN_CLEAN_UP_TooltipDescription_RESID: (null) */
+END
+
+ID_BTN_CLEAN_UP_SmallImages_RESID    BITMAP    ".\\res\\home_small_clean_up.bmp" /* SmallImages ID_BTN_CLEAN_UP_SmallImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ID_BTN_CODE_LabelTitle_RESID L"Code" /* LabelTitle ID_BTN_CODE_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_BTN_CODE_TooltipTitle_RESID L"Code" /* TooltipTitle ID_BTN_CODE_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_BTN_CODE_TooltipDescription_RESID L"Code for a class" /* TooltipDescription ID_BTN_CODE_TooltipDescription_RESID: (null) */
+END
+
+ID_BTN_CODE_SmallImages_RESID    BITMAP    ".\\res\\home_small_code.bmp" /* SmallImages ID_BTN_CODE_SmallImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ID_BTN_GENERATE_LabelTitle_RESID L"Generate" /* LabelTitle ID_BTN_GENERATE_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_BTN_GENERATE_TooltipTitle_RESID L"Generate" /* TooltipTitle ID_BTN_GENERATE_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_BTN_GENERATE_TooltipDescription_RESID L"Class code generate" /* TooltipDescription ID_BTN_GENERATE_TooltipDescription_RESID: (null) */
+END
+
+ID_BTN_GENERATE_LargeImages_RESID    BITMAP    ".\\res\\home_large_generate.bmp" /* LargeImages ID_BTN_GENERATE_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ID_BTN_HEADER_LabelTitle_RESID L"Header" /* LabelTitle ID_BTN_HEADER_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_BTN_HEADER_TooltipTitle_RESID L"Header" /* TooltipTitle ID_BTN_HEADER_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_BTN_HEADER_TooltipDescription_RESID L"Code file header" /* TooltipDescription ID_BTN_HEADER_TooltipDescription_RESID: (null) */
+END
+
+ID_BTN_HEADER_SmallImages_RESID    BITMAP    ".\\res\\home_small_header.bmp" /* SmallImages ID_BTN_HEADER_SmallImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ID_BTN_FOOTER_LabelTitle_RESID L"Footer" /* LabelTitle ID_BTN_FOOTER_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_BTN_FOOTER_TooltipTitle_RESID L"Footer" /* TooltipTitle ID_BTN_FOOTER_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_BTN_FOOTER_TooltipDescription_RESID L"Code file footer" /* TooltipDescription ID_BTN_FOOTER_TooltipDescription_RESID: (null) */
+END
+
+ID_BTN_FOOTER_SmallImages_RESID    BITMAP    ".\\res\\home_small_footer.bmp" /* SmallImages ID_BTN_FOOTER_SmallImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ID_BTN_TYPEDEF_LabelTitle_RESID L"TypeDef" /* LabelTitle ID_BTN_TYPEDEF_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_BTN_TYPEDEF_TooltipTitle_RESID L"TypeDef" /* TooltipTitle ID_BTN_TYPEDEF_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_BTN_TYPEDEF_TooltipDescription_RESID L"Type Define" /* TooltipDescription ID_BTN_TYPEDEF_TooltipDescription_RESID: (null) */
+END
+
+ID_BTN_TYPEDEF_SmallImages_RESID    BITMAP    ".\\res\\home_small_typedef.bmp" /* SmallImages ID_BTN_TYPEDEF_SmallImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ID_BTN_NOTES_LabelTitle_RESID L"Notes" /* LabelTitle ID_BTN_NOTES_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_BTN_NOTES_TooltipTitle_RESID L"Notes" /* TooltipTitle ID_BTN_NOTES_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_BTN_NOTES_TooltipDescription_RESID L"Notes" /* TooltipDescription ID_BTN_NOTES_TooltipDescription_RESID: (null) */
+END
+
+ID_BTN_NOTES_LargeImages_RESID    BITMAP    ".\\res\\home_large_notes.bmp" /* LargeImages ID_BTN_NOTES_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ID_BTN_SEARCH_LabelTitle_RESID L"Search" /* LabelTitle ID_BTN_SEARCH_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_BTN_SEARCH_TooltipTitle_RESID L"Search" /* TooltipTitle ID_BTN_SEARCH_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_BTN_SEARCH_TooltipDescription_RESID L"Search" /* TooltipDescription ID_BTN_SEARCH_TooltipDescription_RESID: (null) */
+END
+
+ID_BTN_SEARCH_LargeImages_RESID    BITMAP    ".\\res\\home_large_search.bmp" /* LargeImages ID_BTN_SEARCH_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ID_BTN_CONSOLE_LabelTitle_RESID L"Console" /* LabelTitle ID_BTN_CONSOLE_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_BTN_CONSOLE_TooltipTitle_RESID L"Console" /* TooltipTitle ID_BTN_CONSOLE_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_BTN_CONSOLE_TooltipDescription_RESID L"Console for debug" /* TooltipDescription ID_BTN_CONSOLE_TooltipDescription_RESID: (null) */
+END
+
+ID_BTN_CONSOLE_LargeImages_RESID    BITMAP    ".\\res\\home_large_console.bmp" /* LargeImages ID_BTN_CONSOLE_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ID_BTN_MODULES_LabelTitle_RESID L"Modules" /* LabelTitle ID_BTN_MODULES_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_BTN_MODULES_TooltipTitle_RESID L"Notes" /* TooltipTitle ID_BTN_MODULES_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_BTN_MODULES_TooltipDescription_RESID L"System Kernel Modules" /* TooltipDescription ID_BTN_MODULES_TooltipDescription_RESID: (null) */
+END
+
+ID_BTN_MODULES_LargeImages_RESID    BITMAP    ".\\res\\home_large_modules.bmp" /* LargeImages ID_BTN_MODULES_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
     ID_TAB_HOME_LabelTitle_RESID L"Home" /* LabelTitle ID_TAB_HOME_LabelTitle_RESID: (null) */
 END
 
@@ -27,12 +267,22 @@ END
 
 STRINGTABLE 
 BEGIN
-    GroupClipboard_LabelTitle_RESID L"Label:GroupClipboard" /* LabelTitle GroupClipboard_LabelTitle_RESID: (null) */
+    ID_GROUP_DRIVER_LabelTitle_RESID L"Driver" /* LabelTitle ID_GROUP_DRIVER_LabelTitle_RESID: (null) */
 END
 
 STRINGTABLE 
 BEGIN
-    GroupView_LabelTitle_RESID L"Label:GroupView" /* LabelTitle GroupView_LabelTitle_RESID: (null) */
+    ID_GROUP_CLASS_LabelTitle_RESID L"Class" /* LabelTitle ID_GROUP_CLASS_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_GROUP_CODE_LabelTitle_RESID L"Code" /* LabelTitle ID_GROUP_CODE_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_GROUP_TOOLS_LabelTitle_RESID L"Tools" /* LabelTitle ID_GROUP_TOOLS_LabelTitle_RESID: (null) */
 END
 
 APPLICATION_RIBBON    UIFILE    "Ribbon.bml"

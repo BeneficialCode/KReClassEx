@@ -39,8 +39,156 @@
 		<Command Name="wtl_VIEW_TOOLBAR" Symbol="ID_VIEW_TOOLBAR" Id="0xE800"/>
 		<Command Name="wtl_VIEW_STATUS_BAR" Symbol="ID_VIEW_STATUS_BAR" Id="0xE801"/>
 		<Command Name="wtl_VIEW_RIBBON" Symbol="ID_VIEW_RIBBON" Id="0xE804"/>
+
+		<Command Name="wtl_PROJECT_RESET" Symbol="ID_BTN_RESET" LabelTitle="Reset">
+			<Command.TooltipTitle>Reset</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Reset the project
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/home_large_reset.bmp"/>
+			</Command.LargeImages>
+		</Command>
 		
-		<Command Name="wtl_PROJECT_RESET" Symbol="ID_BTN_RESET" Id="0xCA"/>
+		<Command Name="wtl_DRIVER_SELECT" Symbol="ID_BTN_SELECT" LabelTitle="Select">
+			<Command.TooltipTitle>Select</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Select the kernel module
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/home_large_select.bmp"/>
+			</Command.LargeImages>
+		</Command>
+		
+		<Command Name="wtl_CLASS_NEW" Symbol="ID_BTN_NEW" LabelTitle="New">
+			<Command.TooltipTitle>New</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				New a class
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/home_large_class.bmp"/>
+			</Command.LargeImages>
+		</Command>
+		
+		<Command Name="wtl_CLASS_EDIT" Symbol="ID_BTN_EDIT" LabelTitle="Edit">
+			<Command.TooltipTitle>Edit</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Select a class to edit
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/home_large_edit.bmp"/>
+			</Command.LargeImages>
+		</Command>
+		
+		<Command Name="wtl_CLASS_DELETE" Symbol="ID_BTN_DELETE" LabelTitle="Delete">
+			<Command.TooltipTitle>Delete</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Delete a class
+			</Command.TooltipDescription>
+			<Command.SmallImages>
+				<Image Source="./res/home_small_delete.bmp"/>
+			</Command.SmallImages>
+		</Command>
+		
+		<Command Name="wtl_CLASS_CLEAN_UP" Symbol="ID_BTN_CLEAN_UP" LabelTitle="Clean Up">
+			<Command.TooltipTitle>Clean Up</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Clean Up
+			</Command.TooltipDescription>
+			<Command.SmallImages>
+				<Image Source="./res/home_small_clean_up.bmp"/>
+			</Command.SmallImages>
+		</Command>
+		
+		<Command Name="wtl_CLASS_CODE" Symbol="ID_BTN_CODE" LabelTitle="Code">
+			<Command.TooltipTitle>Code</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Code for a class
+			</Command.TooltipDescription>
+			<Command.SmallImages>
+				<Image Source="./res/home_small_code.bmp"/>
+			</Command.SmallImages>
+		</Command>
+		
+		<Command Name="wtl_CODE_GENERATE" Symbol="ID_BTN_GENERATE" LabelTitle="Generate">
+			<Command.TooltipTitle>Generate</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Class code generate
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/home_large_generate.bmp"/>
+			</Command.LargeImages>
+		</Command>
+		
+		<Command Name="wtl_CODE_HEADER" Symbol="ID_BTN_HEADER" LabelTitle="Header">
+			<Command.TooltipTitle>Header</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Code file header
+			</Command.TooltipDescription>
+			<Command.SmallImages>
+				<Image Source="./res/home_small_header.bmp"/>
+			</Command.SmallImages>
+		</Command>
+		
+		<Command Name="wtl_CODE_FOOTER" Symbol="ID_BTN_FOOTER" LabelTitle="Footer">
+			<Command.TooltipTitle>Footer</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Code file footer
+			</Command.TooltipDescription>
+			<Command.SmallImages>
+				<Image Source="./res/home_small_footer.bmp"/>
+			</Command.SmallImages>
+		</Command>
+		
+		<Command Name="wtl_CODE_TYPEDEF" Symbol="ID_BTN_TYPEDEF" LabelTitle="TypeDef">
+			<Command.TooltipTitle>TypeDef</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Type Define
+			</Command.TooltipDescription>
+			<Command.SmallImages>
+				<Image Source="./res/home_small_typedef.bmp"/>
+			</Command.SmallImages>
+		</Command>
+		
+		<Command Name="wtl_TOOLS_NOTES" Symbol="ID_BTN_NOTES" LabelTitle="Notes">
+			<Command.TooltipTitle>Notes</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Notes
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/home_large_notes.bmp"/>
+			</Command.LargeImages>
+		</Command>
+		
+		<Command Name="wtl_TOOLS_SEARCH" Symbol="ID_BTN_SEARCH" LabelTitle="Search">
+			<Command.TooltipTitle>Search</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Search
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/home_large_search.bmp"/>
+			</Command.LargeImages>
+		</Command>
+		
+		<Command Name="wtl_TOOLS_CONSOLE" Symbol="ID_BTN_CONSOLE" LabelTitle="Console">
+			<Command.TooltipTitle>Console</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Console for debug
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/home_large_console.bmp"/>
+			</Command.LargeImages>
+		</Command>
+				 
+		<Command Name="wtl_TOOLS_MODULES" Symbol="ID_BTN_MODULES" LabelTitle="Modules">
+			<Command.TooltipTitle>Notes</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				System Kernel Modules
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/home_large_modules.bmp"/>
+			</Command.LargeImages>
+		</Command>
 
 
 		<!-- Tabs -->
@@ -54,12 +202,16 @@
 				 LabelTitle="Settings"/>
 
 		<!-- Groups -->
-		<!--<Command Name="GroupClipboard" Symbol="ID_GROUP_CLIPBOARD"
-                 LabelTitle="Clipboard" />
-		<Command Name="GroupView" Symbol="ID_GROUP_VIEW"
-                 LabelTitle="View" />-->
 		<Command Name="GroupProject" Symbol="ID_GROUP_PROJECT"
 				 LabelTitle="Project"/>
+		<Command Name="GroupDriver" Symbol="ID_GROUP_DRIVER"
+				 LabelTitle="Driver"/>
+		<Command Name="GroupClass" Symbol="ID_GROUP_CLASS"
+				 LabelTitle="Class"/>
+		<Command Name="GroupCode" Symbol="ID_GROUP_CODE"
+				 LabelTitle="Code"/>
+		<Command Name="GroupTools" Symbol="ID_GROUP_TOOLS"
+				 LabelTitle="Tools"/>
 
 		<!-- App Menu, MRU list, Help button and Quick Access Toolbar -->
 		<Command Name="AppMenu" Symbol="ID_RIBBON_APP_MENU"/>
@@ -108,6 +260,7 @@
 					</MenuGroup>
 				</ApplicationMenu>
 			</Ribbon.ApplicationMenu >
+
 			
 			<!-- Help button -->
 			<Ribbon.HelpButton>
@@ -132,8 +285,8 @@
 					<Tab.ScalingPolicy>
 						<ScalingPolicy>
 							<ScalingPolicy.IdealSizes>
-								<!--<Scale Group="GroupClipboard" Size="Medium"/>
-								<Scale Group="GroupView" Size="Large"/>-->
+								<Scale Group="GroupClass" Size="Medium"/>
+								<Scale Group="GroupCode" Size="Medium"/>
 							</ScalingPolicy.IdealSizes>
 						</ScalingPolicy>
 					</Tab.ScalingPolicy>
@@ -141,36 +294,31 @@
 					<Group CommandName="GroupProject" SizeDefinition="OneButton">
 						<Button CommandName="wtl_PROJECT_RESET"/>
 					</Group>
-
-					<Group CommandName="GroupClipboard" SizeDefinition="FourButtons">
-						<Button CommandName="wtl_EDIT_UNDO"/>
-						<Button CommandName="wtl_EDIT_PASTE"/>
-						<Button CommandName="wtl_EDIT_CUT"/>
-						<Button CommandName="wtl_EDIT_COPY"/>
+				
+					<Group CommandName="GroupDriver" SizeDefinition="OneButton">
+						<Button CommandName="wtl_DRIVER_SELECT"/>
 					</Group>
-
-					<Group CommandName="GroupView">
-						<SizeDefinition>
-							<ControlNameMap>
-								<ControlNameDefinition Name="wtl_VIEW_STATUS_BAR"/>
-							</ControlNameMap>
-							<GroupSizeDefinition Size="Large">
-								<ControlSizeDefinition ControlName="wtl_VIEW_STATUS_BAR"
-                                                       ImageSize="Small"
-                                                       IsLabelVisible="true" />
-							</GroupSizeDefinition>
-							<GroupSizeDefinition Size="Medium">
-								<ControlSizeDefinition ControlName="wtl_VIEW_STATUS_BAR"
-                                                       ImageSize="Small"
-                                                       IsLabelVisible="true" />
-							</GroupSizeDefinition>
-							<GroupSizeDefinition Size="Small">
-								<ControlSizeDefinition ControlName="wtl_VIEW_STATUS_BAR"
-                                                       ImageSize="Small"
-                                                       IsLabelVisible="false" />
-							</GroupSizeDefinition>
-						</SizeDefinition>
-						<CheckBox CommandName="wtl_VIEW_STATUS_BAR"/>
+				
+					<Group CommandName="GroupClass" SizeDefinition="FiveButtons">
+						<Button CommandName="wtl_CLASS_NEW"/>
+						<Button CommandName="wtl_CLASS_EDIT"/>
+						<Button CommandName="wtl_CLASS_DELETE"/>
+						<Button CommandName="wtl_CLASS_CLEAN_UP"/>
+						<Button CommandName="wtl_CLASS_CODE"/>
+					</Group>
+				
+					<Group CommandName="GroupCode" SizeDefinition="FourButtons">
+						<Button CommandName="wtl_CODE_GENERATE"/>
+						<Button CommandName="wtl_CODE_HEADER"/>
+						<Button CommandName="wtl_CODE_FOOTER"/>
+						<Button CommandName="wtl_CODE_TYPEDEF"/>
+					</Group>
+				
+					<Group CommandName="GroupTools" SizeDefinition="FourButtons">
+						<Button CommandName="wtl_TOOLS_NOTES"/>
+						<Button CommandName="wtl_TOOLS_CONSOLE"/>
+						<Button CommandName="wtl_TOOLS_SEARCH"/>
+						<Button CommandName="wtl_TOOLS_MODULES"/>
 					</Group>
 				</Tab>
 
