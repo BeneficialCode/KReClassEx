@@ -81,3 +81,8 @@ LRESULT CMainFrame::OnAppAbout(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCt
 	dlg.DoModal();
 	return 0;
 }
+
+LRESULT CMainFrame::OnSelect(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/) {
+	
+	return 0;
+}
