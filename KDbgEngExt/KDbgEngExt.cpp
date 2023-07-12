@@ -1,29 +1,14 @@
 #include "pch.h"
+#include "winsock.h"
+#include "KDbgEngExt.h"
+#include "server.h"
+#include "utils.h"
 
-// Including SDKDDKVer.h defines the highest available Windows platform.
+#ifndef SSMAXCONN
+#define SSMAXCONN 1024
+#endif
 
-// If you wish to build your application for a previous Windows platform, include WinSDKVer.h and
-// set the _WIN32_WINNT macro to the platform you wish to support before including SDKDDKVer.h.
-
-#include <sdkddkver.h>
-
-// Windows Header Files
-#include <Windows.h>
-#include <stdio.h>
-
-//
-// Define KDEXT_64BIT to make all wdbgexts APIs recognize 64 bit addresses
-// It is recommended for extensions to use 64 bit headers from wdbgexts so
-// the extensions could support 64 bit targets.
-//
-#define KDEXT_64BIT
-#include <DbgEng.h>
-
-#include <tchar.h>
-#include <strsafe.h>
-#include <DbgHelp.h>
-
-#pragma comment (lib, "dbgeng.lib")
+using json = nlohmann::json;
 
 #define DBGEXT_DEF extern "C" __declspec(dllexport) HRESULT __cdecl
 
@@ -31,8 +16,12 @@ PDEBUG_CLIENT g_DebugClient = NULL;
 PDEBUG_CONTROL4 g_DebugControl = NULL;
 PDEBUG_DATA_SPACES g_DebugDataSpaces = NULL;
 
+extern std::list<server_t*> g_connections;
+
 EXTERN_C __declspec(dllexport) void __cdecl DebugExtensionUninitialize(void);
 extern void __cdecl dprintf(PCSTR Format, ...);
+
+DWORD WINAPI TunnelThread(void* params);
 
 // DbgEng requires all extensions to implement this function.
 EXTERN_C __declspec(dllexport) HRESULT __cdecl
@@ -110,4 +99,63 @@ dprintf(PCSTR Format, ...)
 	va_start(Args, Format);
 	g_DebugControl->OutputVaList(DEBUG_OUTPUT_ERROR, Format, Args);
 	va_end(Args);
+}
+
+DWORD WINAPI TunnelThread(void* params) {
+	int ret = 0;
+
+	std::ifstream f("config.json");
+	json data;
+	try
+	{
+		data = json::parse(f);
+	}
+	catch (json::parse_error& ex)
+	{
+		dprintf("parser error %s\n", ex.what());
+		return 1;
+	}
+
+	winsock_init();
+
+	evthread_use_windows_threads();
+
+	struct event_base* base = event_base_new();
+
+	// initialize listen context
+	listen_ctx listen_ctx;
+
+	std::string host = data["server"].get<std::string>();
+	std::string port = data["server_port"].get<std::string>();
+	int timeout = data["timeout"].get<int>();
+
+	if (ss_is_ipv6addr(host.c_str())) {
+		dprintf("tcp server listening at [%s]:%s", host, port);
+	}
+	else
+		dprintf("tcp server listening at %s:%s", host.c_str(), port.c_str());
+
+	// Bind to port
+	int listenfd;
+	listenfd = create_and_bind(host.c_str(), port.c_str());
+	if (listenfd == -1) {
+		return 2;
+	}
+	if (listen(listenfd, SSMAXCONN) == -1) {
+		dprintf("listen() error!\n");
+		return 3;
+	}
+	setnonblocking(listenfd);
+	
+	// Setup context
+	listen_ctx.timeout = timeout;
+	listen_ctx.fd = listenfd;
+	listen_ctx.base = base;
+
+	listen_ctx.io = event_new(base, listenfd, EV_READ | EV_PERSIST,
+		accept_cb, &listen_ctx);
+
+
+
+	return ret;
 }
