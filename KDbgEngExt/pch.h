@@ -37,6 +37,8 @@
 #include <event2/thread.h>
 
 #include <fstream>
+#include <algorithm>
+
 #include "nlohmann/json.hpp"
 #include "common.h"
 

@@ -37,11 +37,11 @@
 #define ID_BTN_RESET_TooltipTitle_RESID 60002
 #define ID_BTN_RESET_TooltipDescription_RESID 60003
 #define ID_BTN_RESET_LargeImages_RESID 60004
-#define ID_BTN_SELECT 3 
-#define ID_BTN_SELECT_LabelTitle_RESID 60005
-#define ID_BTN_SELECT_TooltipTitle_RESID 60006
-#define ID_BTN_SELECT_TooltipDescription_RESID 60007
-#define ID_BTN_SELECT_LargeImages_RESID 60008
+#define ID_BTN_CONNECT 3 
+#define ID_BTN_CONNECT_LabelTitle_RESID 60005
+#define ID_BTN_CONNECT_TooltipTitle_RESID 60006
+#define ID_BTN_CONNECT_TooltipDescription_RESID 60007
+#define ID_BTN_CONNECT_LargeImages_RESID 60008
 #define ID_BTN_NEW 4 
 #define ID_BTN_NEW_LabelTitle_RESID 60009
 #define ID_BTN_NEW_TooltipTitle_RESID 60010
@@ -115,8 +115,8 @@
 #define ID_TAB_SETTINGS_LabelTitle_RESID 60063
 #define ID_GROUP_PROJECT 20 
 #define ID_GROUP_PROJECT_LabelTitle_RESID 60064
-#define ID_GROUP_DRIVER 21 
-#define ID_GROUP_DRIVER_LabelTitle_RESID 60065
+#define ID_GROUP_KERNEL 21 
+#define ID_GROUP_KERNEL_LabelTitle_RESID 60065
 #define ID_GROUP_CLASS 22 
 #define ID_GROUP_CLASS_LabelTitle_RESID 60066
 #define ID_GROUP_CODE 23 

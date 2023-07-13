@@ -23,20 +23,20 @@ END
 ID_BTN_RESET_LargeImages_RESID    BITMAP    ".\\res\\home_large_reset.bmp" /* LargeImages ID_BTN_RESET_LargeImages_RESID: (null) */
 STRINGTABLE 
 BEGIN
-    ID_BTN_SELECT_LabelTitle_RESID L"Select" /* LabelTitle ID_BTN_SELECT_LabelTitle_RESID: (null) */
+    ID_BTN_CONNECT_LabelTitle_RESID L"Connect" /* LabelTitle ID_BTN_CONNECT_LabelTitle_RESID: (null) */
 END
 
 STRINGTABLE 
 BEGIN
-    ID_BTN_SELECT_TooltipTitle_RESID L"Select" /* TooltipTitle ID_BTN_SELECT_TooltipTitle_RESID: (null) */
+    ID_BTN_CONNECT_TooltipTitle_RESID L"Connect" /* TooltipTitle ID_BTN_CONNECT_TooltipTitle_RESID: (null) */
 END
 
 STRINGTABLE 
 BEGIN
-    ID_BTN_SELECT_TooltipDescription_RESID L"Select the kernel module" /* TooltipDescription ID_BTN_SELECT_TooltipDescription_RESID: (null) */
+    ID_BTN_CONNECT_TooltipDescription_RESID L"Connect the kernel debugger" /* TooltipDescription ID_BTN_CONNECT_TooltipDescription_RESID: (null) */
 END
 
-ID_BTN_SELECT_LargeImages_RESID    BITMAP    ".\\res\\home_large_select.bmp" /* LargeImages ID_BTN_SELECT_LargeImages_RESID: (null) */
+ID_BTN_CONNECT_LargeImages_RESID    BITMAP    ".\\res\\home_large_select.bmp" /* LargeImages ID_BTN_CONNECT_LargeImages_RESID: (null) */
 STRINGTABLE 
 BEGIN
     ID_BTN_NEW_LabelTitle_RESID L"New" /* LabelTitle ID_BTN_NEW_LabelTitle_RESID: (null) */
@@ -267,7 +267,7 @@ END
 
 STRINGTABLE 
 BEGIN
-    ID_GROUP_DRIVER_LabelTitle_RESID L"Driver" /* LabelTitle ID_GROUP_DRIVER_LabelTitle_RESID: (null) */
+    ID_GROUP_KERNEL_LabelTitle_RESID L"Kernel" /* LabelTitle ID_GROUP_KERNEL_LabelTitle_RESID: (null) */
 END
 
 STRINGTABLE 

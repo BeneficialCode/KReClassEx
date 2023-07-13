@@ -8,6 +8,9 @@
 
 #include "aboutdlg.h"
 #include "MainFrm.h"
+#include "local.h"
+
+int g_socket = 0;
 
 BOOL CMainFrame::PreTranslateMessage(MSG* pMsg)
 {
@@ -82,7 +85,22 @@ LRESULT CMainFrame::OnAppAbout(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCt
 	return 0;
 }
 
-LRESULT CMainFrame::OnSelect(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/) {
-	
+LRESULT CMainFrame::OnConnect(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/) {
+	HANDLE hThread = ::CreateThread(nullptr, 0, TunnelThread,
+		nullptr, 0, nullptr
+	);
+	if (hThread != NULL)
+		::CloseHandle(hThread);
+
 	return 0;
+}
+
+DWORD WINAPI CMainFrame::TunnelThread(void* params) {
+	const profile_t profile = {
+		.remote_host = const_cast<char*>("127.0.0.1"),
+		.remote_port = 9000,
+		.timeout = 5000
+	};
+
+	return start_local(profile);
 }

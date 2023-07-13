@@ -13,6 +13,9 @@
       <UniqueIdentifier>{c8852697-b06e-4c29-b097-ed1504d2fb74}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;jpg;jpeg;jpe;manifest</Extensions>
     </Filter>
+    <Filter Include="libevent">
+      <UniqueIdentifier>{f0020fbc-9537-4643-bde0-a30369e47143}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -26,6 +29,21 @@
     </ClCompile>
     <ClCompile Include="AboutDlg.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="local.cpp">
+      <Filter>libevent</Filter>
+    </ClCompile>
+    <ClCompile Include="winsock.cpp">
+      <Filter>libevent</Filter>
+    </ClCompile>
+    <ClCompile Include="utils.cpp">
+      <Filter>libevent</Filter>
+    </ClCompile>
+    <ClCompile Include="netutils.cpp">
+      <Filter>libevent</Filter>
+    </ClCompile>
+    <ClCompile Include="crypto.cpp">
+      <Filter>libevent</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -43,6 +61,27 @@
     </ClInclude>
     <ClInclude Include="Ribbon.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="winsock.h">
+      <Filter>libevent</Filter>
+    </ClInclude>
+    <ClInclude Include="local.h">
+      <Filter>libevent</Filter>
+    </ClInclude>
+    <ClInclude Include="common.h">
+      <Filter>libevent</Filter>
+    </ClInclude>
+    <ClInclude Include="utils.h">
+      <Filter>libevent</Filter>
+    </ClInclude>
+    <ClInclude Include="jconf.h">
+      <Filter>libevent</Filter>
+    </ClInclude>
+    <ClInclude Include="netutils.h">
+      <Filter>libevent</Filter>
+    </ClInclude>
+    <ClInclude Include="crypto.h">
+      <Filter>libevent</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

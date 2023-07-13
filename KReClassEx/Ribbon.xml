@@ -50,10 +50,10 @@
 			</Command.LargeImages>
 		</Command>
 		
-		<Command Name="wtl_DRIVER_SELECT" Symbol="ID_BTN_SELECT" LabelTitle="Select">
-			<Command.TooltipTitle>Select</Command.TooltipTitle>
+		<Command Name="wtl_KERNEL_CONNECT" Symbol="ID_BTN_CONNECT" LabelTitle="Connect">
+			<Command.TooltipTitle>Connect</Command.TooltipTitle>
 			<Command.TooltipDescription>
-				Select the kernel module
+				Connect the kernel debugger
 			</Command.TooltipDescription>
 			<Command.LargeImages>
 				<Image Source="./res/home_large_select.bmp"/>
@@ -204,8 +204,8 @@
 		<!-- Groups -->
 		<Command Name="GroupProject" Symbol="ID_GROUP_PROJECT"
 				 LabelTitle="Project"/>
-		<Command Name="GroupDriver" Symbol="ID_GROUP_DRIVER"
-				 LabelTitle="Driver"/>
+		<Command Name="GroupKernel" Symbol="ID_GROUP_KERNEL"
+				 LabelTitle="Kernel"/>
 		<Command Name="GroupClass" Symbol="ID_GROUP_CLASS"
 				 LabelTitle="Class"/>
 		<Command Name="GroupCode" Symbol="ID_GROUP_CODE"
@@ -295,8 +295,8 @@
 						<Button CommandName="wtl_PROJECT_RESET"/>
 					</Group>
 				
-					<Group CommandName="GroupDriver" SizeDefinition="OneButton">
-						<Button CommandName="wtl_DRIVER_SELECT"/>
+					<Group CommandName="GroupKernel" SizeDefinition="OneButton">
+						<Button CommandName="wtl_KERNEL_CONNECT"/>
 					</Group>
 				
 					<Group CommandName="GroupClass" SizeDefinition="FiveButtons">

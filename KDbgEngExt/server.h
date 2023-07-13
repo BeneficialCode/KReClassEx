@@ -1,5 +1,12 @@
 #pragma once
 
+struct server;
+typedef struct server_ctx {
+	struct event* io;
+	struct event* watcher;
+	int connected;
+	struct server* server;
+}server_ctx_t;
 
 typedef struct server {
 	int fd;
@@ -11,7 +18,6 @@ typedef struct server {
 	struct server_ctx* recv_ctx;
 	struct server_ctx* send_ctx;
 	struct listen_ctx* listen_ctx;
-	struct remote* remote;
 }server_t;
 
 typedef struct listen_ctx {
@@ -21,9 +27,16 @@ typedef struct listen_ctx {
 	int timeout;
 }listen_ctx_t;
 
-server_t* new_server(int fd, listen_ctx_t* listener);
 
+server_t* new_server(int fd, listen_ctx_t* listener);
 
 int create_and_bind(const char* host, 
 	const char* port);
 void accept_cb(evutil_socket_t fd, short event, void* arg);
+void server_recv_cb(evutil_socket_t fd, short events, void* arg);
+void server_send_cb(evutil_socket_t fd, short events, void* arg);
+void server_timeout_cb(evutil_socket_t fd, short events, void* arg);
+void close_and_free_server(server_t* server);
+void free_server(server_t* server);
+
+void free_connections();
