@@ -48,4 +48,6 @@ public:
 	LRESULT OnConnect(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/);
 
 	static DWORD WINAPI TunnelThread(void* params);
+
+
 };

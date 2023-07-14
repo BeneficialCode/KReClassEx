@@ -39,6 +39,8 @@
 #include <fstream>
 #include <algorithm>
 
+#include <inttypes.h>
+
 #include "nlohmann/json.hpp"
 #include "common.h"
 

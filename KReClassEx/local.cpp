@@ -21,6 +21,9 @@ static int ipv6first = 0;
 struct timeval tv;
 int no_delay = 0;
 extern int g_socket;
+extern void* g_pData;
+extern ULONG g_TotalSize;
+extern ULONG g_idx;
 
 int start_local(profile_t profile) {
 	char* remote_host = profile.remote_host;
@@ -213,15 +216,22 @@ void remote_recv_cb(evutil_socket_t fd, short events, void* arg) {
         }
     }
 
-    // Todo: handle the data
-
-
     // Disable TCP_NODELAY after the first response are sent
     if (!remote->recv_ctx->connected && !no_delay) {
         int opt = 0;
         setsockopt(remote->fd, SOL_TCP, TCP_NODELAY, (char*)&opt, sizeof(opt));
     }
     remote->recv_ctx->connected = 1;
+    
+    remote->buf->len = r;
+
+    // Todo: handle the data
+    memcpy_s((char*)g_pData + g_idx, r, remote->buf->data, remote->buf->len);
+    g_idx += r;
+    g_TotalSize -= r;
+    if (g_TotalSize == 0) {
+        printf("Complete!\n");
+    }
 }
 
 void remote_send_cb(evutil_socket_t fd, short events, void* arg) {
