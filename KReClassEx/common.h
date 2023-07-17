@@ -32,6 +32,17 @@ typedef struct buffer {
 
 #define SVERSION 0x01
 
+enum class MsgType {
+    ReadMemory,
+    GetStatus,
+    HeartBeat,
+};
+
+typedef struct _PACKET_HEADER {
+    MsgType Type;
+    ULONG Length;
+}PACKET_HEADER,*PPACKET_HEADER;
+
 typedef struct _READ_MEMORY_INFO {
     unsigned char Version;
     ULONG64 Address;
@@ -39,7 +50,8 @@ typedef struct _READ_MEMORY_INFO {
     ULONG ReadSize;
 }READ_MEMORY_INFO, * PREAD_MEMORY_INFO;
 
-typedef struct _MEMORY_DATA_HEADER {
+typedef struct _MEMORY_DATA {
     ULONG64 Address;
     ULONG TotalSize;
-}MEMORY_DATA_HEADER, * PMEMORY_DATA_HEADER;
+    UCHAR Data[1];
+}MEMORY_DATA, * PMEMORY_DATA;

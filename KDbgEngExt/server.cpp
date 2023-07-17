@@ -186,71 +186,7 @@ void server_recv_cb(evutil_socket_t fd, short events, void* arg) {
 	// handle data
 	dprintf("total received bytes: %I64u\n", tx);
 
-	if (buf->data[0] != SVERSION) {
-		close_and_free_server(server);
-		return;
-	}
-	if (buf->len < sizeof(READ_MEMORY_INFO)) {
-		return;
-	}
-
-	PREAD_MEMORY_INFO info = (PREAD_MEMORY_INFO)buf->data;
-	dprintf("read memory request: Version: %x Address: %p, IsVirtual: %d, ReadSize: %x\n",
-		info->Version, info->Address, info->IsVirtual, info->ReadSize);
-
-	void* pData = ::VirtualAlloc(nullptr, info->ReadSize, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
-	if (!pData) {
-		dprintf("alloc memory failed!\n");
-		return;
-	}
-	if (info->IsVirtual) {
-		memset(pData, 0, info->ReadSize);
-		ULONG bytes = 0;
-
-		do
-		{
-			ULONG status;
-			HRESULT hr = g_DebugControl->GetExecutionStatus(&status);
-			if (FAILED(hr)) {
-				dprintf("get status failed!\n");
-				break;
-			}
-			if (status != DEBUG_STATUS_BREAK) {
-				dprintf("please break the windbg!\n");
-				break;
-			}
-			dprintf("status: %d\n", status);
-			hr = g_DebugDataSpaces->ReadVirtual(info->Address, pData, info->ReadSize, &bytes);
-			if (FAILED(hr)) {
-				dprintf("read virtual failed!\n");
-				break;
-			}
-			dprintf("read bytes: %x\n", bytes);
-			// send the data
-			size_t sent = 0;
-			ULONG size = 1 << 10; // 1kb
-			while (info->ReadSize > 0) {
-				int s = send(fd, (char*)pData + sent, std::min<ULONG>(size, info->ReadSize), 0);
-				if (s == -1) {
-					if (GETSOCKETERRNO() == EAGAIN || GETSOCKETERRNO() == EWOULDBLOCK) {
-						break;
-					}
-					else {
-						close_and_free_server(server);
-						break;
-					}
-				}
-				sent += s;
-				info->ReadSize -= s;
-			}
-		} while (FALSE);
-	}
-	else {
-
-	}
-
-	::VirtualFree(pData, 0, MEM_RELEASE);
-	pData = nullptr;
+	
 }
 
 void server_send_cb(evutil_socket_t fd, short events, void* arg) {

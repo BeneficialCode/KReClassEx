@@ -33,7 +33,7 @@ typedef struct _READ_MEMORY_INFO {
     ULONG ReadSize;
 }READ_MEMORY_INFO, * PREAD_MEMORY_INFO;
 
-typedef struct _MEMORY_DATA_HEADER {
+typedef struct _MEMORY_DATA {
     ULONG64 Address;
     ULONG TotalSize;
-}MEMORY_DATA_HEADER, * PMEMORY_DATA_HEADER;
+}MEMORY_DATA, * PMEMORY_DATA;

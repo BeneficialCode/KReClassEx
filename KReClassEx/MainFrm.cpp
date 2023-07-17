@@ -12,9 +12,7 @@
 #include <Psapi.h>
 
 int g_socket = 0;
-void* g_pData = nullptr;
-ULONG g_TotalSize = 0;
-ULONG g_idx = 0;
+extern HANDLE g_hSem;
 
 BOOL CMainFrame::PreTranslateMessage(MSG* pMsg)
 {
@@ -84,17 +82,6 @@ LRESULT CMainFrame::OnViewStatusBar(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*h
 
 LRESULT CMainFrame::OnAppAbout(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
 {
-	READ_MEMORY_INFO info;
-	info.Address = 0x00aa0000;
-	info.IsVirtual = true;
-	info.Version = SVERSION;
-	info.ReadSize = 0x257000;
-	g_TotalSize = info.ReadSize;
-	g_idx = 0;
-	g_pData = ::VirtualAlloc(nullptr, g_TotalSize, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
-	if (g_pData) {
-		send(g_socket, (const char*)&info, sizeof(info), 0);
-	}
 	CAboutDlg dlg;
 	dlg.DoModal();
 	return 0;

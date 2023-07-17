@@ -21,9 +21,7 @@ static int ipv6first = 0;
 struct timeval tv;
 int no_delay = 0;
 extern int g_socket;
-extern void* g_pData;
-extern ULONG g_TotalSize;
-extern ULONG g_idx;
+HANDLE g_hSem = NULL;
 
 int start_local(profile_t profile) {
 	char* remote_host = profile.remote_host;
@@ -39,6 +37,10 @@ int start_local(profile_t profile) {
 
 	struct event_base* base = event_base_new();
 
+    g_hSem = ::CreateSemaphore(nullptr, 1, 1, nullptr);
+    if (g_hSem == NULL) {
+        return -1;
+    }
     
 	struct sockaddr_storage* storage = (sockaddr_storage*)ss_malloc(sizeof(struct sockaddr_storage));
 	memset(storage, 0, sizeof(struct sockaddr_storage));
@@ -80,6 +82,10 @@ int start_local(profile_t profile) {
     }
 
     winsock_cleanup();
+
+    if (g_hSem != NULL) {
+        CloseHandle(g_hSem);
+    }
 
     return 0;
 }
@@ -226,12 +232,7 @@ void remote_recv_cb(evutil_socket_t fd, short events, void* arg) {
     remote->buf->len = r;
 
     // Todo: handle the data
-    memcpy_s((char*)g_pData + g_idx, r, remote->buf->data, remote->buf->len);
-    g_idx += r;
-    g_TotalSize -= r;
-    if (g_TotalSize == 0) {
-        printf("Complete!\n");
-    }
+    
 }
 
 void remote_send_cb(evutil_socket_t fd, short events, void* arg) {
