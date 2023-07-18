@@ -38,6 +38,7 @@
 
 #include <fstream>
 #include <algorithm>
+#include <unordered_map>
 
 #include <inttypes.h>
 

@@ -36,15 +36,16 @@ enum class MsgType {
     ReadMemory,
     GetStatus,
     HeartBeat,
+    MemoryData,
 };
 
 typedef struct _PACKET_HEADER {
+    UCHAR Version;
     MsgType Type;
     ULONG Length;
 }PACKET_HEADER,*PPACKET_HEADER;
 
 typedef struct _READ_MEMORY_INFO {
-    unsigned char Version;
     ULONG64 Address;
     bool IsVirtual;
     ULONG ReadSize;

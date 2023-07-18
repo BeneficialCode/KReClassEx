@@ -26,8 +26,20 @@ typedef struct buffer {
 
 #define SVERSION 0x01
 
+enum class MsgType {
+    ReadMemory,
+    GetStatus,
+    HeartBeat,
+    MemoryData,
+};
+
+typedef struct _PACKET_HEADER {
+    UCHAR Version;
+    MsgType Type;
+    ULONG Length;
+}PACKET_HEADER, * PPACKET_HEADER;
+
 typedef struct _READ_MEMORY_INFO {
-    unsigned char Version;
     ULONG64 Address;
     bool IsVirtual;
     ULONG ReadSize;
@@ -36,4 +48,5 @@ typedef struct _READ_MEMORY_INFO {
 typedef struct _MEMORY_DATA {
     ULONG64 Address;
     ULONG TotalSize;
+    UCHAR Data[1];
 }MEMORY_DATA, * PMEMORY_DATA;

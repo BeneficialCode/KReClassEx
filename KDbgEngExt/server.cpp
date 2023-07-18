@@ -6,6 +6,7 @@
 #include "utils.h"
 #include "crypto.h"
 #include "jconf.h"
+#include <event2/buffer.h>
 
 std::list<server_t*> g_connections;
 
@@ -14,6 +15,9 @@ uint64_t tx = 0;
 uint64_t rx = 0;
 extern PDEBUG_DATA_SPACES g_DebugDataSpaces;
 extern PDEBUG_CONTROL4 g_DebugControl;
+
+std::unordered_map<int, struct evbuffer*> g_mem_map;
+std::unordered_map<int, HANDLE> g_sem_map;
 
 int create_and_bind(const char* host,
 	const char* port) {
@@ -103,6 +107,10 @@ void accept_cb(evutil_socket_t fd, short event, void* arg) {
 	setnonblocking(serverfd);
 
 	server_t* server = new_server(serverfd, listener);
+	struct evbuffer* buf = evbuffer_new();
+	g_mem_map.insert({ serverfd,buf });
+	HANDLE hSem = ::CreateSemaphore(nullptr, 0, 1, nullptr);
+	g_sem_map.insert({ serverfd,hSem });
 	event_add(server->recv_ctx->io, nullptr);
 	evtimer_add(server->recv_ctx->watcher, nullptr);
 }
@@ -186,7 +194,29 @@ void server_recv_cb(evutil_socket_t fd, short events, void* arg) {
 	// handle data
 	dprintf("total received bytes: %I64u\n", tx);
 
-	
+	if (!g_mem_map.contains(fd)) {
+		return;
+	}
+	struct evbuffer* mem = g_mem_map[fd];
+	evbuffer_add(mem, buf->data, buf->len);
+	size_t size = evbuffer_get_length(mem);
+	if (size < sizeof(PACKET_HEADER)) {
+		return;
+	}
+	else {
+		PPACKET_HEADER pHeader = (PPACKET_HEADER)evbuffer_pullup(mem, sizeof(PACKET_HEADER));
+		if (pHeader == NULL) {
+			return;
+		}
+		if (pHeader->Version != SVERSION) {
+			evbuffer_drain(mem, size);
+			return;
+		}
+		size_t totalSize = pHeader->Length;
+		if (size == totalSize) {
+			parse_packet(fd, mem);
+		}
+	}
 }
 
 void server_send_cb(evutil_socket_t fd, short events, void* arg) {
@@ -199,27 +229,8 @@ void server_send_cb(evutil_socket_t fd, short events, void* arg) {
 		return;
 	}
 	else {
-		// has data to send
-		size_t s = send(server->fd, server->buf->data + server->buf->idx,
-			server->buf->len, 0);
-		if (s == -1) {
-			if (GETSOCKETERRNO() != EAGAIN && GETSOCKETERRNO() != EWOULDBLOCK) {
-				close_and_free_server(server);
-			}
-			return;
-		}
-		else if (s < server->buf->len) {
-			// partly sent, move memory, wait for the next time to send
-			server->buf->len -= s;
-			server->buf->idx += s;
-			return;
-		}
-		else {
-			// all sent out, wait for reading
-			server->buf->len = 0;
-			server->buf->idx = 0;
-			event_del(server_send_ctx->io);
-		}
+		// we can continue sending the data 
+		ReleaseSemaphore(g_sem_map[fd], 1, nullptr);
 	}
 }
 
@@ -261,4 +272,116 @@ void free_connections() {
 	for (auto& connection : g_connections) {
 		close_and_free_server(connection);
 	}
+}
+
+int parse_packet(evutil_socket_t fd,struct evbuffer* buf) {
+	PPACKET_HEADER pHeader = (PPACKET_HEADER)evbuffer_pullup(buf, sizeof(PACKET_HEADER));
+	size_t len = pHeader->Length;
+	size_t dataLen = len - sizeof(PACKET_HEADER);
+	MsgType type = pHeader->Type;
+
+	unsigned char* pBody = (unsigned char*)malloc(len);
+	if (pBody == nullptr)
+		return -1;
+
+	evbuffer_drain(buf, sizeof(PACKET_HEADER));
+	evbuffer_remove(buf, pBody, dataLen);
+
+	switch (type)
+	{
+	case MsgType::ReadMemory:
+	{
+		OnReadMemory(fd, (PREAD_MEMORY_INFO)pBody);
+		break;
+	}
+	case MsgType::GetStatus:
+		break;
+	case MsgType::HeartBeat:
+		break;
+	default:
+		
+		return -1;
+	}
+
+	free(pBody);
+
+	return 1;
+}
+
+int OnReadMemory(evutil_socket_t fd, PREAD_MEMORY_INFO pInfo) {
+	dprintf("read memory request: Address: %p, IsVirtual: %d, ReadSize: %x\n",
+		pInfo->Address, pInfo->IsVirtual, pInfo->ReadSize);
+
+	ULONG bytes = 0;
+	size_t size = sizeof(PACKET_HEADER) + sizeof(MEMORY_DATA) + pInfo->ReadSize;
+	void* pPacket = ::VirtualAlloc(nullptr, size, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
+	if (!pPacket) {
+		dprintf("alloc memory failed!\n");
+		return -1;
+	}
+	PPACKET_HEADER pHeader = (PPACKET_HEADER)pPacket;
+	pHeader->Version = SVERSION;
+	pHeader->Type = MsgType::MemoryData;
+	pHeader->Length = size;
+	do
+	{
+		ULONG status;
+		HRESULT hr = g_DebugControl->GetExecutionStatus(&status);
+		if (FAILED(hr)) {
+			dprintf("get status failed!\n");
+			break;
+		}
+		if (status != DEBUG_STATUS_BREAK) {
+			dprintf("please break the windbg!\n");
+			break;
+		}
+		dprintf("status: %d\n", status);
+		PMEMORY_DATA pMemData = (PMEMORY_DATA)((PBYTE)pPacket + sizeof(PACKET_HEADER));
+		pMemData->Address = pInfo->Address;
+		pMemData->TotalSize = pInfo->ReadSize;
+		void* pData = pMemData->Data;
+		if (pInfo->IsVirtual) {
+			hr = g_DebugDataSpaces->ReadVirtual(pInfo->Address, pData, pInfo->ReadSize, &bytes);
+			if (FAILED(hr)) {
+				dprintf("read virtual failed!\n");
+				break;
+			}
+		}
+		else {
+
+		}
+		dprintf("read bytes: %x\n", bytes);
+		// send the data
+		WritePacket(fd, pPacket, size);
+	} while (FALSE);
+
+	::VirtualFree(pPacket, 0, MEM_RELEASE);
+	return 0;
+}
+
+void WritePacket(evutil_socket_t fd, void* pPacket, ULONG length) {
+	size_t idx = 0;
+	do
+	{
+		int s = send(fd, reinterpret_cast<const char*>((PBYTE)pPacket + idx),
+			length, 0);
+		if (s == -1) {
+			if (GETSOCKETERRNO() == EAGAIN || GETSOCKETERRNO() == EWOULDBLOCK) {
+				// no data ,wait for send
+				WaitForSingleObject(g_sem_map[fd], INFINITE);
+			}
+			else {
+				// error
+				return;
+			}
+		}
+		else if (s < length) {
+			length -= s;
+			idx = s;
+		}
+		else {
+			// ·¢ËÍÍê±Ï
+			return;
+		}
+	} while (length);
 }

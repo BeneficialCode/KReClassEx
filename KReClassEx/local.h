@@ -53,4 +53,4 @@ void remote_send_cb(evutil_socket_t fd, short events, void* arg);
 void remote_timeout_cb(evutil_socket_t sock, short which, void* arg);
 void close_and_free_remote(remote_t* remote);
 void free_remote(remote_t* remote);
-
+int parse_packet(evutil_socket_t fd, struct evbuffer* buf);

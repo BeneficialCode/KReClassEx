@@ -22,6 +22,8 @@ struct timeval tv;
 int no_delay = 0;
 extern int g_socket;
 HANDLE g_hSem = NULL;
+struct evbuffer* g_buf;
+uint64_t rx = 0;
 
 int start_local(profile_t profile) {
 	char* remote_host = profile.remote_host;
@@ -37,7 +39,7 @@ int start_local(profile_t profile) {
 
 	struct event_base* base = event_base_new();
 
-    g_hSem = ::CreateSemaphore(nullptr, 1, 1, nullptr);
+    g_hSem = ::CreateSemaphore(nullptr, 0, 1, nullptr);
     if (g_hSem == NULL) {
         return -1;
     }
@@ -74,6 +76,8 @@ int start_local(profile_t profile) {
         event_add(remote->send_ctx->io, NULL);
         evtimer_add(remote->send_ctx->watcher, &tv);
     }
+
+    g_buf = evbuffer_new();
 
     event_base_dispatch(base);
 
@@ -232,7 +236,30 @@ void remote_recv_cb(evutil_socket_t fd, short events, void* arg) {
     remote->buf->len = r;
 
     // Todo: handle the data
-    
+    rx += r;
+
+    printf("We received total bytes: %I64u\n", rx);
+    buffer_t* buf = remote->buf;
+    evbuffer_add(g_buf, buf->data, buf->len);
+    size_t size = evbuffer_get_length(g_buf);
+    if (size < sizeof(PACKET_HEADER)) {
+        // continue receiving the data
+        return;
+    }
+    else {
+        PPACKET_HEADER pHeader = (PPACKET_HEADER)evbuffer_pullup(g_buf, sizeof(PACKET_HEADER));
+        if (pHeader == NULL) {
+            return;
+        }
+        if (pHeader->Version != SVERSION) {
+            evbuffer_drain(g_buf, size);
+            return;
+        }
+        size_t totalSize = pHeader->Length;
+        if (size == totalSize) {
+            parse_packet(fd, g_buf);
+        }
+    }
 }
 
 void remote_send_cb(evutil_socket_t fd, short events, void* arg) {
@@ -264,44 +291,8 @@ void remote_send_cb(evutil_socket_t fd, short events, void* arg) {
         }
     }
 
-    if (remote->buf->len == 0) {
-        // 如果buf为空则关闭连接
-        // close and free
-        close_and_free_remote(remote);
-        return;
-    }
-    else {
-        // has data to send
-        // idx作为发送的数据的指针
-        // 如果未connected的情况下，这个idx是设置为0的，那么发送的数据就是整个buf的数据
-        size_t s = send(remote->fd, remote->buf->data + remote->buf->idx,
-            remote->buf->len, 0);
-        if (s == -1) {
-            if (GETSOCKETERRNO() != EAGAIN && GETSOCKETERRNO() != EWOULDBLOCK) {
-                // 因为remote->fd是非阻塞的，走到这里就是出错了，断开连接
-                close_and_free_remote(remote);
-            }
-            // 等一下再发送，直接return出去等下次remote_send_cb被回调
-            // 下次再回调进来时，remote_send_ctx->connected已经是1了，
-            // 所以直接进下半段代码继续send
-            return;
-        }
-        else if (s < (size_t)(remote->buf->len)) {
-            // 说明发送了部分数据，需要调整idx的位置并从len减去s
-            // 等下次写事件触发可以继续发送时，就从idx的位置继续发送
-            // partly sent, move memory, wait for the next time to send
-            remote->buf->len -= s;
-            remote->buf->idx += s;
-            return;
-        }
-        else {
-            // 如果s等于buf->len说明全部发送完毕, len和idx清0
-            // all sent out, wait for reading
-            remote->buf->len = 0;
-            remote->buf->idx = 0;
-            event_del(remote_send_ctx->io);
-        }
-    }
+    // We can continue sending data
+    ReleaseSemaphore(g_hSem, 1, nullptr);
 }
 
 void remote_timeout_cb(evutil_socket_t sock, short which, void* arg) {
@@ -331,4 +322,37 @@ void free_remote(remote_t* remote) {
     ss_free(remote->recv_ctx);
     ss_free(remote->send_ctx);
     ss_free(remote);
+}
+
+int parse_packet(evutil_socket_t fd, struct evbuffer* buf) {
+    PPACKET_HEADER pHeader = (PPACKET_HEADER)evbuffer_pullup(buf, sizeof(PACKET_HEADER));
+    size_t len = pHeader->Length;
+    size_t dataLen = len - sizeof(PACKET_HEADER);
+    MsgType type = pHeader->Type;
+
+    unsigned char* pBody = (unsigned char*)malloc(len);
+    if (pBody == nullptr)
+        return -1;
+
+    evbuffer_drain(buf, sizeof(PACKET_HEADER));
+    evbuffer_remove(buf, pBody, dataLen);
+
+    switch (type)
+    {
+    case MsgType::MemoryData:
+    {
+        PMEMORY_DATA pMemData = (PMEMORY_DATA)pBody;
+        printf("Address: %p,Size: %I64u\n", pMemData->Address, pMemData->TotalSize);
+        break;
+    }
+    case MsgType::HeartBeat:
+        break;
+    default:
+
+        return -1;
+    }
+
+    free(pBody);
+
+    return 1;
 }

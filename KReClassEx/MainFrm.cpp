@@ -82,8 +82,21 @@ LRESULT CMainFrame::OnViewStatusBar(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*h
 
 LRESULT CMainFrame::OnAppAbout(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
 {
-	CAboutDlg dlg;
-	dlg.DoModal();
+	/*CAboutDlg dlg;
+	dlg.DoModal();*/
+	size_t len = sizeof(PACKET_HEADER) + sizeof(READ_MEMORY_INFO);
+	void* pData = malloc(len);
+	if (pData != NULL) {
+		PPACKET_HEADER pHeader = (PPACKET_HEADER)pData;
+		pHeader->Length = len;
+		pHeader->Type = MsgType::ReadMemory;
+		pHeader->Version = SVERSION;
+		PREAD_MEMORY_INFO pInfo = (PREAD_MEMORY_INFO)((PBYTE)pData + sizeof(PACKET_HEADER));
+		pInfo->Address = 0x00aa0000;
+		pInfo->ReadSize = 0x257000;
+		pInfo->IsVirtual = true;
+		WritePacket(pData, len);
+	}
 	return 0;
 }
 
@@ -105,4 +118,32 @@ DWORD WINAPI CMainFrame::TunnelThread(void* params) {
 	};
 
 	return start_local(profile);
+}
+
+void CMainFrame::WritePacket(void* pPacket, ULONG length) {
+	size_t idx = 0;
+	do
+	{
+		int s = send(g_socket, reinterpret_cast<const char*>((PBYTE)pPacket + idx), 
+			length, 0);
+		if (s == -1) {
+			if (GETSOCKETERRNO() == EAGAIN || GETSOCKETERRNO() == EWOULDBLOCK) {
+				// no data ,wait for send
+				WaitForSingleObject(g_hSem, INFINITE);
+			}
+			else {
+				// error
+				return;
+			}
+		}
+		else if (s < length) {
+			length -= s;
+			idx = s;
+		}
+		else {
+			// ·¢ËÍÍê±Ï
+			return;
+		}
+	} while (length);
+	
 }

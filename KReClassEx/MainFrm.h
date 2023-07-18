@@ -49,5 +49,5 @@ public:
 
 	static DWORD WINAPI TunnelThread(void* params);
 
-	
+	void WritePacket(void* pPacket, ULONG length);
 };
