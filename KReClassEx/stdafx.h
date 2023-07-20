@@ -20,10 +20,13 @@ extern CAppModule _Module;
 
 #include <atlframe.h>
 #include <atlctrls.h>
+#include <atlctrlx.h>
 #include <atldlgs.h>
 #include <atlribbon.h>
+#include <atlcrack.h>
 
 #include <algorithm>
+#include <vector>
 
 #if defined _M_IX86
   #pragma comment(linker, "/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='x86' publicKeyToken='6595b64144ccf1df' language='*'\"")
@@ -34,3 +37,59 @@ extern CAppModule _Module;
 #else
   #pragma comment(linker, "/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
 #endif
+
+extern std::vector<HICON> g_Icons;
+
+extern COLORREF g_clrBackground;
+extern COLORREF g_clrSelect;
+extern COLORREF g_clrHidden;
+extern COLORREF g_clrOffset;
+extern COLORREF g_clrAddress;
+extern COLORREF g_clrType;
+extern COLORREF g_clrName;
+extern COLORREF g_clrIndex;
+extern COLORREF g_clrValue;
+extern COLORREF g_clrComment;
+extern COLORREF g_clrVTable;
+extern COLORREF g_clrFunction;
+extern COLORREF g_clrChar;
+extern COLORREF g_clrCustom;
+extern COLORREF g_clrHex;
+
+#define FONT_DEFAULT_WIDTH	8
+#define FONT_DEFAULT_HEIGHT 16
+#define FONT_DEFAULT_SIZE	10
+
+extern CString g_ViewFontName;
+extern CFont g_ViewFont;
+extern int g_FontWidth;
+extern int g_FontHeight;
+
+extern bool g_bAddress;
+extern bool g_bOffset;
+
+#define ICON_OPEN 0
+#define ICON_CLOSED 1
+#define ICON_CLASS 2
+#define ICON_METHOD 3
+#define ICON_VTABLE 4
+#define ICON_DELETE 5
+#define ICON_ADD 6
+#define ICON_RANDOM 7
+#define ICON_DROPARROW 8
+#define ICON_POINTER 9
+#define ICON_ARRAY 10
+#define ICON_CUSTOM 11
+#define ICON_ENUM 12
+#define ICON_FLOAT 13
+#define ICON_LEFT 14
+#define ICON_RIGHT 15
+#define ICON_MATRIX 16
+#define ICON_INTEGER 17
+#define ICON_TEXT 18
+#define ICON_UNSIGNED 19
+#define ICON_VECTOR 20
+#define ICON_CHANGE 21
+#define ICON_CAMERA 22
+
+BOOL ReClassReadMemory(ULONG_PTR address, LPVOID buffer, SIZE_T size, PSIZE_T bytesRead = nullptr);

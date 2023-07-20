@@ -14,11 +14,85 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
+// Chinese (Simplified, PRC) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_ICON_ADD            ICON                    "res\\icons\\add.ico"
+
+IDI_ICON_ARRAY          ICON                    "res\\icons\\array.ico"
+
+IDI_ICON_DROPARROW      ICON                    "res\\icons\\arrow_icon.ico"
+
+IDI_ICON_CAMERA         ICON                    "res\\icons\\camera.ico"
+
+IDI_ICON_DELETE         ICON                    "res\\icons\\close.ico"
+
+IDI_ICON_CLOSED         ICON                    "res\\icons\\closed.ico"
+
+IDI_ICON_CUSTOM         ICON                    "res\\icons\\custom.ico"
+
+IDI_ICON_ENUM           ICON                    "res\\icons\\enum.ico"
+
+IDI_ICON_CHANGE         ICON                    "res\\icons\\exchange.ico"
+
+IDI_ICON_FLOAT          ICON                    "res\\icons\\float.ico"
+
+IDI_ICON_CLASS          ICON                    "res\\icons\\general_class_VS.ico"
+
+IDI_ICON_VTABLE         ICON                    "res\\icons\\general_interface_VS.ico"
+
+IDI_ICON_METHOD         ICON                    "res\\icons\\general_method_VS.ico"
+
+IDI_ICON_LEFT           ICON                    "res\\icons\\left.ico"
+
+IDI_ICON_MATRIX         ICON                    "res\\icons\\matrix.ico"
+
+IDI_ICON_OPEN           ICON                    "res\\icons\\open.ico"
+
+IDI_ICON_POINTER        ICON                    "res\\icons\\pointer.ico"
+
+IDI_ICON_RIGHT          ICON                    "res\\icons\\right.ico"
+
+IDI_ICON_INTEGER        ICON                    "res\\icons\\signed.ico"
+
+IDI_ICON_RANDOM         ICON                    "res\\icons\\speles_random_ico.ico"
+
+IDI_ICON_TEXT           ICON                    "res\\icons\\text.ico"
+
+IDI_ICON_UNSIGNED       ICON                    "res\\icons\\unsigned.ico"
+
+IDI_ICON_VECTOR         ICON                    "res\\icons\\vector.ico"
+
+#endif    // Chinese (Simplified, PRC) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
 // English (United States) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
 LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 #pragma code_page(1252)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "F:\\cpp\\KReClassEx\\KReClassEx\\res\\KReClassEx.ico"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -113,16 +187,6 @@ BEGIN
         MENUITEM "&About KReClassEx",           ID_APP_ABOUT
     END
 END
-
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// Icon
-//
-
-// Icon with lowest ID value placed first to ensure application icon
-// remains consistent on all systems.
-IDR_MAINFRAME           ICON                    "res\\KReClassEx.ico"
 
 
 /////////////////////////////////////////////////////////////////////////////

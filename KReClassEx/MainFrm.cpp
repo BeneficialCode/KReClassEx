@@ -9,7 +9,7 @@
 #include "aboutdlg.h"
 #include "MainFrm.h"
 #include "local.h"
-#include <Psapi.h>
+#include "ClassView.h"
 
 int g_socket = 0;
 extern HANDLE g_hSem;
@@ -35,13 +35,18 @@ LRESULT CMainFrame::OnCreate(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/
 	CreateSimpleStatusBar();
 	UISetCheck(ID_VIEW_STATUS_BAR, 1);
 
+	m_view.m_bDestroyImageList = false;
+	
+	m_hWndClient = m_view.Create(m_hWnd, rcDefault, nullptr,
+		WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | WS_CLIPCHILDREN);
+
 	// register object for message filtering and idle updates
 	CMessageLoop* pLoop = _Module.GetMessageLoop();
 	ATLASSERT(pLoop != NULL);
 	pLoop->AddMessageFilter(this);
 	pLoop->AddIdleHandler(this);
 
-		ShowRibbonUI(true);
+	ShowRibbonUI(true);
 
 	return 0;
 }
@@ -96,6 +101,7 @@ LRESULT CMainFrame::OnAppAbout(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCt
 		pInfo->ReadSize = 0x257000;
 		pInfo->IsVirtual = true;
 		WritePacket(pData, len);
+		free(pData);
 	}
 	return 0;
 }
@@ -146,4 +152,25 @@ void CMainFrame::WritePacket(void* pPacket, ULONG length) {
 		}
 	} while (length);
 	
+}
+
+LRESULT CMainFrame::OnNewClass(WORD, WORD, HWND, BOOL&)
+{
+	// AtlMessageBox(m_hWnd, L"I'm comming!", L"Info", MB_OK);
+	auto pView = new CClassView();
+	auto hWnd = pView->Create(m_view, rcDefault, nullptr, 
+		WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | WS_CLIPCHILDREN,
+		WS_EX_STATICEDGE);
+	if (!hWnd) {
+		delete pView;
+		return 0;
+	}
+	
+	CNodeClass* pNewClass = new CNodeClass;
+	pView->SetClass(pNewClass);
+
+	m_view.AddPage(hWnd, L" N00000001     ", -1, pView);
+	
+
+	return 0;
 }

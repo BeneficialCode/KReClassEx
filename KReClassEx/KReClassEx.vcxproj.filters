@@ -16,6 +16,9 @@
     <Filter Include="libevent">
       <UniqueIdentifier>{f0020fbc-9537-4643-bde0-a30369e47143}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Nodes">
+      <UniqueIdentifier>{fe8a52a1-985d-4507-b11a-a4e09b691694}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -44,6 +47,24 @@
     </ClCompile>
     <ClCompile Include="crypto.cpp">
       <Filter>libevent</Filter>
+    </ClCompile>
+    <ClCompile Include="CustomEdit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CustomToolTip.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NodeBase.cpp">
+      <Filter>Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="NodeClass.cpp">
+      <Filter>Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="NodeType.cpp">
+      <Filter>Nodes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -83,6 +104,30 @@
     <ClInclude Include="crypto.h">
       <Filter>libevent</Filter>
     </ClInclude>
+    <ClInclude Include="ClassView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Memory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CustomEdit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HotSpot.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CustomToolTip.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeBase.h">
+      <Filter>Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeTypes.h">
+      <Filter>Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeClass.h">
+      <Filter>Nodes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="KReClassEx.rc">
@@ -93,13 +138,83 @@
     <Image Include="res\toolbar.bmp">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="res\KReClassEx.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="res\Undo.bmp">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="res\reset.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\icons\add.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\icons\array.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\icons\arrow_icon.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\icons\camera.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\icons\close.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\icons\closed.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\icons\custom.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\icons\enum.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\icons\exchange.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\icons\float.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\icons\general_class_VS.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\icons\general_interface_VS.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\icons\general_method_VS.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\icons\left.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\icons\matrix.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\icons\open.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\icons\pointer.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\icons\right.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\icons\signed.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\icons\speles_random_ico.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\icons\text.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\icons\unsigned.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\icons\vector.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\icons\icon.png" />
+    <Image Include="res\KReClassEx.ico">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

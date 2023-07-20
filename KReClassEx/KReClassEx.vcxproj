@@ -84,6 +84,12 @@
   <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <VcpkgUseStatic>true</VcpkgUseStatic>
   </PropertyGroup>
+  <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <VcpkgUseStatic>true</VcpkgUseStatic>
+  </PropertyGroup>
+  <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <VcpkgUseStatic>true</VcpkgUseStatic>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -126,6 +132,7 @@
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_WINDOWS;STRICT;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -187,6 +194,7 @@
       <ExceptionHandling />
       <DebugInformationFormat />
       <PreprocessorDefinitions>_WINDOWS;STRICT;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -210,11 +218,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AboutDlg.cpp" />
+    <ClCompile Include="ClassView.cpp" />
     <ClCompile Include="crypto.cpp" />
+    <ClCompile Include="CustomEdit.cpp" />
+    <ClCompile Include="CustomToolTip.cpp" />
     <ClCompile Include="KReClassEx.cpp" />
     <ClCompile Include="local.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="netutils.cpp" />
+    <ClCompile Include="NodeBase.cpp" />
+    <ClCompile Include="NodeClass.cpp" />
+    <ClCompile Include="NodeType.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -226,12 +240,20 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AboutDlg.h" />
+    <ClInclude Include="ClassView.h" />
     <ClInclude Include="common.h" />
     <ClInclude Include="crypto.h" />
+    <ClInclude Include="CustomEdit.h" />
+    <ClInclude Include="CustomToolTip.h" />
+    <ClInclude Include="HotSpot.h" />
     <ClInclude Include="jconf.h" />
     <ClInclude Include="local.h" />
     <ClInclude Include="MainFrm.h" />
+    <ClInclude Include="Memory.h" />
     <ClInclude Include="netutils.h" />
+    <ClInclude Include="NodeBase.h" />
+    <ClInclude Include="NodeClass.h" />
+    <ClInclude Include="NodeTypes.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Ribbon.h" />
     <ClInclude Include="stdafx.h" />
@@ -242,6 +264,30 @@
     <ResourceCompile Include="KReClassEx.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="res\icons\add.ico" />
+    <Image Include="res\icons\array.ico" />
+    <Image Include="res\icons\arrow_icon.ico" />
+    <Image Include="res\icons\camera.ico" />
+    <Image Include="res\icons\close.ico" />
+    <Image Include="res\icons\closed.ico" />
+    <Image Include="res\icons\custom.ico" />
+    <Image Include="res\icons\enum.ico" />
+    <Image Include="res\icons\exchange.ico" />
+    <Image Include="res\icons\float.ico" />
+    <Image Include="res\icons\general_class_VS.ico" />
+    <Image Include="res\icons\general_interface_VS.ico" />
+    <Image Include="res\icons\general_method_VS.ico" />
+    <Image Include="res\icons\icon.png" />
+    <Image Include="res\icons\left.ico" />
+    <Image Include="res\icons\matrix.ico" />
+    <Image Include="res\icons\open.ico" />
+    <Image Include="res\icons\pointer.ico" />
+    <Image Include="res\icons\right.ico" />
+    <Image Include="res\icons\signed.ico" />
+    <Image Include="res\icons\speles_random_ico.ico" />
+    <Image Include="res\icons\text.ico" />
+    <Image Include="res\icons\unsigned.ico" />
+    <Image Include="res\icons\vector.ico" />
     <Image Include="res\KReClassEx.ico" />
     <Image Include="res\reset.bmp" />
     <Image Include="res\toolbar.bmp" />

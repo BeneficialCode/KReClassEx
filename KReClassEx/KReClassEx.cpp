@@ -13,6 +13,8 @@
 
 CAppModule _Module;
 
+BOOL InitApp(HINSTANCE hInst);
+
 int Run(LPTSTR /*lpstrCmdLine*/ = NULL, int nCmdShow = SW_SHOWDEFAULT)
 {
 	CMessageLoop theLoop;
@@ -44,6 +46,8 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPTSTR lp
 	hRes = _Module.Init(NULL, hInstance);
 	ATLASSERT(SUCCEEDED(hRes));
 
+	InitApp(hInstance);
+
 	int nRet = 0;
 	if (RunTimeHelper::IsRibbonUIAvailable())
 		nRet = Run(lpstrCmdLine, nCmdShow);
@@ -54,4 +58,16 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPTSTR lp
 	::CoUninitialize();
 
 	return nRet;
+}
+
+BOOL InitApp(HINSTANCE hInst) {
+	UINT icons[] = { IDI_ICON_OPEN,IDI_ICON_CLOSED, IDI_ICON_CLASS,IDI_ICON_METHOD,
+	IDI_ICON_VTABLE ,IDI_ICON_DELETE ,IDI_ICON_ADD ,IDI_ICON_RANDOM ,IDI_ICON_DROPARROW ,
+	IDI_ICON_POINTER ,IDI_ICON_ARRAY ,IDI_ICON_CUSTOM ,IDI_ICON_ENUM ,
+	IDI_ICON_FLOAT ,IDI_ICON_LEFT ,IDI_ICON_RIGHT ,IDI_ICON_MATRIX ,IDI_ICON_INTEGER ,
+	IDI_ICON_TEXT ,IDI_ICON_UNSIGNED ,IDI_ICON_VECTOR ,IDI_ICON_CHANGE ,IDI_ICON_CAMERA };
+	for (auto id : icons)
+		g_Icons.emplace_back(::LoadIcon(hInst, MAKEINTRESOURCE(id)));
+
+	return TRUE;
 }
