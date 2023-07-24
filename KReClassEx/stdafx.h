@@ -13,15 +13,20 @@
 
 #include <atlbase.h>
 #include <atlapp.h>
+#include <atlstr.h>
 
 extern CAppModule _Module;
 
 #include <atlwin.h>
-
 #include <atlframe.h>
 #include <atlctrls.h>
-#include <atlctrlx.h>
 #include <atldlgs.h>
+#include <atlctrlw.h>
+#include <atlctrlx.h>
+#include <atltypes.h>
+#include <atlgdi.h>
+#include <atltheme.h>
+#include <strsafe.h>
 #include <atlribbon.h>
 #include <atlcrack.h>
 

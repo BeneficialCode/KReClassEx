@@ -6,7 +6,7 @@
 
 std::vector<HICON> g_Icons;
 
-COLORREF g_clrBackground = RGB(255, 255, 255);
+COLORREF g_clrBackground = RGB(0, 255, 255);
 COLORREF g_clrSelect = RGB(240, 240, 240);
 COLORREF g_clrHidden = RGB(240, 240, 240);
 

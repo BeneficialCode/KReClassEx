@@ -8,29 +8,29 @@
 #include "NodeClass.h"
 
 
-class CClassView : public CWindowImpl<CClassView>
+
+class CClassView :
+	public CBufferedPaintWindowImpl<CClassView>
 {
 public:
-	DECLARE_WND_CLASS_EX(nullptr, CS_DBLCLKS | CS_HREDRAW | CS_VREDRAW,NULL)
+	DECLARE_WND_CLASS_EX(nullptr,CS_OWNDC| CS_DBLCLKS | CS_HREDRAW | CS_VREDRAW,NULL)
 
 	BOOL PreTranslateMessage(MSG* pMsg)
 	{
 		pMsg;
 		return FALSE;
 	}
-	void OnPaint(CDCHandle dc);
 	void OnSize(UINT nType, CSize size);
 	int OnCreate(LPCREATESTRUCT lpCreateStruct);
+	void DoPaint(CDCHandle dc, RECT& rect);
 
 	BEGIN_MSG_MAP_EX(CClassView)
 		MSG_WM_CREATE(OnCreate)
-		MSG_WM_PAINT(OnPaint)
-		MSG_WM_SIZE(OnSize)
+		//MSG_WM_SIZE(OnSize)
+		CHAIN_MSG_MAP(CBufferedPaintWindowImpl<CClassView>)
 	END_MSG_MAP()
 
 	
-
-
 public:
 	void SetClass(CNodeClass* pClass) { m_pClass = pClass; }
 

@@ -8,7 +8,7 @@
 
 typedef struct tagVIEWINFO {
 	// Temporary added for testing
-	CDC* Dc;
+	CDCHandle* Dc;
 	CRect* ClientRect;
 	std::vector<HOTSPOT>* Hotspots;
 	ULONG_PTR Address;
