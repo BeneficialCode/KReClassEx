@@ -170,7 +170,22 @@ LRESULT CMainFrame::OnNewClass(WORD, WORD, HWND, BOOL&)
 	pView->SetClass(pNewClass);
 
 	m_view.AddPage(hWnd, L" N00000001     ", -1, pView);
-	
 
+	for (int i = 0; i < 64 / sizeof(size_t); i++) {
+		CNodeHex* pNode = new CNodeHex;
+		pNode->SetParent(pNewClass);
+		pNewClass->AddNode(pNode);
+	}
+	
+	CalcOffsets(pNewClass);
 	return 0;
+}
+
+void CMainFrame::CalcOffsets(CNodeClass* pClass) {
+	size_t offset = 0;
+	for (UINT i = 0; i < pClass->NodeCount(); i++) {
+		CNodeBase* pNode = pClass->GetNode(i);
+		pNode->SetOffset(offset);
+		offset += pNode->GetMemorySize();
+	}
 }

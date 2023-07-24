@@ -72,6 +72,10 @@ extern int g_FontHeight;
 
 extern bool g_bAddress;
 extern bool g_bOffset;
+extern bool g_bText;
+extern bool g_bRTTI;
+extern bool g_bRandomName;
+extern bool g_bResizingFont;
 
 #define ICON_OPEN 0
 #define ICON_CLOSED 1
@@ -98,3 +102,11 @@ extern bool g_bOffset;
 #define ICON_CAMERA 22
 
 BOOL ReClassReadMemory(ULONG_PTR address, LPVOID buffer, SIZE_T size, PSIZE_T bytesRead = nullptr);
+BOOL ReClassWriteMemory(ULONG_PTR address, LPVOID buffer, SIZE_T size, PSIZE_T bytesWritten = nullptr);
+
+#include "Nodes.h"
+#if defined(_M_AMD64)
+#define CNodeHex CNodeHex64
+#else
+#define CNodeHex CNodeHex32
+#endif

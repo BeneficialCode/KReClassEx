@@ -228,3 +228,15 @@ NODESIZE CNodeBase::DrawHidden(const PVIEWINFO view, int x, int y) {
 
 	return size;
 }
+
+CStringA CNodeBase::GetStringFromMemoryA(const char* pMemory, int length) {
+	CStringA str;
+	for (int i = 0; i < length; i++) {
+		if (pMemory[i] > 0x1F && pMemory[i] < 0xFF && pMemory[i] != 0x7F) {
+			str += pMemory[i];
+		}
+		else
+			str += '.';
+	}
+	return str;
+}

@@ -141,6 +141,12 @@ public:
 	void SetHidden(bool hidden) { m_bHidden = hidden; }
 	void ToggleHidden() { m_bHidden = !m_bHidden; }
 
+	bool IsSelected() { return m_bSelected; }
+	void SetSelected(bool selected) { m_bSelected = selected; }
+	void Select() { m_bSelected = true; }
+	void Unselect() { m_bSelected = false; }
+	void ToogleSelected() { m_bSelected = !m_bSelected; }
+
 	bool IsLevelOpen(int idx) { return m_LevelsOpen[idx]; }
 	void ToggleLevelOpen(int idx) { m_LevelsOpen[idx] = !m_LevelsOpen[idx]; }
 
@@ -171,6 +177,8 @@ public:
 	void StandardUpdate(const PHOTSPOT spot);
 
 	NODESIZE DrawHidden(const PVIEWINFO view, int x, int y);
+
+	CStringA GetStringFromMemoryA(const char* pMemory, int length);
 
 protected:
 	NodeType m_NodeType{ NodeType::Base };

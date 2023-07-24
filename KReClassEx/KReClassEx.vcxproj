@@ -228,6 +228,7 @@
     <ClCompile Include="netutils.cpp" />
     <ClCompile Include="NodeBase.cpp" />
     <ClCompile Include="NodeClass.cpp" />
+    <ClCompile Include="NodeHex64.cpp" />
     <ClCompile Include="NodeType.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -253,6 +254,8 @@
     <ClInclude Include="netutils.h" />
     <ClInclude Include="NodeBase.h" />
     <ClInclude Include="NodeClass.h" />
+    <ClInclude Include="NodeHex64.h" />
+    <ClInclude Include="Nodes.h" />
     <ClInclude Include="NodeTypes.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Ribbon.h" />

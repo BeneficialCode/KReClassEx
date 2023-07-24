@@ -20,19 +20,32 @@ public:
 		pMsg;
 		return FALSE;
 	}
+public:
+
+	void ClearSelection();
+	
+public:
 	void OnSize(UINT nType, CSize size);
 	int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	void DoPaint(CDCHandle dc, RECT& rect);
+	void OnRButtonDown(UINT nFlags, CPoint point);
+	void OnTimer(UINT_PTR nIDEvent);
+	void OnLButtonDown(UINT nFlags, CPoint point);
 
 	BEGIN_MSG_MAP_EX(CClassView)
 		MSG_WM_CREATE(OnCreate)
-		//MSG_WM_SIZE(OnSize)
+		MSG_WM_SIZE(OnSize)
+		MSG_WM_LBUTTONDOWN(OnLButtonDown)
+		MSG_WM_RBUTTONDOWN(OnRButtonDown)
+		MSG_WM_TIMER(OnTimer)
 		CHAIN_MSG_MAP(CBufferedPaintWindowImpl<CClassView>)
 	END_MSG_MAP()
 
 	
 public:
 	void SetClass(CNodeClass* pClass) { m_pClass = pClass; }
+
+	
 
 private:
 	CNodeClass* m_pClass;

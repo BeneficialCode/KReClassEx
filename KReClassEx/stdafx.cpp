@@ -6,7 +6,11 @@
 
 std::vector<HICON> g_Icons;
 
+#ifdef _DEBUG
 COLORREF g_clrBackground = RGB(0, 255, 255);
+#else
+COLORREF g_clrBackground = RGB(255, 255, 255);
+#endif
 COLORREF g_clrSelect = RGB(240, 240, 240);
 COLORREF g_clrHidden = RGB(240, 240, 240);
 
@@ -33,7 +37,16 @@ int g_FontHeight = FONT_DEFAULT_HEIGHT;
 
 bool g_bAddress = true;
 bool g_bOffset = true;
+bool g_bText = true;
+bool g_bRTTI = true;
+bool g_bRandomName = true;
+bool g_bResizingFont = true;
 
 BOOL ReClassReadMemory(ULONG_PTR address, LPVOID buffer, SIZE_T size, PSIZE_T bytesRead) {
+	SecureZeroMemory(buffer, size);
+	return FALSE;
+}
+
+BOOL ReClassWriteMemory(ULONG_PTR address, LPVOID buffer, SIZE_T size, PSIZE_T bytesWritten) {
 	return FALSE;
 }

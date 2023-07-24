@@ -73,6 +73,77 @@ IDI_ICON_UNSIGNED       ICON                    "res\\icons\\unsigned.ico"
 
 IDI_ICON_VECTOR         ICON                    "res\\icons\\vector.ico"
 
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU_QUICKMODIFY MENU
+BEGIN
+    POPUP "Quick Modify"
+    BEGIN
+        POPUP "Type"
+        BEGIN
+            MENUITEM "Hex 64",                      ID_TYPE_HEX64
+            MENUITEM "Hex 32",                      ID_TYPE_HEX32
+            MENUITEM "Hex 16",                      ID_TYPE_HEX16
+            MENUITEM "Hex 8",                       ID_TYPE_HEX8
+            MENUITEM "Bits",                        ID_TYPE_BITS
+            MENUITEM "Int 64",                      ID_TYPE_INT64
+            MENUITEM "Int 32",                      ID_TYPE_INT32
+            MENUITEM "Int 16",                      ID_TYPE_INT16
+            MENUITEM "Int 8",                       ID_TYPE_INT8
+            MENUITEM "QWord",                       ID_TYPE_QWORD
+            MENUITEM "DWord",                       ID_TYPE_DWORD
+            MENUITEM "Word",                        ID_TYPE_WORD
+            MENUITEM "Byte",                        ID_TYPE_BYTE
+            MENUITEM "ASCII",                       ID_TYPE_ASCII
+            MENUITEM "PCHAR",                       ID_TYPE_PCHAR
+            MENUITEM "Unicode",                     ID_TYPE_UNICODE
+            MENUITEM "Float",                       ID_TYPE_FLOAT
+            MENUITEM "Double",                      ID_TYPE_DOUBLE
+            MENUITEM "Custom",                      ID_TYPE_CUSTOM
+            MENUITEM "Vec 2",                       ID_TYPE_VEC2
+            MENUITEM "Vec 3",                       ID_TYPE_VEC3
+            MENUITEM "Vec 4",                       ID_TYPE_QUAT
+            MENUITEM "Matrix",                      ID_TYPE_MATRIX
+            MENUITEM "Pointer",                     ID_TYPE_POINTER
+            MENUITEM "Class",                       ID_TYPE_CLASS
+            MENUITEM "VTable",                      ID_TYPE_VTABLE
+            MENUITEM "Function",                    ID_TYPE_FUNCTION
+        END
+        POPUP "Add"
+        BEGIN
+            MENUITEM "Add 4",                       ID_ADD_ADD4
+            MENUITEM "Add 8",                       ID_ADD_ADD8
+            MENUITEM "Add 64",                      ID_ADD_ADD64
+            MENUITEM "Add 128",                     ID_ADD_ADD128
+            MENUITEM "Add 256",                     ID_ADD_ADD256
+            MENUITEM "Add 512",                     ID_ADD_ADD512
+            MENUITEM "Add 1024",                    ID_ADD_ADD1024
+            MENUITEM "Add 2048",                    ID_ADD_ADD2048
+        END
+        POPUP "Insert"
+        BEGIN
+            MENUITEM "Insert 4",                    ID_INSERT_INSERT4
+            MENUITEM "Insert 8",                    ID_INSERT_INSERT8
+            MENUITEM "Insert 64",                   ID_INSERT_INSERT64
+            MENUITEM "Insert 128",                  ID_INSERT_INSERT128
+            MENUITEM "Insert 256",                  ID_INSERT_INSERT256
+            MENUITEM "Insert 512",                  ID_INSERT_INSERT512
+            MENUITEM "Insert 1024",                 ID_INSERT_INSERT1024
+            MENUITEM "Insert 2048",                 ID_INSERT_INSERT2048
+        END
+        POPUP "Modify"
+        BEGIN
+            MENUITEM "Delete",                      ID_MODIFY_DELETE
+            MENUITEM "Show",                        ID_MODIFY_SHOW
+            MENUITEM "Hide",                        ID_MODIFY_HIDE
+        END
+    END
+END
+
 #endif    // Chinese (Simplified, PRC) resources
 /////////////////////////////////////////////////////////////////////////////
 

@@ -66,6 +66,9 @@
     <ClCompile Include="NodeType.cpp">
       <Filter>Nodes</Filter>
     </ClCompile>
+    <ClCompile Include="NodeHex64.cpp">
+      <Filter>Nodes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -126,6 +129,12 @@
       <Filter>Nodes</Filter>
     </ClInclude>
     <ClInclude Include="NodeClass.h">
+      <Filter>Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeHex64.h">
+      <Filter>Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="Nodes.h">
       <Filter>Nodes</Filter>
     </ClInclude>
   </ItemGroup>

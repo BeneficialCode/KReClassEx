@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "ClassView.h"
+#include "resource.h"
 
 #define SB_WIDTH 14
 
@@ -102,5 +103,70 @@ int CClassView::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 	m_ToolTip.SetFont(g_ViewFont);
 	m_ToolTip.EnableWindow(FALSE);
 
+	SetTimer(1, 250, nullptr);
+
 	return 0;
+}
+
+void CClassView::OnRButtonDown(UINT nFlags, CPoint point) {
+	size_t i;
+	CNodeBase* pNode;
+
+	m_Edit.ShowWindow(SW_HIDE);
+
+	for (i = 0; i < m_Hotspots.size(); i++) {
+		if (m_Hotspots[i].Rect.PtInRect(point)) {
+			pNode = m_Hotspots[i].Object;
+
+			if (m_Hotspots[i].Type == HS_CLICK) {
+				pNode->Update(&m_Hotspots[i]);
+			}
+			else if (m_Hotspots[i].Type == HS_SELECT) {
+				if (nFlags == MK_RBUTTON) {
+					ClearSelection();
+
+					pNode->Select();
+					m_Selected.push_back(m_Hotspots[i]);
+
+					CRect rect;
+					GetClientRect(&rect);
+					ClientToScreen(&rect);
+
+					CMenu menu;
+					menu.LoadMenu(IDR_MENU_QUICKMODIFY);
+					TrackPopupMenu(menu.GetSubMenu(0), TPM_LEFTALIGN | TPM_HORNEGANIMATION,
+						rect.left + m_Hotspots[i].Rect.left + point.x,
+						rect.top + point.y, 0, m_hWnd, nullptr);
+				}
+			}
+
+			// Update
+			Invalidate();
+		}
+	}
+}
+
+void CClassView::ClearSelection()
+{
+	for (size_t i = 0; i < m_Selected.size(); i++) {
+		m_Selected[i].Object->Unselect();
+	}
+	m_Selected.clear();
+}
+
+void CClassView::OnTimer(UINT_PTR nIDEvent) {
+	if (nIDEvent == 1)
+		Invalidate(FALSE);
+}
+
+void CClassView::OnLButtonDown(UINT nFlags, CPoint point) {
+	CNodeBase* pObjectHit;
+	CNodeBase* pSelectedNode;
+	CNodeClass* pSelectedParentClassNode;
+	UINT idx1, idx2;
+	size_t i, s, j, m;
+
+	m_Edit.ShowWindow(SW_HIDE);
+
+
 }

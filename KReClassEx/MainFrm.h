@@ -54,6 +54,8 @@ public:
 
 	void WritePacket(void* pPacket, ULONG length);
 
+
+	void CalcOffsets(CNodeClass* pClass);
 private:
 
 	CTabView m_view;
