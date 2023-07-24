@@ -77,7 +77,7 @@ int CNodeBase::AddText(const PVIEWINFO view, int x, int y, DWORD color, int hitI
 
 	int width = strlen(buf) * g_FontWidth;
 
-	if ((y >= -(g_FontHeight)) &&
+	if ((y >= -g_FontHeight) &&
 		(y + g_FontHeight <= view->ClientRect->bottom + g_FontHeight)) {
 		CRect pos;
 		if (hitId != HS_NONE) {
@@ -110,10 +110,10 @@ int CNodeBase::AddAddressOffset(const PVIEWINFO view, int x, int y) {
 
 	if (g_bAddress) {
 #ifdef _WIN64
-		x = AddText(view, x, y, g_clrAddress, HS_NONE, 
+		x = AddText(view, x, y, g_clrAddress, HS_ADDRESS, 
 			L"%0.9I64X", view->Address+ m_Offset) + g_FontWidth;
 #else
-		x = AddText(view, x, y, g_clrAddress, HS_NONE,
+		x = AddText(view, x, y, g_clrAddress, HS_ADDRESS,
 			L"%0.8X", view->Address + m_Offset) + g_FontWidth;
 #endif
 	}
@@ -197,6 +197,21 @@ int CNodeBase::AddComment(const PVIEWINFO view, int x, int y) {
 	x = AddText(view, x, y, g_clrComment, HS_COMMENT, L"%s ", m_Comment);
 
 	if (m_NodeType == NodeType::Hex64) {
+		float fVal = *(float*)&view->Data[m_Offset];
+		LONG_PTR iVal = *(LONG_PTR*)&view->Data[m_Offset];
+
+		// 显示注释中的数值
+		if (g_bInt) {
+			if (iVal > 0x6FFFFFFF && iVal < 0x7FFFFFFFFFFF) {
+				x = AddText(view, x, y, g_clrValue, HS_NONE, L"(%I64d|0x%IX)", iVal, iVal);
+			}
+			else if (iVal == 0) {
+				x = AddText(view, x, y, g_clrValue, HS_NONE, L"(%I64d)", iVal);
+			}
+			else
+				x = AddText(view, x, y, g_clrValue, HS_NONE, L"(%I64d|0x%X)", iVal, iVal);
+		}
+		
 
 	}
 	else if (m_NodeType == NodeType::Hex32) {

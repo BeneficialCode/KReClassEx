@@ -145,7 +145,7 @@ public:
 	void SetSelected(bool selected) { m_bSelected = selected; }
 	void Select() { m_bSelected = true; }
 	void Unselect() { m_bSelected = false; }
-	void ToogleSelected() { m_bSelected = !m_bSelected; }
+	void ToggleSelected() { m_bSelected = !m_bSelected; }
 
 	bool IsLevelOpen(int idx) { return m_LevelsOpen[idx]; }
 	void ToggleLevelOpen(int idx) { m_LevelsOpen[idx] = !m_LevelsOpen[idx]; }

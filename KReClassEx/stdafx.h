@@ -110,3 +110,9 @@ BOOL ReClassWriteMemory(ULONG_PTR address, LPVOID buffer, SIZE_T size, PSIZE_T b
 #else
 #define CNodeHex CNodeHex32
 #endif
+
+extern bool g_bFloat;
+extern bool g_bInt;
+extern bool g_bString;
+extern bool g_bPointers;
+extern bool g_bUnsignedHex;

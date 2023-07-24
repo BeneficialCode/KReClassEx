@@ -42,6 +42,12 @@ bool g_bRTTI = true;
 bool g_bRandomName = true;
 bool g_bResizingFont = true;
 
+bool g_bFloat = true;
+bool g_bInt = true;
+bool g_bString = true;
+bool g_bPointers = true;
+bool g_bUnsignedHex = true;
+
 BOOL ReClassReadMemory(ULONG_PTR address, LPVOID buffer, SIZE_T size, PSIZE_T bytesRead) {
 	SecureZeroMemory(buffer, size);
 	return FALSE;

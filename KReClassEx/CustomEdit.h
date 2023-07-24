@@ -16,7 +16,7 @@ public:
 
 	LRESULT OnTextChanged(WORD /*wNotifyCode*/, WORD, HWND /*hWndCtl*/, BOOL& /*bHandled*/);
 
-private:
+public:
 	HOTSPOT m_Hotspot;
 	LONG m_MinWidth;
 	HBRUSH m_hBackBrush;

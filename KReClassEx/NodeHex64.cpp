@@ -32,7 +32,7 @@ NODESIZE CNodeHex64::Draw(const PVIEWINFO view, int x, int y) {
 	}
 
 	for (int i = 0; i < 8; i++) {
-		tx = AddText(view, tx, y, g_clrHex, i, L"%0.2X", data[i]) + g_FontHeight;
+		tx = AddText(view, tx, y, g_clrHex, i, L"%0.2X", data[i]) + g_FontWidth;
 	}
 	tx = AddComment(view, tx, y);
 
