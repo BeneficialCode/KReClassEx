@@ -4,14 +4,24 @@
 
 #pragma once
 
+#include "Interfaces.h"
+
 class CMainFrame : 
 	public CRibbonFrameWindowImpl<CMainFrame>, 
-	public CMessageFilter, public CIdleHandler
+	public CMessageFilter, public CIdleHandler,
+	public IMainFrame
 {
 public:
 	DECLARE_FRAME_WND_CLASS(NULL, IDR_MAINFRAME)
 
 	CCommandBarCtrl m_CmdBar;
+
+	// Inherited via IMainFrame
+	void CalcAllOffsets();
+	void CalcOffsets(CNodeClass* pClass);
+	void ClearHidden();
+	bool IsNodeValid(CNodeBase* pCheckNode);
+	CNodeBase* CreateNewNode(NodeType type);
 
 	//TODO: Declare ribbon controls
 
@@ -54,9 +64,10 @@ public:
 
 	void WritePacket(void* pPacket, ULONG length);
 
-
-	void CalcOffsets(CNodeClass* pClass);
 private:
 
 	CTabView m_view;
+
+public:
+	std::vector<CNodeClass*> m_Classes;
 };

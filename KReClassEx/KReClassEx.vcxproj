@@ -228,7 +228,10 @@
     <ClCompile Include="netutils.cpp" />
     <ClCompile Include="NodeBase.cpp" />
     <ClCompile Include="NodeClass.cpp" />
+    <ClCompile Include="NodeHex16.cpp" />
+    <ClCompile Include="NodeHex32.cpp" />
     <ClCompile Include="NodeHex64.cpp" />
+    <ClCompile Include="NodeHex8.cpp" />
     <ClCompile Include="NodeType.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -247,6 +250,7 @@
     <ClInclude Include="CustomEdit.h" />
     <ClInclude Include="CustomToolTip.h" />
     <ClInclude Include="HotSpot.h" />
+    <ClInclude Include="Interfaces.h" />
     <ClInclude Include="jconf.h" />
     <ClInclude Include="local.h" />
     <ClInclude Include="MainFrm.h" />
@@ -254,7 +258,10 @@
     <ClInclude Include="netutils.h" />
     <ClInclude Include="NodeBase.h" />
     <ClInclude Include="NodeClass.h" />
+    <ClInclude Include="NodeHex16.h" />
+    <ClInclude Include="NodeHex32.h" />
     <ClInclude Include="NodeHex64.h" />
+    <ClInclude Include="NodeHex8.h" />
     <ClInclude Include="Nodes.h" />
     <ClInclude Include="NodeTypes.h" />
     <ClInclude Include="resource.h" />

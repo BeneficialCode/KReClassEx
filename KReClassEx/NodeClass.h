@@ -13,6 +13,8 @@ public:
 	
 	void SetCode(WCHAR* code) { m_Code = code; }
 
+	ULONG_PTR ConvertStrToAddress(CString str);
+
 	size_t m_Idx;
 	size_t m_RequestPosition;
 	CString m_Code;

@@ -31,27 +31,71 @@ void CClassView::DoPaint(CDCHandle dc, RECT& rect) {
 		info.Level = 0;
 		info.Hotspots = &m_Hotspots;
 		info.MultiSelected = m_Selected.size() > 1;
+		
+
+		if (m_VScroll.IsWindowVisible()) {
+			info.ClientRect->right -= SB_WIDTH;
+			info.ClientRect->bottom -= SB_WIDTH;
+		}
+
 
 		SCROLLINFO si;
 
-		xPos = GetScrollPos(SB_HORZ) * g_FontHeight;
-		yPos = GetScrollPos(SB_VERT);
+		yPos = m_VScroll.GetScrollPos() * g_FontHeight;
+		xPos = m_HScroll.GetScrollPos();
+
 
 		// do the draw!
 		drawMax = m_pClass->Draw(&info, 0 - xPos, -yPos);
 
 		// dirty hack fix draw methods
 		drawMax.x += xPos;
-		drawMax.y = yPos;
+		drawMax.y += yPos;
 
 
 		if (m_pClass->m_RequestPosition != -1) {
 
 		}
+
+		if (clientRect.Height() < drawMax.y) {
+			ZeroMemory(&si, sizeof(SCROLLINFO));
+			si.cbSize = sizeof(SCROLLINFO);
+			si.fMask = SIF_PAGE | SIF_RANGE;
+			si.nMin = 0;
+			si.nMax = drawMax.y / g_FontHeight;
+			si.nPage = clientRect.Height() / g_FontHeight;
+			m_VScroll.SetScrollInfo(&si);
+			m_VScroll.ShowScrollBar();
+		}
+		else {
+			m_VScroll.SetScrollPos(0);
+			m_VScroll.ShowScrollBar(FALSE);
+		}
+
+		if (clientRect.Width() < drawMax.x) {
+			ZeroMemory(&si, sizeof(SCROLLINFO));
+			si.cbSize = sizeof(SCROLLINFO);
+			si.fMask = SIF_PAGE | SIF_RANGE;
+			si.nMin = 0;
+			si.nMax = drawMax.x;
+			si.nPage = clientRect.Width();
+			m_HScroll.SetScrollInfo(&si);
+			m_HScroll.ShowScrollBar(TRUE);
+		}
+		else {
+			m_HScroll.SetScrollPos(0);
+			m_HScroll.ShowScrollBar(FALSE);
+		}
 	}
 }
 
 void CClassView::OnSize(UINT nType, CSize size) {
+	CRect client;
+	GetClientRect(&client);
+	m_VScroll.SetWindowPos(nullptr, client.right - SB_WIDTH, 0, 
+		SB_WIDTH, client.Height() - SB_WIDTH, SWP_NOZORDER);
+	m_HScroll.SetWindowPos(nullptr, client.left, client.bottom - SB_WIDTH,
+		client.Width() - SB_WIDTH, SB_WIDTH, SWP_NOZORDER);
 	m_Edit.ShowWindow(SW_HIDE);
 }
 
@@ -61,12 +105,20 @@ int CClassView::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 	m_Edit.ShowWindow(SW_HIDE);
 	m_Edit.SetFont(g_ViewFont);
 
+	m_VScroll.Create(m_hWnd, rect, nullptr, SBS_VERT | WS_CHILD | WS_VISIBLE);
+	m_VScroll.EnableScrollBar(ESB_ENABLE_BOTH);
+	m_VScroll.ShowScrollBar();
+
+	CRect hrect(5, 5, 100, 30);
+	m_HScroll.Create(m_hWnd, hrect, nullptr, SBS_HORZ | WS_CHILD | WS_VISIBLE);
+	m_HScroll.EnableScrollBar(ESB_ENABLE_BOTH);
+	m_HScroll.ShowScrollBar();
+
 	m_ToolTip.Create(m_hWnd, rect, nullptr, ES_MULTILINE | WS_BORDER);
 	m_ToolTip.SetFont(g_ViewFont);
 	m_ToolTip.EnableWindow(FALSE);
 
 	SetTimer(1, 250, nullptr);
-
 	return 0;
 }
 
@@ -217,7 +269,7 @@ void CClassView::OnLButtonDown(UINT nFlags, CPoint point) {
 					idx1 = FindNodeIndex(m_Selected[s].Object);
 					if (idx1 != MAX_NODES) {
 						pSelectedParentClassNode->DeleteNode(idx1);
-						// TODO: Calculate all offsets
+						m_pFrame->CalcAllOffsets();
 					}
 				}
 				m_Selected.clear();
@@ -273,4 +325,265 @@ void CClassView::OnLButtonDblClk(UINT nFlags, CPoint point) {
 			}
 		}
 	}
+}
+
+void CClassView::OnAdd(DWORD size) {
+	if (m_Selected[0].Object->GetType() == NodeType::Class) {
+		AddBytes((CNodeClass*)m_Selected[0].Object, size);
+	}
+	else {
+		AddBytes((CNodeClass*)m_Selected[0].Object->GetParent(), size);
+	}
+	Invalidate(FALSE);
+}
+
+LRESULT CClassView::OnAdd4(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/) {
+	// AtlMessageBox(m_hWnd, L"I'm comming!", L"Info", MB_OK);
+	OnAdd(4);
+	return 0;
+}
+
+void CClassView::AddBytes(CNodeClass* pClass, DWORD length) {
+	if (!pClass)
+		return;
+
+	if (length == 4) {
+		CNodeBase* pNode = nullptr;
+		if (pClass->GetType() == NodeType::Vtable) {
+			
+		}
+		else {
+			pNode = new CNodeHex32;
+		}
+		pNode->SetParent(pClass);
+		pClass->AddNode(pNode);
+		m_pFrame->CalcAllOffsets();
+		return;
+	}
+
+	for (UINT i = 0; i < length / sizeof(ULONG_PTR); i++) {
+		CNodeBase* pNode;
+		if (pClass->GetType() == NodeType::Vtable) {
+
+		}
+		else {
+			pNode = new CNodeHex;
+		}
+
+		pNode->SetParent(pClass);
+		pClass->AddNode(pNode);
+	}
+
+	m_pFrame->CalcAllOffsets();
+}
+
+CClassView::CClassView(IMainFrame* frame):m_pFrame(frame){
+}
+
+LRESULT CClassView::OnAdd8(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/) {
+	OnAdd(8);
+	return 0;
+}
+
+LRESULT CClassView::OnAdd64(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/) {
+	OnAdd(64);
+	return 0;
+}
+
+LRESULT CClassView::OnAdd128(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/) {
+	OnAdd(128);
+	return 0;
+}
+
+LRESULT CClassView::OnAdd256(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/) {
+	OnAdd(256);
+	return 0;
+}
+
+void CClassView::OnVScroll(UINT nSBCode, UINT nPos, CScrollBar pScrollBar) {
+	m_Edit.ShowWindow(SW_HIDE);
+
+	if (nSBCode == SB_THUMBPOSITION || nSBCode == SB_THUMBTRACK)
+	{
+		pScrollBar.SetScrollPos(nPos);
+		Invalidate();
+	}
+	else if (nSBCode == SB_LINEUP || nSBCode == SB_LINEDOWN) {
+		pScrollBar.SetScrollPos(pScrollBar.GetScrollPos() + ((nSBCode == SB_LINEUP) ? -1 : 1));
+		Invalidate();
+	}
+}
+
+void CClassView::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar pScrollBar) {
+	m_Edit.ShowWindow(SW_HIDE);
+
+	if (nSBCode == SB_THUMBPOSITION || nSBCode == SB_THUMBTRACK)
+	{
+		pScrollBar.SetScrollPos(nPos);
+		Invalidate();
+	}
+	else if (nSBCode == SB_LINELEFT || nSBCode == SB_LINERIGHT)
+	{
+		pScrollBar.SetScrollPos(pScrollBar.GetScrollPos() + ((nSBCode == SB_LINEUP) ? -1 : 1));
+		Invalidate();
+	}
+}
+
+BOOL CClassView::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt) {
+	if (m_VScroll.IsWindowVisible()) {
+		if (GetAsyncKeyState(VK_LCONTROL))
+			m_VScroll.SetScrollPos(m_VScroll.GetScrollPos() + ((zDelta < 0 ? 1 : -1)));
+		else
+			m_VScroll.SetScrollPos(m_VScroll.GetScrollPos() - ((int)zDelta / g_FontHeight));
+		m_Edit.ShowWindow(SW_HIDE);
+		m_ToolTip.ShowWindow(SW_HIDE);
+		Invalidate();
+	}
+	return TRUE;
+}
+
+LRESULT CClassView::OnAdd512(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/) {
+	OnAdd(512);
+	return 0;
+}
+
+LRESULT CClassView::OnAdd1024(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/) {
+	OnAdd(1024);
+	return 0;
+}
+	
+LRESULT CClassView::OnAdd2048(WORD, WORD, HWND, BOOL&) {
+	OnAdd(2048);
+	return 0;
+}
+
+void CClassView::InsertBytes(CNodeClass* pClass, UINT index, DWORD length) {
+	if (!pClass || index == MAX_NODES) {
+		return;
+	}
+
+	if (length == 4) {
+		CNodeBase* pNode = nullptr;
+		if (pClass->GetType() == NodeType::Vtable) {
+
+		}
+		else {
+			pNode = new CNodeHex32;
+		}
+
+		pNode->SetParent(pClass);
+		pClass->InsertNode(index, pNode);
+		m_pFrame->CalcAllOffsets();
+		return;
+	}
+
+	for (UINT i = 0; i < length / sizeof(ULONG_PTR); i++) {
+		CNodeBase* pNode;
+		if (pClass->GetType() == NodeType::Vtable) {
+
+		}
+		else {
+			pNode = new CNodeHex;
+		}
+
+		pNode->SetParent(pClass);
+		pClass->InsertNode(index, pNode);
+	}
+
+	m_pFrame->CalcAllOffsets();
+}
+
+void CClassView::OnInsert(DWORD size) {
+	InsertBytes((CNodeClass*)m_Selected[0].Object->GetParent(), FindNodeIndex(m_Selected[0].Object),
+		size);
+	Invalidate(FALSE);
+}
+
+LRESULT CClassView::OnInsert4(WORD, WORD, HWND, BOOL&) {
+	OnInsert(4);
+	return 0;
+}
+
+LRESULT CClassView::OnInsert8(WORD, WORD, HWND, BOOL&) {
+	OnInsert(8);
+	return 0;
+}
+
+LRESULT CClassView::OnInsert64(WORD, WORD, HWND, BOOL&) {
+	OnInsert(64);
+	return 0;
+}
+
+LRESULT CClassView::OnInsert128(WORD, WORD, HWND, BOOL&) {
+	OnInsert(128);
+	return 0;
+}
+
+LRESULT CClassView::OnInsert256(WORD, WORD, HWND, BOOL&) {
+	OnInsert(256);
+	return 0;
+}
+
+LRESULT CClassView::OnInsert512(WORD, WORD, HWND, BOOL&) {
+	OnInsert(512);
+	return 0;
+}
+
+LRESULT CClassView::OnInsert1024(WORD, WORD, HWND, BOOL&) {
+	OnInsert(1024);
+	return 0;
+}
+
+LRESULT CClassView::OnInsert2048(WORD, WORD, HWND, BOOL&) {
+	OnInsert(2048);
+	return 0;
+}
+
+LRESULT CClassView::OnModifyHide(WORD, WORD, HWND, BOOL&) {
+	for (UINT i = 0; i < m_Selected.size(); i++)
+		m_Selected[i].Object->Hide();
+	Invalidate(FALSE);
+	return 0;
+}
+
+LRESULT CClassView::OnModifyShow(WORD, WORD, HWND, BOOL&) {
+	m_pFrame->ClearHidden();
+	return 0;
+}
+
+LRESULT CClassView::OnModifyDelete(WORD, WORD, HWND, BOOL&) {
+	for (UINT i = 0; i < m_Selected.size(); i++) {
+		CNodeBase* pClass = (CNodeClass*)m_Selected[i].Object->GetParent();
+		UINT idx = FindNodeIndex(m_Selected[i].Object);
+		if (idx != MAX_NODES) {
+			pClass->DeleteNode(idx);
+			m_pFrame->CalcAllOffsets();
+		}
+	}
+	m_Selected.clear();
+	return 0;
+}
+
+void CClassView::ReplaceSelectedWithType(NodeType type) {
+	std::vector<CNodeBase*> newSelected;
+
+
+	for (size_t i = 0; i < m_Selected.size(); i++) {
+		if (!m_pFrame->IsNodeValid(m_Selected[i].Object))
+			continue;
+
+		if (m_Selected[i].Object->GetParent()->GetType() == NodeType::Vtable) {
+			type = NodeType::FunctionPtr;
+		}
+
+		
+	}
+
+	m_Selected.clear();
+	for (UINT i = 0; i < newSelected.size(); i++) {
+		newSelected[i]->Select();
+
+	}
+
+	Invalidate(FALSE);
 }

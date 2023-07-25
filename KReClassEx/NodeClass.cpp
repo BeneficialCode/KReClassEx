@@ -17,11 +17,16 @@ CNodeClass::CNodeClass() {
 	m_Idx = 0;
 }
 
+ULONG_PTR CNodeClass::ConvertStrToAddress(CString str) {
+	return 0;
+}
+
 void CNodeClass::Update(const PHOTSPOT spot) {
 	StandardUpdate(spot);
 	if (spot->Id == 0) {
-		m_OffsetText.SetString(spot->Text);
-		// TODO: m_Offset 
+		m_OffsetText.SetString(spot->Text);	
+		// TODO: m_Offset
+
 	}
 	else if (spot->Id == 1) {
 		m_RequestPosition = _tcstol(spot->Text, nullptr, 10);

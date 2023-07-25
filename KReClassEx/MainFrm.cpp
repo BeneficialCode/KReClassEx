@@ -157,7 +157,7 @@ void CMainFrame::WritePacket(void* pPacket, ULONG length) {
 LRESULT CMainFrame::OnNewClass(WORD, WORD, HWND, BOOL&)
 {
 	// AtlMessageBox(m_hWnd, L"I'm comming!", L"Info", MB_OK);
-	auto pView = new CClassView();
+	auto pView = new CClassView(this);
 	auto hWnd = pView->Create(m_view, rcDefault, nullptr, 
 		WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | WS_CLIPCHILDREN,
 		WS_EX_STATICEDGE);
@@ -166,18 +166,19 @@ LRESULT CMainFrame::OnNewClass(WORD, WORD, HWND, BOOL&)
 		return 0;
 	}
 	
-	CNodeClass* pNewClass = new CNodeClass;
-	pView->SetClass(pNewClass);
+	CNodeClass* pClass = new CNodeClass;
+	pView->SetClass(pClass);
+	m_Classes.push_back(pClass);
 
 	m_view.AddPage(hWnd, L" N00000001     ", -1, pView);
 
 	for (int i = 0; i < 64 / sizeof(size_t); i++) {
 		CNodeHex* pNode = new CNodeHex;
-		pNode->SetParent(pNewClass);
-		pNewClass->AddNode(pNode);
+		pNode->SetParent(pClass);
+		pClass->AddNode(pNode);
 	}
 	
-	CalcOffsets(pNewClass);
+	CalcOffsets(pClass);
 	return 0;
 }
 
@@ -188,4 +189,64 @@ void CMainFrame::CalcOffsets(CNodeClass* pClass) {
 		pNode->SetOffset(offset);
 		offset += pNode->GetMemorySize();
 	}
+}
+
+void CMainFrame::CalcAllOffsets() {
+	for (UINT i = 0; i < m_Classes.size(); i++)
+		CalcOffsets(m_Classes[i]);
+}
+
+void CMainFrame::ClearHidden() {
+	for (size_t c = 0; c < m_Classes.size(); c++) {
+		m_Classes[c]->Show();
+		for (size_t n = 0; n < m_Classes[c]->NodeCount(); n++) {
+			CNodeBase* pNode = m_Classes[c]->GetNode(n);
+			pNode->Show();
+
+			NodeType type = pNode->GetType();
+			if (type == NodeType::Vtable) {
+
+			}
+			else if (type == NodeType::Array) {
+
+			}
+			else if (type == NodeType::Pointer) {
+
+			}
+		}
+	}
+}
+
+bool CMainFrame::IsNodeValid(CNodeBase* pCheckNode) {
+	for (size_t c = 0; c < m_Classes.size(); c++) {
+		for (size_t n = 0; n < m_Classes[c]->NodeCount(); n++) {
+			CNodeBase* pNode = m_Classes[c]->GetNode(n);
+			if (pNode == pCheckNode)
+				return true;
+
+			NodeType nodeType = pNode->GetType();
+			if (nodeType == NodeType::Vtable) {
+
+			}
+			if (nodeType == NodeType::Array) {
+
+			}
+			if (nodeType == NodeType::Pointer) {
+
+			}
+		}
+	}
+
+	return false;
+}
+
+CNodeBase* CMainFrame::CreateNewNode(NodeType type) {
+	switch (type) {
+	case NodeType::Class: return new CNodeClass;
+
+	case NodeType::Hex64: return new CNodeHex64;
+
+	}
+
+	return nullptr;
 }

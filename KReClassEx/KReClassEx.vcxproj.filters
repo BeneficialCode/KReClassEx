@@ -69,6 +69,15 @@
     <ClCompile Include="NodeHex64.cpp">
       <Filter>Nodes</Filter>
     </ClCompile>
+    <ClCompile Include="NodeHex32.cpp">
+      <Filter>Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="NodeHex16.cpp">
+      <Filter>Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="NodeHex8.cpp">
+      <Filter>Nodes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -135,6 +144,18 @@
       <Filter>Nodes</Filter>
     </ClInclude>
     <ClInclude Include="Nodes.h">
+      <Filter>Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="Interfaces.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeHex32.h">
+      <Filter>Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeHex16.h">
+      <Filter>Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeHex8.h">
       <Filter>Nodes</Filter>
     </ClInclude>
   </ItemGroup>

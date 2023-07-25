@@ -202,6 +202,7 @@ int CNodeBase::AddComment(const PVIEWINFO view, int x, int y) {
 
 		// 显示注释中的数值
 		if (g_bInt) {
+			// 此处地址判断有误，如果是内核地址的话
 			if (iVal > 0x6FFFFFFF && iVal < 0x7FFFFFFFFFFF) {
 				x = AddText(view, x, y, g_clrValue, HS_NONE, L"(%I64d|0x%IX)", iVal, iVal);
 			}
@@ -215,7 +216,24 @@ int CNodeBase::AddComment(const PVIEWINFO view, int x, int y) {
 
 	}
 	else if (m_NodeType == NodeType::Hex32) {
+		float fVal = *(float*)&view->Data[m_Offset];
+		LONG_PTR iVal = *(LONG_PTR*)&view->Data[m_Offset];
 
+		if (g_bInt) {
+#ifdef _M_AMD64
+			if (iVal > 0x140000000 && iVal < 0x7FFFFFFFFFFF) // in 64 bit address range
+				x = AddText(view, x, y, g_clrValue, HS_NONE, _T("(%i|0x%IX)"), iVal, iVal);
+			else if (iVal > 0x400000 && iVal < 0x140000000)
+				x = AddText(view, x, y, g_clrValue, HS_NONE, _T("(%i|0x%X)"), iVal, iVal);
+			else if (iVal == 0)
+				x = AddText(view, x, y, g_clrValue, HS_NONE, _T("(%i)"), iVal);
+			else
+				x = AddText(view, x, y, g_clrValue, HS_NONE, _T("(%i|0x%X)"), iVal, iVal);
+#else
+
+#endif // _M_AMD64
+
+		}
 	}
 	else if (m_NodeType == NodeType::Hex16) {
 
