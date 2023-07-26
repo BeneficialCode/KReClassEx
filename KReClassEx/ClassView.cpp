@@ -576,14 +576,140 @@ void CClassView::ReplaceSelectedWithType(NodeType type) {
 			type = NodeType::FunctionPtr;
 		}
 
-		
+		CNodeBase* pNewNode = m_pFrame->CreateNewNode(type);
+
+		if (type == NodeType::Class) {
+
+		}
+
+		ReplaceNode((CNodeClass*)m_Selected[i].Object->GetParent(),
+			FindNodeIndex(m_Selected[i].Object), pNewNode);
+
+		newSelected.push_back(pNewNode);
 	}
 
 	m_Selected.clear();
 	for (UINT i = 0; i < newSelected.size(); i++) {
 		newSelected[i]->Select();
+		CNodeClass* pClass = (CNodeClass*)newSelected[i]->GetParent();
 
+		HOTSPOT hotspot;
+		hotspot.Address = pClass->GetOffset() + newSelected[i]->GetOffset();
+		hotspot.Object = newSelected[i];
+		m_Selected.push_back(hotspot);
 	}
 
 	Invalidate(FALSE);
+}
+
+void CClassView::ReplaceNode(CNodeClass* pClass, UINT index, CNodeBase* pNewNode) {
+	if (!pClass || index == MAX_NODES)
+		return;
+
+	CNodeBase* pOldNode = pClass->GetNode(index);
+	pNewNode->SetName(pOldNode->GetName());
+	pNewNode->SetComment(pOldNode->GetComment());
+
+	pNewNode->SetParent(pClass);
+	pNewNode->Unselect();
+
+	pClass->SetNode(index, pNewNode);
+
+	DWORD oldSize = pOldNode->GetMemorySize();
+	DWORD newSize = pNewNode->GetMemorySize();
+
+	if (oldSize != newSize) {
+		if (newSize < oldSize) {
+			FillNodes(pClass, index + 1, oldSize - newSize);
+		}
+		else {
+			RemoveNodes(pClass, index + 1, newSize - oldSize);
+		}
+	}
+
+	delete pOldNode;
+
+	m_pFrame->CalcAllOffsets();
+}
+
+void CClassView::FillNodes(CNodeClass* pClass, UINT index, DWORD length) {
+	if (!pClass || index >= MAX_NODES)
+		return;
+
+	size_t offset = 0;
+
+	if (index > 0) {
+		CNodeBase* pNode = pClass->GetNode(index - 1);
+		offset = pNode->GetOffset() + pNode->GetMemorySize();
+	}
+
+	while (length != 0) {
+		// Assume 8 ?
+		// TODO: to figure this out
+		if (length >= 8) {
+			CNodeHex64* pFill = new CNodeHex64;
+			pFill->SetParent(pClass);
+			pFill->SetOffset(offset);
+
+			pClass->InsertNode(index, pFill);
+
+			offset += 8;
+			length -= 8;
+			index++;
+		}
+
+		if (length >= 4) {
+			CNodeHex32* pFill = new CNodeHex32;
+			pFill->SetParent(pClass);
+			pFill->SetOffset(offset);
+			pClass->InsertNode(index, pFill);
+			offset += 4;
+			length -= 4;
+			index++;
+		}
+
+		if (length >= 2 && length < 4) {
+			CNodeHex16* pFill = new CNodeHex16;
+			pFill->SetParent(pClass);
+			pFill->SetOffset(offset);
+			pClass->InsertNode(index, pFill);
+			offset += 2;
+			length -= 2;
+			index++;
+		}
+
+		if (length == 1) {
+			CNodeHex8* pFill = new CNodeHex8;
+			pFill->SetParent(pClass);
+			pFill->SetOffset(offset);
+			pClass->InsertNode(index, pFill);
+			offset += 1;
+			length -= 1;
+			index++;
+		}
+	}
+}
+
+void CClassView::RemoveNodes(CNodeClass* pClass, UINT index, DWORD length) {
+	if (!pClass || index == MAX_NODES)
+		return;
+
+	UINT t = 0;
+	DWORD totalSize = 0;
+	for (UINT i = index; i < pClass->NodeCount(); i++) {
+		totalSize += pClass->GetNode(i)->GetMemorySize();
+		t++;
+		if (totalSize >= length)
+			break;
+	}
+
+	for (UINT i = 0; i < t; i++) {
+		pClass->DeleteNode(index);
+	}
+
+	if (totalSize > length) {
+		FillNodes(pClass, index, totalSize - length);
+	}
+
+	m_pFrame->CalcAllOffsets();
 }

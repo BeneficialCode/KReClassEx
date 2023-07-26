@@ -33,6 +33,10 @@ public:
 	void InsertBytes(CNodeClass* pClass, UINT index, DWORD length);
 
 	void ReplaceSelectedWithType(NodeType type);
+	void ReplaceNode(CNodeClass* pClass, UINT index, CNodeBase* pNewNode);
+	void FillNodes(CNodeClass* pClass, UINT index, DWORD length);
+	void RemoveNodes(CNodeClass* pClass, UINT index, DWORD length);
+
 
 public:
 	void OnAdd(DWORD size);
