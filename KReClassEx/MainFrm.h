@@ -67,7 +67,5 @@ public:
 private:
 
 	CTabView m_view;
-
-public:
-	std::vector<CNodeClass*> m_Classes;
+	
 };

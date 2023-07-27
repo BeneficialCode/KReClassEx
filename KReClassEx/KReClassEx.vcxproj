@@ -226,13 +226,40 @@
     <ClCompile Include="local.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="netutils.cpp" />
+    <ClCompile Include="NodeArray.cpp" />
     <ClCompile Include="NodeBase.cpp" />
+    <ClCompile Include="NodeBits.cpp" />
+    <ClCompile Include="NodeByte.cpp" />
+    <ClCompile Include="NodeCharPtr.cpp" />
     <ClCompile Include="NodeClass.cpp" />
+    <ClCompile Include="NodeClassInstance.cpp" />
+    <ClCompile Include="NodeCustom.cpp" />
+    <ClCompile Include="NodeDouble.cpp" />
+    <ClCompile Include="NodeDWORD.cpp" />
+    <ClCompile Include="NodeFloat.cpp" />
+    <ClCompile Include="NodeFunction.cpp" />
+    <ClCompile Include="NodeFunctionPtr.cpp" />
     <ClCompile Include="NodeHex16.cpp" />
     <ClCompile Include="NodeHex32.cpp" />
     <ClCompile Include="NodeHex64.cpp" />
     <ClCompile Include="NodeHex8.cpp" />
+    <ClCompile Include="NodeInt16.cpp" />
+    <ClCompile Include="NodeInt32.cpp" />
+    <ClCompile Include="NodeInt64.cpp" />
+    <ClCompile Include="NodeInt8.cpp" />
+    <ClCompile Include="NodeMatrix.cpp" />
+    <ClCompile Include="NodePtr.cpp" />
+    <ClCompile Include="NodePtrArray.cpp" />
+    <ClCompile Include="NodeQuat.cpp" />
+    <ClCompile Include="NodeQWORD.cpp" />
+    <ClCompile Include="NodeText.cpp" />
     <ClCompile Include="NodeType.cpp" />
+    <ClCompile Include="NodeUnicode.cpp" />
+    <ClCompile Include="NodeVec2.cpp" />
+    <ClCompile Include="NodeVec3.cpp" />
+    <ClCompile Include="NodeVTable.cpp" />
+    <ClCompile Include="NodeWCharPtr.cpp" />
+    <ClCompile Include="NodeWORD.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -244,6 +271,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AboutDlg.h" />
+    <ClInclude Include="BitArray.h" />
     <ClInclude Include="ClassView.h" />
     <ClInclude Include="common.h" />
     <ClInclude Include="crypto.h" />
@@ -256,14 +284,41 @@
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="Memory.h" />
     <ClInclude Include="netutils.h" />
+    <ClInclude Include="NodeArray.h" />
     <ClInclude Include="NodeBase.h" />
+    <ClInclude Include="NodeBits.h" />
+    <ClInclude Include="NodeByte.h" />
+    <ClInclude Include="NodeCharPtr.h" />
     <ClInclude Include="NodeClass.h" />
+    <ClInclude Include="NodeClassInstance.h" />
+    <ClInclude Include="NodeCustom.h" />
+    <ClInclude Include="NodeDouble.h" />
+    <ClInclude Include="NodeDWORD.h" />
+    <ClInclude Include="NodeFloat.h" />
+    <ClInclude Include="NodeFunction.h" />
+    <ClInclude Include="NodeFunctionPtr.h" />
     <ClInclude Include="NodeHex16.h" />
     <ClInclude Include="NodeHex32.h" />
     <ClInclude Include="NodeHex64.h" />
     <ClInclude Include="NodeHex8.h" />
+    <ClInclude Include="NodeInt16.h" />
+    <ClInclude Include="NodeInt32.h" />
+    <ClInclude Include="NodeInt64.h" />
+    <ClInclude Include="NodeInt8.h" />
+    <ClInclude Include="NodeMatrix.h" />
+    <ClInclude Include="NodePtr.h" />
+    <ClInclude Include="NodePtrArray.h" />
+    <ClInclude Include="NodeQuat.h" />
+    <ClInclude Include="NodeQWORD.h" />
     <ClInclude Include="Nodes.h" />
+    <ClInclude Include="NodeText.h" />
     <ClInclude Include="NodeTypes.h" />
+    <ClInclude Include="NodeUnicode.h" />
+    <ClInclude Include="NodeVec2.h" />
+    <ClInclude Include="NodeVec3.h" />
+    <ClInclude Include="NodeVTable.h" />
+    <ClInclude Include="NodeWCharPtr.h" />
+    <ClInclude Include="NodeWORD.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Ribbon.h" />
     <ClInclude Include="stdafx.h" />
@@ -321,6 +376,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\lexilla\src\Lexilla.vcxproj">
+      <Project>{e541c9be-13bc-4ce6-a0a4-31145f51a2c1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\scintilla\win32\Scintilla.vcxproj">
+      <Project>{19cca8b8-46b9-4609-b7ce-198da19f07bd}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

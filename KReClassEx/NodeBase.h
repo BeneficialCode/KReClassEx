@@ -179,6 +179,10 @@ public:
 	NODESIZE DrawHidden(const PVIEWINFO view, int x, int y);
 
 	CStringA GetStringFromMemoryA(const char* pMemory, int length);
+	CStringW GetStringFromMemoryW(const wchar_t* pMemory, int length);
+
+	BOOLEAN IsMemory(ULONG_PTR address);
+
 
 protected:
 	NodeType m_NodeType{ NodeType::Base };

@@ -204,7 +204,7 @@ void CMainFrame::ClearHidden() {
 			pNode->Show();
 
 			NodeType type = pNode->GetType();
-			if (type == NodeType::Vtable) {
+			if (type == NodeType::VTable) {
 
 			}
 			else if (type == NodeType::Array) {
@@ -225,7 +225,7 @@ bool CMainFrame::IsNodeValid(CNodeBase* pCheckNode) {
 				return true;
 
 			NodeType nodeType = pNode->GetType();
-			if (nodeType == NodeType::Vtable) {
+			if (nodeType == NodeType::VTable) {
 
 			}
 			if (nodeType == NodeType::Array) {

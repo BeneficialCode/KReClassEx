@@ -80,7 +80,7 @@ NODESIZE CNodeClass::Draw(const PVIEWINFO view, int x, int y) {
 				continue;
 			}
 
-			if (pNode->GetType() == NodeType::Vtable) {
+			if (pNode->GetType() == NodeType::VTable) {
 
 			}
 

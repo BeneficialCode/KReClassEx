@@ -349,7 +349,7 @@ void CClassView::AddBytes(CNodeClass* pClass, DWORD length) {
 
 	if (length == 4) {
 		CNodeBase* pNode = nullptr;
-		if (pClass->GetType() == NodeType::Vtable) {
+		if (pClass->GetType() == NodeType::VTable) {
 			
 		}
 		else {
@@ -363,7 +363,7 @@ void CClassView::AddBytes(CNodeClass* pClass, DWORD length) {
 
 	for (UINT i = 0; i < length / sizeof(ULONG_PTR); i++) {
 		CNodeBase* pNode;
-		if (pClass->GetType() == NodeType::Vtable) {
+		if (pClass->GetType() == NodeType::VTable) {
 
 		}
 		else {
@@ -464,7 +464,7 @@ void CClassView::InsertBytes(CNodeClass* pClass, UINT index, DWORD length) {
 
 	if (length == 4) {
 		CNodeBase* pNode = nullptr;
-		if (pClass->GetType() == NodeType::Vtable) {
+		if (pClass->GetType() == NodeType::VTable) {
 
 		}
 		else {
@@ -479,7 +479,7 @@ void CClassView::InsertBytes(CNodeClass* pClass, UINT index, DWORD length) {
 
 	for (UINT i = 0; i < length / sizeof(ULONG_PTR); i++) {
 		CNodeBase* pNode;
-		if (pClass->GetType() == NodeType::Vtable) {
+		if (pClass->GetType() == NodeType::VTable) {
 
 		}
 		else {
@@ -572,14 +572,37 @@ void CClassView::ReplaceSelectedWithType(NodeType type) {
 		if (!m_pFrame->IsNodeValid(m_Selected[i].Object))
 			continue;
 
-		if (m_Selected[i].Object->GetParent()->GetType() == NodeType::Vtable) {
+		if (m_Selected[i].Object->GetParent()->GetType() == NodeType::VTable) {
 			type = NodeType::FunctionPtr;
 		}
 
 		CNodeBase* pNewNode = m_pFrame->CreateNewNode(type);
 
 		if (type == NodeType::Class) {
+			MakeBasicClass((CNodeClass*)pNewNode);
+		}
 
+		if (type == NodeType::Custom) {
+			((CNodeCustom*)pNewNode)->SetSize(m_Selected[i].Object->GetMemorySize());
+		}
+		if (type == NodeType::Text) {
+			((CNodeText*)pNewNode)->SetSize(m_Selected[i].Object->GetMemorySize());
+		}
+		if (type == NodeType::Unicode) {
+			((CNodeUnicode*)pNewNode)->SetSize(m_Selected[i].Object->GetMemorySize());
+		}
+		if (type == NodeType::VTable) {
+			for (int i = 0; i < 10; i++)
+			{
+				CNodeVTable* pVTable = (CNodeVTable*)pNewNode;
+				pVTable->Initialize(this);
+
+				CNodeFunctionPtr* pFunctionPtr = new CNodeFunctionPtr(this, pVTable->GetOffset() + (i * sizeof(size_t)));
+				pFunctionPtr->SetOffset(pVTable->GetOffset() + (i * sizeof(size_t)));
+				pFunctionPtr->SetParent(pVTable);
+
+				pVTable->AddNode(pFunctionPtr);
+			}
 		}
 
 		ReplaceNode((CNodeClass*)m_Selected[i].Object->GetParent(),
@@ -712,4 +735,19 @@ void CClassView::RemoveNodes(CNodeClass* pClass, UINT index, DWORD length) {
 	}
 
 	m_pFrame->CalcAllOffsets();
+}
+
+LRESULT CClassView::OnTypeHex64(WORD, WORD, HWND, BOOL&) {
+	ReplaceSelectedWithType(NodeType::Hex64);
+	return 0;
+}
+
+void CClassView::MakeBasicClass(CNodeClass* pClass) {
+	for (int i = 0; i < 1; i++) {
+		CNodeHex* pNode = new CNodeHex();
+		pNode->SetParent(pClass);
+		pClass->AddNode(pNode);
+	}
+	m_pFrame->CalcOffsets(pClass);
+	m_pFrame->m_Classes.push_back(pClass);
 }

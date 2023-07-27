@@ -37,6 +37,8 @@ public:
 	void FillNodes(CNodeClass* pClass, UINT index, DWORD length);
 	void RemoveNodes(CNodeClass* pClass, UINT index, DWORD length);
 
+	void MakeBasicClass(CNodeClass* pClass);
+
 
 public:
 	void OnAdd(DWORD size);
@@ -63,7 +65,7 @@ public:
 	LRESULT OnModifyShow(WORD, WORD, HWND, BOOL&);
 	LRESULT OnModifyDelete(WORD, WORD, HWND, BOOL&);
 
-
+	LRESULT OnTypeHex64(WORD, WORD, HWND, BOOL&);
 
 
 	
@@ -105,6 +107,7 @@ public:
 		COMMAND_ID_HANDLER(ID_INSERT_INSERT512,OnInsert512)
 		COMMAND_ID_HANDLER(ID_INSERT_INSERT1024,OnInsert1024)
 		COMMAND_ID_HANDLER(ID_INSERT_INSERT2048,OnInsert2048)
+		COMMAND_ID_HANDLER(ID_TYPE_HEX64,OnTypeHex64)
 		COMMAND_ID_HANDLER(ID_MODIFY_HIDE,OnModifyHide)
 		COMMAND_ID_HANDLER(ID_MODIFY_SHOW,OnModifyShow)
 		COMMAND_ID_HANDLER(ID_MODIFY_DELETE,OnModifyDelete)

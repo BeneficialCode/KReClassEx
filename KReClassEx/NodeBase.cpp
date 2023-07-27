@@ -273,3 +273,16 @@ CStringA CNodeBase::GetStringFromMemoryA(const char* pMemory, int length) {
 	}
 	return str;
 }
+
+CStringW CNodeBase::GetStringFromMemoryW(const wchar_t* pMemory, int length) {
+	CStringW str;
+	for (int i = 0; i < length; i++)
+	{
+		str += (pMemory[i] > 0x1F && pMemory[i] < 0xFF && pMemory[i] != 0x7F) ? (wchar_t)pMemory[i] : (wchar_t)(L'.');
+	}
+	return str;
+}
+
+BOOLEAN CNodeBase::IsMemory(ULONG_PTR address) {
+	return false;
+}

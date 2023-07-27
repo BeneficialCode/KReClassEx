@@ -78,6 +78,87 @@
     <ClCompile Include="NodeHex8.cpp">
       <Filter>Nodes</Filter>
     </ClCompile>
+    <ClCompile Include="NodeBits.cpp">
+      <Filter>Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="NodeVTable.cpp">
+      <Filter>Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="NodeFunctionPtr.cpp">
+      <Filter>Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="NodeFunction.cpp">
+      <Filter>Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="NodePtr.cpp">
+      <Filter>Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="NodeInt64.cpp">
+      <Filter>Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="NodeInt8.cpp">
+      <Filter>Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="NodeInt16.cpp">
+      <Filter>Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="NodeInt32.cpp">
+      <Filter>Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="NodeQWORD.cpp">
+      <Filter>Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="NodeDWORD.cpp">
+      <Filter>Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="NodeWORD.cpp">
+      <Filter>Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="NodeWCharPtr.cpp">
+      <Filter>Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="NodeVec3.cpp">
+      <Filter>Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="NodeVec2.cpp">
+      <Filter>Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="NodeUnicode.cpp">
+      <Filter>Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="NodeText.cpp">
+      <Filter>Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="NodeQuat.cpp">
+      <Filter>Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="NodePtrArray.cpp">
+      <Filter>Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="NodeMatrix.cpp">
+      <Filter>Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="NodeFloat.cpp">
+      <Filter>Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="NodeDouble.cpp">
+      <Filter>Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="NodeCustom.cpp">
+      <Filter>Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="NodeClassInstance.cpp">
+      <Filter>Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="NodeCharPtr.cpp">
+      <Filter>Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="NodeByte.cpp">
+      <Filter>Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="NodeArray.cpp">
+      <Filter>Nodes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -156,6 +237,90 @@
       <Filter>Nodes</Filter>
     </ClInclude>
     <ClInclude Include="NodeHex8.h">
+      <Filter>Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeBits.h">
+      <Filter>Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="BitArray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeVTable.h">
+      <Filter>Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeFunctionPtr.h">
+      <Filter>Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeFunction.h">
+      <Filter>Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="NodePtr.h">
+      <Filter>Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeInt64.h">
+      <Filter>Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeInt32.h">
+      <Filter>Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeInt16.h">
+      <Filter>Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeInt8.h">
+      <Filter>Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeQWORD.h">
+      <Filter>Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeDWORD.h">
+      <Filter>Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeWORD.h">
+      <Filter>Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeByte.h">
+      <Filter>Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeText.h">
+      <Filter>Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeUnicode.h">
+      <Filter>Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeCharPtr.h">
+      <Filter>Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeWCharPtr.h">
+      <Filter>Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeFloat.h">
+      <Filter>Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeDouble.h">
+      <Filter>Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeVec2.h">
+      <Filter>Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeVec3.h">
+      <Filter>Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeQuat.h">
+      <Filter>Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeMatrix.h">
+      <Filter>Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeArray.h">
+      <Filter>Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeClassInstance.h">
+      <Filter>Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="NodePtrArray.h">
+      <Filter>Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeCustom.h">
       <Filter>Nodes</Filter>
     </ClInclude>
   </ItemGroup>

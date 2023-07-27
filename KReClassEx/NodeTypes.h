@@ -23,11 +23,11 @@ enum class NodeType {
 	Unicode,
 	FunctionPtr,
 	Custom,
-	Vec2,
-	Vec3,
-	Quat,
-	Matrix,
-	Vtable,
+	Vec2,	// 二维向量 x,y
+	Vec3,	// 3维浮点坐标 x,y,z
+	Quat,	// x1,y1,x2,y2
+	Matrix,	// 坐标变换矩阵
+	VTable,
 	Array,
 	Class,
 	PChar,
@@ -35,7 +35,7 @@ enum class NodeType {
 	Bits,
 	UINT64, // qword
 	Function,
-	PTrArray
+	PtrArray
 };
 
 
