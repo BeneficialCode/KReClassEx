@@ -26,4 +26,5 @@ typedef struct tagHOSTPOT {
     INT Type;
     UINT Level;
     class CNodeBase* Object;
+    class CClassView* View;
 }HOTSPOT, * PHOTSPOT;

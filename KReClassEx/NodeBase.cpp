@@ -1,13 +1,16 @@
 #include "stdafx.h"
 #include "NodeBase.h"
 
+// Global node index
+extern DWORD g_NodeCreateIndex;
+
 CNodeBase::CNodeBase() {
 	// Optimized
 	m_LevelsOpen.resize(32, false);
 	m_LevelsOpen[0] = true;
 
 	// This is the class name
-	m_Name.Format(L"N%0.8X", 1);
+	m_Name.Format(L"N%0.8X", g_NodeCreateIndex++);
 }
 
 void CNodeBase::AddHotSpot(const PVIEWINFO view, const CRect& spot, CString text, 

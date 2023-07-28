@@ -1,12 +1,16 @@
 #pragma once
-
 #include "HotSpot.h"
 
+class CClassView;
 class CCustomEdit : public CWindowImpl<CCustomEdit,CEdit> {
 public:
 
 	void OnChar(TCHAR chChar, UINT nRepCnt, UINT nFlags);
 	HBRUSH OnCtlColorEdit(CDCHandle dc, CEdit edit);
+
+	void SetClassView(CClassView* pView) {
+		m_pClassView = pView;
+	}
 
 	BEGIN_MSG_MAP_EX(CCustomEdit)
 		MSG_WM_CHAR(OnChar)
@@ -20,4 +24,5 @@ public:
 	HOTSPOT m_Hotspot;
 	LONG m_MinWidth;
 	HBRUSH m_hBackBrush;
+	CClassView* m_pClassView;
 };

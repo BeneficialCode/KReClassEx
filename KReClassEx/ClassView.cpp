@@ -23,6 +23,7 @@ void CClassView::DoPaint(CDCHandle dc, RECT& rect) {
 
 		ReClassReadMemory(m_pClass->GetOffset(), m_Memory.Data(), classSize);
 
+
 		info.Address = m_pClass->GetOffset();
 		info.Data = m_Memory.Data();
 
@@ -104,6 +105,7 @@ int CClassView::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 	m_Edit.Create(m_hWnd, rect, nullptr, WS_CHILD | WS_TABSTOP);
 	m_Edit.ShowWindow(SW_HIDE);
 	m_Edit.SetFont(g_ViewFont);
+	m_Edit.ModifyStyle(0, ES_AUTOHSCROLL);
 
 	m_VScroll.Create(m_hWnd, rect, nullptr, SBS_VERT | WS_CHILD | WS_VISIBLE);
 	m_VScroll.EnableScrollBar(ESB_ENABLE_BOTH);
@@ -242,6 +244,7 @@ void CClassView::OnLButtonDown(UINT nFlags, CPoint point) {
 							hotspot.Address = pSelectedParentClassNode->GetOffset() +
 								pSelectedParentClassNode->GetNode(s)->GetOffset();
 							hotspot.Object = pSelectedParentClassNode->GetNode(s);
+							hotspot.View = this;
 
 							pSelectedParentClassNode->GetNode(s)->Select();
 							m_Selected.push_back(hotspot);
@@ -378,6 +381,7 @@ void CClassView::AddBytes(CNodeClass* pClass, DWORD length) {
 }
 
 CClassView::CClassView(IMainFrame* frame):m_pFrame(frame){
+	m_Edit.SetClassView(this);
 }
 
 LRESULT CClassView::OnAdd8(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/) {
@@ -604,6 +608,43 @@ void CClassView::ReplaceSelectedWithType(NodeType type) {
 				pVTable->AddNode(pFunctionPtr);
 			}
 		}
+		if (type == NodeType::Pointer) {
+			CNodePtr* pPtr = (CNodePtr*)pNewNode;
+			CNodeClass* pClass = (CNodeClass*)m_pFrame->CreateNewNode(NodeType::Class);
+			MakeBasicClass(pClass);
+			pPtr->SetClass(pClass);
+		}
+		if (type == NodeType::Array)
+		{
+			CNodeArray* pArray = (CNodeArray*)pNewNode;
+			CNodeClass* pClass = (CNodeClass*)m_pFrame->CreateNewNode(NodeType::Class);
+			MakeBasicClass(pClass);
+			pArray->SetClass(pClass);
+		}
+		if (type == NodeType::PtrArray)
+		{
+			CNodePtrArray* pArray = (CNodePtrArray*)pNewNode;
+			CNodeClass* pClass = (CNodeClass*)m_pFrame->CreateNewNode(NodeType::Class);
+			MakeBasicClass(pClass);
+			pArray->SetClass(pClass);
+		}
+		if (type == NodeType::Instance)
+		{
+			CNodeClassInstance* pInstance = (CNodeClassInstance*)pNewNode;
+			CNodeClass* pClass = (CNodeClass*)m_pFrame->CreateNewNode(NodeType::Class);
+			MakeBasicClass(pClass);
+			pInstance->SetClass(pClass);
+		}
+		if (type == NodeType::Function)
+		{
+			CNodeFunction* pFunction = (CNodeFunction*)pNewNode;
+			
+		}
+		if (type == NodeType::FunctionPtr)
+		{
+			CNodeFunctionPtr* pFunctionPtr = (CNodeFunctionPtr*)pNewNode;
+			pFunctionPtr->Initialize(this, m_Selected[i].Object->GetParent()->GetOffset() + m_Selected[i].Object->GetOffset());
+		}
 
 		ReplaceNode((CNodeClass*)m_Selected[i].Object->GetParent(),
 			FindNodeIndex(m_Selected[i].Object), pNewNode);
@@ -619,6 +660,7 @@ void CClassView::ReplaceSelectedWithType(NodeType type) {
 		HOTSPOT hotspot;
 		hotspot.Address = pClass->GetOffset() + newSelected[i]->GetOffset();
 		hotspot.Object = newSelected[i];
+		hotspot.View = this;
 		m_Selected.push_back(hotspot);
 	}
 
@@ -750,4 +792,140 @@ void CClassView::MakeBasicClass(CNodeClass* pClass) {
 	}
 	m_pFrame->CalcOffsets(pClass);
 	m_pFrame->m_Classes.push_back(pClass);
+}
+
+LRESULT CClassView::OnTypeHex32(WORD, WORD, HWND, BOOL&) {
+	ReplaceSelectedWithType(NodeType::Hex32);
+	return 0;
+}
+
+LRESULT CClassView::OnTypeHex16(WORD, WORD, HWND, BOOL&) {
+	ReplaceSelectedWithType(NodeType::Hex16);
+	return 0;
+}
+
+LRESULT CClassView::OnTypeHex8(WORD, WORD, HWND, BOOL&) {
+	ReplaceSelectedWithType(NodeType::Hex8);
+	return 0;
+}
+
+LRESULT CClassView::OnTypeInt64(WORD, WORD, HWND, BOOL&) {
+	ReplaceSelectedWithType(NodeType::Int64);
+	return 0;
+}
+
+LRESULT CClassView::OnTypeInt32(WORD, WORD, HWND, BOOL&) {
+	ReplaceSelectedWithType(NodeType::Int32);
+	return 0;
+}
+
+LRESULT CClassView::OnTypeInt16(WORD, WORD, HWND, BOOL&) {
+	ReplaceSelectedWithType(NodeType::Int16);
+	return 0;
+}
+
+LRESULT CClassView::OnTypeInt8(WORD, WORD, HWND, BOOL&) {
+	ReplaceSelectedWithType(NodeType::Int8);
+	return 0;
+}
+
+LRESULT CClassView::OnTypeBits(WORD, WORD, HWND, BOOL&) {
+	ReplaceSelectedWithType(NodeType::Bits);
+	return 0;
+}
+
+LRESULT CClassView::OnTypeQword(WORD, WORD, HWND, BOOL&) {
+	ReplaceSelectedWithType(NodeType::UINT64);
+	return 0;
+}
+
+LRESULT CClassView::OnTypeDword(WORD, WORD, HWND, BOOL&) {
+	ReplaceSelectedWithType(NodeType::UINT32);
+	return 0;
+}
+
+LRESULT CClassView::OnTypeWord(WORD, WORD, HWND, BOOL&) {
+	ReplaceSelectedWithType(NodeType::UINT16);
+	return 0;
+}
+
+LRESULT CClassView::OnTypeByte(WORD, WORD, HWND, BOOL&) {
+	ReplaceSelectedWithType(NodeType::UINT8);
+	return 0;
+}
+
+LRESULT CClassView::OnTypeVec2(WORD, WORD, HWND, BOOL&) {
+	ReplaceSelectedWithType(NodeType::Vec2);
+	return 0;
+}
+
+LRESULT CClassView::OnTypeVec3(WORD, WORD, HWND, BOOL&) {
+	ReplaceSelectedWithType(NodeType::Vec3);
+	return 0;
+}
+
+LRESULT CClassView::OnTypeQuat(WORD, WORD, HWND, BOOL&) {
+	ReplaceSelectedWithType(NodeType::Quat);
+	return 0;
+}
+
+LRESULT CClassView::OnTypeFloat(WORD, WORD, HWND, BOOL&) {
+	ReplaceSelectedWithType(NodeType::Float);
+	return 0;
+}
+
+LRESULT CClassView::OnTypeDouble(WORD, WORD, HWND, BOOL&) {
+	ReplaceSelectedWithType(NodeType::Double);
+	return 0;
+}
+
+LRESULT CClassView::OnTypeMatrix(WORD, WORD, HWND, BOOL&) {
+	ReplaceSelectedWithType(NodeType::Matrix);
+	return 0;
+}
+
+LRESULT CClassView::OnTypeCustom(WORD, WORD, HWND, BOOL&) {
+	ReplaceSelectedWithType(NodeType::Custom);
+	return 0;
+}
+
+LRESULT CClassView::OnTypeText(WORD, WORD, HWND, BOOL&) {
+	ReplaceSelectedWithType(NodeType::Text);
+	return 0;
+}
+
+LRESULT CClassView::OnTypePChar(WORD, WORD, HWND, BOOL&) {
+	ReplaceSelectedWithType(NodeType::PChar);
+	return 0;
+}
+
+LRESULT CClassView::OnTypePWChar(WORD, WORD, HWND, BOOL&) {
+	ReplaceSelectedWithType(NodeType::PWChar);
+	return 0;
+}
+
+LRESULT CClassView::OnTypeUnicode(WORD, WORD, HWND, BOOL&) {
+	ReplaceSelectedWithType(NodeType::Unicode);
+	return 0;
+}
+
+LRESULT CClassView::OnTypeInstance(WORD, WORD, HWND, BOOL&) {
+	ReplaceSelectedWithType(NodeType::Class);
+	return 0;
+}
+
+void CClassView::ResizeNode(CNodeClass* pClass, UINT index, DWORD before, DWORD after) {
+	if (!pClass || index == MAX_NODES)
+		return;
+
+	if (before != after) {
+		if (after < before) {
+			FillNodes(pClass, index + 1, before - after);
+		}
+		else {
+			RemoveNodes(pClass, index + 1, after - before);
+		}
+	}
+
+	m_pFrame->CalcAllOffsets();
 }

@@ -8,8 +8,13 @@ public:
 	CNodeFunction();
 	~CNodeFunction();
 
+	virtual void Update(const PHOTSPOT spot);
 
+	virtual ULONG GetMemorySize() { return m_MemorySize; }
 
+	virtual NODESIZE Draw(const PVIEWINFO pView, int x, int y);
+
+	inline void SetSize(ULONG Size) { m_MemorySize = Size; }
 
 private:
 	DWORD m_MemorySize;

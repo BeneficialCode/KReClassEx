@@ -27,7 +27,6 @@
 #define IDI_ICON_TEXT                   224
 #define IDI_ICON_UNSIGNED               225
 #define IDI_ICON_VECTOR                 226
-#define IDR_MENU1                       228
 #define IDR_MENU_QUICKMODIFY            228
 #define ID_QUICKMODIFY_TYPE             32775
 #define ID_TYPE_HEX64                   32776
@@ -80,13 +79,15 @@
 #define ID_MODIFY_DELETE                32823
 #define ID_MODIFY_SHOW                  32824
 #define ID_MODIFY_HIDE                  32825
+#define ID_TYPE_TEXT                    32826
+#define ID_TYPE_PWCHAR                  32827
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        229
-#define _APS_NEXT_COMMAND_VALUE         32826
+#define _APS_NEXT_COMMAND_VALUE         32828
 #define _APS_NEXT_CONTROL_VALUE         1000
 #define _APS_NEXT_SYMED_VALUE           101
 #endif

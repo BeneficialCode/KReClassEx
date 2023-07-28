@@ -7,7 +7,6 @@
 #define TXOFFSET 16
 
 typedef struct tagVIEWINFO {
-	// Temporary added for testing
 	CDCHandle* Dc;
 	CRect* ClientRect;
 	std::vector<HOTSPOT>* Hotspots;

@@ -245,8 +245,47 @@ CNodeBase* CMainFrame::CreateNewNode(NodeType type) {
 	case NodeType::Class: return new CNodeClass;
 
 	case NodeType::Hex64: return new CNodeHex64;
+	case NodeType::Hex32: return new CNodeHex32;
+	case NodeType::Hex16: return new CNodeHex16;
+	case NodeType::Hex8: return new CNodeHex8;
+	case NodeType::Bits: return new CNodeBits;
+
+	case NodeType::Int64: return new CNodeInt64;
+	case NodeType::Int32: return new CNodeInt32;
+	case NodeType::Int16: return new CNodeInt16;
+	case NodeType::Int8: return new CNodeInt8;
+
+	case NodeType::UINT64: return new CNodeQword;
+	case NodeType::UINT32: return new CNodeDword;
+	case NodeType::UINT16: return new CNodeWord;
+	case NodeType::UINT8: return new CNodeByte;
+
+	case NodeType::Vec2:	return new CNodeVec2;
+	case NodeType::Vec3:	return new CNodeVec3;
+	case NodeType::Quat:	return new CNodeQuat;
+	case NodeType::Matrix:	return new CNodeMatrix;
+
+	case NodeType::Float:	return new CNodeFloat;
+	case NodeType::Double:	return new CNodeDouble;
+
+	case NodeType::Custom:	return new CNodeCustom;
+	case NodeType::Text:	return new CNodeText;
+	case NodeType::PChar:	return new CNodeCharPtr;
+	case NodeType::PWChar:	return new CNodeWCharPtr;
+	case NodeType::Unicode:	return new CNodeUnicode;
+
+	case NodeType::VTable:		return new CNodeVTable;
+	case NodeType::FunctionPtr:	return new CNodeFunctionPtr;
+	case NodeType::Function:	return new CNodeFunction;
+
+	case NodeType::Pointer:		return new CNodePtr;
+	case NodeType::Array:		return new CNodeArray;
+	case NodeType::PtrArray:	return new CNodePtrArray;
+
+	case NodeType::Instance:	return new CNodeClassInstance;
 
 	}
 
 	return nullptr;
 }
+

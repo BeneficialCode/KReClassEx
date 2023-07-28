@@ -48,6 +48,8 @@ bool g_bString = true;
 bool g_bPointers = true;
 bool g_bUnsignedHex = true;
 
+DWORD g_NodeCreateIndex = 0;
+
 BOOL ReClassReadMemory(ULONG_PTR address, LPVOID buffer, SIZE_T size, PSIZE_T bytesRead) {
 	SecureZeroMemory(buffer, size);
 	return FALSE;
