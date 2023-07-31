@@ -21,6 +21,7 @@ BOOL CMainFrame::PreTranslateMessage(MSG* pMsg)
 
 BOOL CMainFrame::OnIdle()
 {
+	UpdateUI();
 	return FALSE;
 }
 
@@ -47,6 +48,9 @@ LRESULT CMainFrame::OnCreate(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/
 	pLoop->AddIdleHandler(this);
 
 	ShowRibbonUI(true);
+
+	UIEnable(ID_ADD_4, false);
+
 
 	return 0;
 }
@@ -289,3 +293,73 @@ CNodeBase* CMainFrame::CreateNewNode(NodeType type) {
 	return nullptr;
 }
 
+LRESULT CMainFrame::OnForwardToActiveView(WORD, WORD, HWND /*hWndCtl*/, BOOL& /*bHandled*/) {
+	int nPage = m_view.GetActivePage();
+	auto msg = GetCurrentMessage();
+	CClassView* pClassView = (CClassView * )m_view.GetPageData(nPage);
+	switch (msg->wParam)
+	{
+	case ID_ADD_4:
+		pClassView->SendMessage(msg->message, ID_ADD_ADD4, msg->lParam);
+		break;
+	default:
+		break;
+	}
+
+	return 0;
+}
+
+void CMainFrame::UIEnableAllAdd(BOOL bEnable) {
+	UIEnable(ID_ADD_4, bEnable);
+	UIEnable(ID_ADD_8, bEnable);
+	UIEnable(ID_ADD_64, bEnable);
+	UIEnable(ID_ADD_1024, bEnable);
+	UIEnable(ID_ADD_2048, bEnable);
+}
+
+void CMainFrame::StandardTypeUpdate(CClassView* pClassView) {
+	if (pClassView->m_Selected.size() > 0) {
+		if (pClassView->m_Selected[0].Object->GetType()
+			== NodeType::Class) {
+			UIEnableAllAdd(true);
+		}
+		else {
+			UIEnableAllAdd(false);
+		}
+	}
+	else {
+		UIEnableAllAdd(false);
+	}
+}
+
+void CMainFrame::UpdateUI() {
+	int nPage = m_view.GetActivePage();
+	if (nPage == -1) {
+		UIEnableAllAdd(false);
+		UIEnableAllInsert(false);
+		return;
+	}
+	CClassView* pClassView = (CClassView*)m_view.GetPageData(nPage);
+	if (pClassView != nullptr) {
+		StandardTypeUpdate(pClassView);
+		InsertTypeUpdate(pClassView);
+	}
+}
+
+void CMainFrame::UIEnableAllInsert(BOOL bEnable) {
+	UIEnable(ID_INSERT_4, bEnable);
+	UIEnable(ID_INSERT_8, bEnable);
+	UIEnable(ID_INSERT_64, bEnable);
+	UIEnable(ID_INSERT_1024, bEnable);
+	UIEnable(ID_INSERT_2048, bEnable);
+}
+
+void CMainFrame::InsertTypeUpdate(CClassView* pClassView) {
+	if (pClassView->m_Selected.size() == 1 &&
+		pClassView->m_Selected[0].Object->GetParent()) {
+		UIEnableAllInsert(true);
+	}
+	else {
+		UIEnableAllInsert(false);
+	}
+}

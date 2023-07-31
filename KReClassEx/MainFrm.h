@@ -24,13 +24,31 @@ public:
 	CNodeBase* CreateNewNode(NodeType type);
 
 	//TODO: Declare ribbon controls
+	LRESULT OnForwardToActiveView(WORD /*wNotifyCode*/, WORD wID, HWND /*hWndCtl*/, BOOL& /*bHandled*/);
 
 	// Ribbon control map
 	BEGIN_RIBBON_CONTROL_MAP(CMainFrame)
+		
 	END_RIBBON_CONTROL_MAP()
 
 	virtual BOOL PreTranslateMessage(MSG* pMsg);
 	virtual BOOL OnIdle();
+
+	void UpdateUI();
+	void UIEnableAllAdd(BOOL bEnable);
+	void StandardTypeUpdate(CClassView* pClassView);
+	void InsertTypeUpdate(CClassView* pClassView);
+	void UIEnableAllInsert(BOOL bEnable);
+
+	BEGIN_UPDATE_UI_MAP(CMainFrame)
+		UPDATE_ELEMENT(ID_ADD_4,UPDUI_RIBBON)
+		UPDATE_ELEMENT(ID_ADD_8,UPDUI_RIBBON)
+		UPDATE_ELEMENT(ID_ADD_64,UPDUI_RIBBON)
+		UPDATE_ELEMENT(ID_ADD_1024,UPDUI_RIBBON)
+		UPDATE_ELEMENT(ID_ADD_2048,UPDUI_RIBBON)
+	END_UPDATE_UI_MAP()
+
+
 
 
 	BEGIN_MSG_MAP(CMainFrame)
@@ -42,6 +60,7 @@ public:
 		COMMAND_ID_HANDLER(ID_APP_ABOUT, OnAppAbout)
 		COMMAND_ID_HANDLER(ID_BTN_CONNECT,OnConnect)
 		COMMAND_ID_HANDLER(ID_BTN_NEW,OnNewClass)
+		COMMAND_ID_HANDLER(ID_ADD_4,OnForwardToActiveView)
 		CHAIN_MSG_MAP(CRibbonFrameWindowImpl<CMainFrame>)
 	END_MSG_MAP()
 

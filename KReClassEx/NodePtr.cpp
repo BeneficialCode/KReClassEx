@@ -44,15 +44,15 @@ NODESIZE CNodePtr::Draw(const PVIEWINFO view, int x, int y)
 
     if (m_LevelsOpen[view->Level])
     {
-        DWORD NeededSize = m_pClassNode->GetMemorySize();
-        m_Memory.SetSize(NeededSize);
+        DWORD needSize = m_pClassNode->GetMemorySize();
+        m_Memory.SetSize(needSize);
 
         VIEWINFO newView;
         memcpy(&newView, view, sizeof(newView));
         newView.Data = m_Memory.Data();
         newView.Address = *pData;
 
-        ReClassReadMemory(newView.Address, (LPVOID)newView.Data, NeededSize);
+        ReClassReadMemory(newView.Address, (LPVOID)newView.Data, needSize);
 
         childDrawSize = m_pClassNode->Draw(&newView, x, y);
 

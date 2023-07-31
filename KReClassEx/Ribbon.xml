@@ -190,6 +190,268 @@
 			</Command.LargeImages>
 		</Command>
 
+		<Command Name="wtl_ADD_4" Symbol="ID_ADD_4" LabelTitle="Add 4">
+			<Command.TooltipTitle>Add 4 Bytes</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Add 4 Bytes
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/toolbar_add.bmp"/>
+			</Command.LargeImages>
+		</Command>
+		<Command Name="wtl_ADD_8" Symbol="ID_ADD_8" LabelTitle="Add 8">
+			<Command.TooltipTitle>Add 8 Bytes</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Add 8 Bytes
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/toolbar_add8.bmp"/>
+			</Command.LargeImages>
+		</Command>
+		<Command Name="wtl_ADD_64" Symbol="ID_ADD_64" LabelTitle="Add 64">
+			<Command.TooltipTitle>Add 64 Bytes</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Add 64 Bytes
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/toolbar_add64.bmp"/>
+			</Command.LargeImages>
+		</Command>
+		<Command Name="wtl_ADD_1024" Symbol="ID_ADD_1024" LabelTitle="Add 1024">
+			<Command.TooltipTitle>Add 1024 Bytes</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Add 1024 Bytes
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/toolbar_add1024.bmp"/>
+			</Command.LargeImages>
+		</Command>
+		<Command Name="wtl_ADD_2048" Symbol="ID_ADD_2048" LabelTitle="Add 2048">
+			<Command.TooltipTitle>Add 2048 Bytes</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Add 2048 Bytes
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/toolbar_add2048.bmp"/>
+			</Command.LargeImages>
+		</Command>
+
+		<Command Name="wtl_INSERT_4" Symbol="ID_INSERT_4" LabelTitle="Insert 4">
+			<Command.TooltipTitle>Insert 4 Bytes</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Insert 4 Bytes
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/toolbar_insert.bmp"/>
+			</Command.LargeImages>
+		</Command>
+		<Command Name="wtl_INSERT_8" Symbol="ID_INSERT_8" LabelTitle="Insert 8">
+			<Command.TooltipTitle>Insert 8 Bytes</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Insert 8 Bytes
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/toolbar_insert8.bmp"/>
+			</Command.LargeImages>
+		</Command>
+		<Command Name="wtl_INSERT_64" Symbol="ID_INSERT_64" LabelTitle="Insert 64">
+			<Command.TooltipTitle>Insert 64 Bytes</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Insert 64 Bytes
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/toolbar_insert64.bmp"/>
+			</Command.LargeImages>
+		</Command>
+		<Command Name="wtl_INSERT_1024" Symbol="ID_INSERT_1024" LabelTitle="Insert 1024">
+			<Command.TooltipTitle>Insert 1024 Bytes</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Insert 1024 Bytes
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/toolbar_insert1024.bmp"/>
+			</Command.LargeImages>
+		</Command>
+		<Command Name="wtl_INSERT_2048" Symbol="ID_INSERT_2048" LabelTitle="Insert 2048">
+			<Command.TooltipTitle>Insert 2048 Bytes</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Insert 2048 Bytes
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/toolbar_insert2048.bmp"/>
+			</Command.LargeImages>
+		</Command>
+
+
+		<Command Name="wtl_HEX_64" Symbol="ID_HEX_64" LabelTitle="Hex 64">
+			<Command.TooltipTitle>Type hex 64</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Type hex 64
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/toolbar_hex64.bmp"/>
+			</Command.LargeImages>
+		</Command>
+		<Command Name="wtl_HEX_32" Symbol="ID_HEX_32" LabelTitle="Hex 32">
+			<Command.TooltipTitle>Type hex 32</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Type hex 32
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/toolbar_hex32.bmp"/>
+			</Command.LargeImages>
+		</Command>
+		<Command Name="wtl_HEX_16" Symbol="ID_HEX_16" LabelTitle="Hex 16">
+			<Command.TooltipTitle>Type hex 16</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Type hex 16
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/toolbar_hex16.bmp"/>
+			</Command.LargeImages>
+		</Command>
+		<Command Name="wtl_HEX_8" Symbol="ID_HEX_8" LabelTitle="Hex 8">
+			<Command.TooltipTitle>Type HEX 8</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Type hex 8
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/toolbar_hex8.bmp"/>
+			</Command.LargeImages>
+		</Command>
+		<Command Name="wtl_HEX_BITS" Symbol="ID_HEX_BITS" LabelTitle="Bits">
+			<Command.TooltipTitle>Type Bits</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Type Bits
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/toolbar_bits.bmp"/>
+			</Command.LargeImages>
+		</Command>
+
+		<Command Name="wtl_INT_64" Symbol="ID_INT_64" LabelTitle="Int 64">
+			<Command.TooltipTitle>Type int 64</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Type int 64
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/toolbar_int64.bmp"/>
+			</Command.LargeImages>
+		</Command>
+		<Command Name="wtl_INT_32" Symbol="ID_INT_32" LabelTitle="Int 32">
+			<Command.TooltipTitle>Type int 32</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Type int 32
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/toolbar_int32.bmp"/>
+			</Command.LargeImages>
+		</Command>
+		<Command Name="wtl_INT_16" Symbol="ID_INT_16" LabelTitle="Int 16">
+			<Command.TooltipTitle>Type int 16</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Type int 16
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/toolbar_int16.bmp"/>
+			</Command.LargeImages>
+		</Command>
+		<Command Name="wtl_INT_8" Symbol="ID_INT_8" LabelTitle="Int 8">
+			<Command.TooltipTitle>Type INT 8</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Type int 8
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/toolbar_int8.bmp"/>
+			</Command.LargeImages>
+		</Command>
+
+
+		<Command Name="wtl_UINT_64" Symbol="ID_UINT_64" LabelTitle="QWord">
+			<Command.TooltipTitle>Type QWord</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Type uint 64
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/toolbar_qword.bmp"/>
+			</Command.LargeImages>
+		</Command>
+		<Command Name="wtl_UINT_32" Symbol="ID_UINT_32" LabelTitle="DWord">
+			<Command.TooltipTitle>Type Dword</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Type uint 32
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/toolbar_dword.bmp"/>
+			</Command.LargeImages>
+		</Command>
+		<Command Name="wtl_UINT_16" Symbol="ID_UINT_16" LabelTitle="Word">
+			<Command.TooltipTitle>Type Word</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Type uint 16
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/toolbar_word.bmp"/>
+			</Command.LargeImages>
+		</Command>
+		<Command Name="wtl_UINT_8" Symbol="ID_UINT_8" LabelTitle="Byte">
+			<Command.TooltipTitle>Type Byte</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Type uint 8
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/toolbar_byte.bmp"/>
+			</Command.LargeImages>
+		</Command>
+
+		<Command Name="wtl_SSE_DOUBLE" Symbol="ID_SSE_DOUBLE" LabelTitle="Double">
+			<Command.TooltipTitle>Type Double</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Type Double
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/toolbar_double.bmp"/>
+			</Command.LargeImages>
+		</Command>
+		<Command Name="wtl_SSE_FLOAT" Symbol="ID_SSE_FLOAT" LabelTitle="Float">
+			<Command.TooltipTitle>Type Float</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Type Float
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/toolbar_float.bmp"/>
+			</Command.LargeImages>
+		</Command>
+
+		<Command Name="wtl_VEC_2" Symbol="ID_VEC_2" LabelTitle="Vec 2">
+			<Command.TooltipTitle>Type Dword</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Type vec 2 (x,y)
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/toolbar_vec2.bmp"/>
+			</Command.LargeImages>
+		</Command>
+		<Command Name="wtl_VEC_3" Symbol="ID_VEC_3" LabelTitle="Vec 3">
+			<Command.TooltipTitle>Type Word</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Type vector 3 (x,y,z)
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/toolbar_vec3.bmp"/>
+			</Command.LargeImages>
+		</Command>
+		<Command Name="wtl_VEC_4" Symbol="ID_VEC_4" LabelTitle="Vec 4">
+			<Command.TooltipTitle>Type Vec 4</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Type vector 4 (x1,y1) (x2,y2)
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/toolbar_vec4.bmp"/>
+			</Command.LargeImages>
+		</Command>
+		
+		
 
 		<!-- Tabs -->
 		<Command Name="TabHome" Symbol="ID_TAB_HOME"
@@ -212,6 +474,15 @@
 				 LabelTitle="Code"/>
 		<Command Name="GroupTools" Symbol="ID_GROUP_TOOLS"
 				 LabelTitle="Tools"/>
+
+		<Command Name="GroupAdd" Symbol="ID_GROUP_ADD"
+				 LabelTitle="Add"/>
+		<Command Name="GroupInsert" Symbol="ID_GROUP_INSERT"
+				 LabelTitle="Insert"/>
+		<!--<Command Name="GroupSelected" Symbol="ID_GROUP_SELECTED"
+				 LabelTitle="Selected"/>-->
+		<Command Name="GroupType" Symbol="ID_GROUP_TYPE"
+				 LabelTitle="Type"/>
 
 		<!-- App Menu, MRU list, Help button and Quick Access Toolbar -->
 		<Command Name="AppMenu" Symbol="ID_RIBBON_APP_MENU"/>
@@ -323,7 +594,177 @@
 				</Tab>
 
 				<Tab CommandName="TabModify">
+					<Tab.ScalingPolicy>
+						<ScalingPolicy>
+							<ScalingPolicy.IdealSizes>
+								<Scale Group="GroupAdd" Size="Medium"/>
+								<Scale Group="GroupInsert" Size="Medium"/>
+							</ScalingPolicy.IdealSizes>
+						</ScalingPolicy>
+					</Tab.ScalingPolicy>
 
+					<Group CommandName="GroupAdd" SizeDefinition="FiveOrSixButtons">
+						<Button CommandName="wtl_ADD_4"/>
+						<Button CommandName="wtl_ADD_8"/>
+						<Button CommandName="wtl_ADD_64"/>
+						<Button CommandName="wtl_ADD_1024"/>
+						<Button CommandName="wtl_ADD_2048"/>
+					</Group>
+
+					<Group CommandName="GroupInsert" SizeDefinition="FiveOrSixButtons">
+						<Button CommandName="wtl_INSERT_4"/>
+						<Button CommandName="wtl_INSERT_8"/>
+						<Button CommandName="wtl_INSERT_64"/>
+						<Button CommandName="wtl_INSERT_1024"/>
+						<Button CommandName="wtl_INSERT_2048"/>
+					</Group>
+					
+					<Group CommandName="GroupType">
+						<!-- Reprents a custom layout template of Ribbon controls -->
+						<SizeDefinition>
+							<!-- Reprents a container for control names in a custom 
+							SizeDefinition layout template
+							-->
+							<ControlNameMap>
+								<ControlNameDefinition Name="wtl_HEX_64"/>
+								<ControlNameDefinition Name="wtl_HEX_32"/>
+								<ControlNameDefinition Name="wtl_HEX_16"/>
+								<ControlNameDefinition Name="wtl_HEX_8"/>
+								<ControlNameDefinition Name="wtl_HEX_BITS"/>
+								<ControlNameDefinition Name="wtl_INT_64"/>
+								<ControlNameDefinition Name="wtl_INT_32"/>
+								<ControlNameDefinition Name="wtl_INT_16"/>
+								<ControlNameDefinition Name="wtl_INT_8"/>
+								<ControlNameDefinition Name="wtl_UINT_64"/>
+								<ControlNameDefinition Name="wtl_UINT_32"/>
+								<ControlNameDefinition Name="wtl_UINT_16"/>
+								<ControlNameDefinition Name="wtl_UINT_8"/>
+								<ControlNameDefinition Name="wtl_SSE_DOUBLE"/>
+								<ControlNameDefinition Name="wtl_SSE_FLOAT"/>
+								<ControlNameDefinition Name="wtl_VEC_2"/>
+								<ControlNameDefinition Name="wtl_VEC_3"/>
+								<ControlNameDefinition Name="wtl_VEC_4"/>
+							</ControlNameMap>
+							<!-- Represents a layout size for a group of controls 
+							in a custom template -->
+							<GroupSizeDefinition Size="Large">
+								<Row>
+									<ControlGroup>
+										<ControlSizeDefinition ControlName="wtl_HEX_64"
+														 ImageSize="Small"
+														 IsLabelVisible="true" />
+										<ControlSizeDefinition ControlName="wtl_HEX_8"
+															 ImageSize="Small"
+															 IsLabelVisible="true" />
+									</ControlGroup>
+								</Row>
+									
+								<Row>
+									<ControlGroup>
+										<ControlSizeDefinition ControlName="wtl_HEX_32"
+												ImageSize="Small"
+													IsLabelVisible="true" />
+										<ControlSizeDefinition ControlName="wtl_HEX_BITS"
+															 ImageSize="Small"
+															 IsLabelVisible="true" />
+									</ControlGroup>
+								</Row>
+								<Row>
+									<ControlGroup>
+										<ControlSizeDefinition ControlName="wtl_HEX_16"
+													 ImageSize="Small"
+													 IsLabelVisible="true" />
+									</ControlGroup>
+								</Row>
+								<ColumnBreak ShowSeparator="true"/>
+								<Row>
+									<ControlGroup>
+										<ControlSizeDefinition ControlName="wtl_INT_64"
+															ImageSize="Small"
+														IsLabelVisible="true" />
+										<ControlSizeDefinition ControlName="wtl_INT_8"
+															 ImageSize="Small"
+															 IsLabelVisible="true" />
+									</ControlGroup>
+								</Row>
+								<Row>
+									<ControlGroup>
+										<ControlSizeDefinition ControlName="wtl_INT_32"
+															 ImageSize="Small"
+															 IsLabelVisible="true" />
+									</ControlGroup>
+								</Row>
+								<Row>
+									<ControlGroup>
+										<ControlSizeDefinition ControlName="wtl_INT_16"
+																ImageSize="Small"
+															   IsLabelVisible="true" />
+									</ControlGroup>
+								</Row>
+								<ColumnBreak ShowSeparator="true"/>
+								<Row>
+									<ControlGroup>
+										<ControlSizeDefinition ControlName="wtl_UINT_64"
+															ImageSize="Small"
+														IsLabelVisible="true" />
+										<ControlSizeDefinition ControlName="wtl_UINT_8"
+															 ImageSize="Small"
+															 IsLabelVisible="true" />
+									</ControlGroup>
+								</Row>
+								<Row>
+									<ControlGroup>
+										<ControlSizeDefinition ControlName="wtl_UINT_32"
+															 ImageSize="Small"
+															 IsLabelVisible="true" />
+									</ControlGroup>
+								</Row>
+								<Row>
+									<ControlGroup>
+										<ControlSizeDefinition ControlName="wtl_UINT_16"
+																ImageSize="Small"
+															   IsLabelVisible="true" />
+									</ControlGroup>
+								</Row>
+								<ColumnBreak ShowSeparator="true"/>
+								<ControlSizeDefinition ControlName="wtl_SSE_DOUBLE"
+																		ImageSize="Small"
+																		IsLabelVisible="true" />
+								<ControlSizeDefinition ControlName="wtl_SSE_FLOAT"
+															 ImageSize="Small"
+															 IsLabelVisible="true" />
+								<ColumnBreak ShowSeparator="true"/>
+								<ControlSizeDefinition ControlName="wtl_VEC_2"
+															ImageSize="Small"
+														IsLabelVisible="true" />
+								<ControlSizeDefinition ControlName="wtl_VEC_3"
+															 ImageSize="Small"
+															 IsLabelVisible="true" />
+								<ControlSizeDefinition ControlName="wtl_VEC_4"
+																ImageSize="Small"
+															   IsLabelVisible="true" />
+								<ColumnBreak ShowSeparator="true"/>
+							</GroupSizeDefinition>
+						</SizeDefinition>
+						<Button CommandName="wtl_HEX_64"/>
+						<Button CommandName="wtl_HEX_32"/>
+						<Button CommandName="wtl_HEX_16"/>
+						<Button CommandName="wtl_HEX_8"/>
+						<Button CommandName="wtl_HEX_BITS"/>
+						<Button CommandName="wtl_INT_64"/>
+						<Button CommandName="wtl_INT_32"/>
+						<Button CommandName="wtl_INT_16"/>
+						<Button CommandName="wtl_INT_8"/>
+						<Button CommandName="wtl_UINT_64"/>
+						<Button CommandName="wtl_UINT_32"/>
+						<Button CommandName="wtl_UINT_16"/>
+						<Button CommandName="wtl_UINT_8"/>
+						<Button CommandName="wtl_SSE_DOUBLE"/>
+						<Button CommandName="wtl_SSE_FLOAT"/>
+						<Button CommandName="wtl_VEC_2"/>
+						<Button CommandName="wtl_VEC_3"/>
+						<Button CommandName="wtl_VEC_4"/>
+					</Group>
 				</Tab>
 
 				<Tab CommandName="TabSettings">

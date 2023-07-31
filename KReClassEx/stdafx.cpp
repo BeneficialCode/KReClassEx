@@ -7,7 +7,7 @@
 std::vector<HICON> g_Icons;
 
 #ifdef _DEBUG
-COLORREF g_clrBackground = RGB(0, 255, 255);
+COLORREF g_clrBackground = RGB(255, 255, 255);
 #else
 COLORREF g_clrBackground = RGB(255, 255, 255);
 #endif

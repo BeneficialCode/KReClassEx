@@ -247,6 +247,454 @@ END
 ID_BTN_MODULES_LargeImages_RESID    BITMAP    ".\\res\\home_large_modules.bmp" /* LargeImages ID_BTN_MODULES_LargeImages_RESID: (null) */
 STRINGTABLE 
 BEGIN
+    ID_ADD_4_LabelTitle_RESID L"Add 4" /* LabelTitle ID_ADD_4_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_ADD_4_TooltipTitle_RESID L"Add 4 Bytes" /* TooltipTitle ID_ADD_4_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_ADD_4_TooltipDescription_RESID L"Add 4 Bytes" /* TooltipDescription ID_ADD_4_TooltipDescription_RESID: (null) */
+END
+
+ID_ADD_4_LargeImages_RESID    BITMAP    ".\\res\\toolbar_add.bmp" /* LargeImages ID_ADD_4_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ID_ADD_8_LabelTitle_RESID L"Add 8" /* LabelTitle ID_ADD_8_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_ADD_8_TooltipTitle_RESID L"Add 8 Bytes" /* TooltipTitle ID_ADD_8_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_ADD_8_TooltipDescription_RESID L"Add 8 Bytes" /* TooltipDescription ID_ADD_8_TooltipDescription_RESID: (null) */
+END
+
+ID_ADD_8_LargeImages_RESID    BITMAP    ".\\res\\toolbar_add8.bmp" /* LargeImages ID_ADD_8_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ID_ADD_64_LabelTitle_RESID L"Add 64" /* LabelTitle ID_ADD_64_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_ADD_64_TooltipTitle_RESID L"Add 64 Bytes" /* TooltipTitle ID_ADD_64_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_ADD_64_TooltipDescription_RESID L"Add 64 Bytes" /* TooltipDescription ID_ADD_64_TooltipDescription_RESID: (null) */
+END
+
+ID_ADD_64_LargeImages_RESID    BITMAP    ".\\res\\toolbar_add64.bmp" /* LargeImages ID_ADD_64_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ID_ADD_1024_LabelTitle_RESID L"Add 1024" /* LabelTitle ID_ADD_1024_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_ADD_1024_TooltipTitle_RESID L"Add 1024 Bytes" /* TooltipTitle ID_ADD_1024_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_ADD_1024_TooltipDescription_RESID L"Add 1024 Bytes" /* TooltipDescription ID_ADD_1024_TooltipDescription_RESID: (null) */
+END
+
+ID_ADD_1024_LargeImages_RESID    BITMAP    ".\\res\\toolbar_add1024.bmp" /* LargeImages ID_ADD_1024_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ID_ADD_2048_LabelTitle_RESID L"Add 2048" /* LabelTitle ID_ADD_2048_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_ADD_2048_TooltipTitle_RESID L"Add 2048 Bytes" /* TooltipTitle ID_ADD_2048_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_ADD_2048_TooltipDescription_RESID L"Add 2048 Bytes" /* TooltipDescription ID_ADD_2048_TooltipDescription_RESID: (null) */
+END
+
+ID_ADD_2048_LargeImages_RESID    BITMAP    ".\\res\\toolbar_add2048.bmp" /* LargeImages ID_ADD_2048_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ID_INSERT_4_LabelTitle_RESID L"Insert 4" /* LabelTitle ID_INSERT_4_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_INSERT_4_TooltipTitle_RESID L"Insert 4 Bytes" /* TooltipTitle ID_INSERT_4_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_INSERT_4_TooltipDescription_RESID L"Insert 4 Bytes" /* TooltipDescription ID_INSERT_4_TooltipDescription_RESID: (null) */
+END
+
+ID_INSERT_4_LargeImages_RESID    BITMAP    ".\\res\\toolbar_insert.bmp" /* LargeImages ID_INSERT_4_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ID_INSERT_8_LabelTitle_RESID L"Insert 8" /* LabelTitle ID_INSERT_8_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_INSERT_8_TooltipTitle_RESID L"Insert 8 Bytes" /* TooltipTitle ID_INSERT_8_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_INSERT_8_TooltipDescription_RESID L"Insert 8 Bytes" /* TooltipDescription ID_INSERT_8_TooltipDescription_RESID: (null) */
+END
+
+ID_INSERT_8_LargeImages_RESID    BITMAP    ".\\res\\toolbar_insert8.bmp" /* LargeImages ID_INSERT_8_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ID_INSERT_64_LabelTitle_RESID L"Insert 64" /* LabelTitle ID_INSERT_64_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_INSERT_64_TooltipTitle_RESID L"Insert 64 Bytes" /* TooltipTitle ID_INSERT_64_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_INSERT_64_TooltipDescription_RESID L"Insert 64 Bytes" /* TooltipDescription ID_INSERT_64_TooltipDescription_RESID: (null) */
+END
+
+ID_INSERT_64_LargeImages_RESID    BITMAP    ".\\res\\toolbar_insert64.bmp" /* LargeImages ID_INSERT_64_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ID_INSERT_1024_LabelTitle_RESID L"Insert 1024" /* LabelTitle ID_INSERT_1024_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_INSERT_1024_TooltipTitle_RESID L"Insert 1024 Bytes" /* TooltipTitle ID_INSERT_1024_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_INSERT_1024_TooltipDescription_RESID L"Insert 1024 Bytes" /* TooltipDescription ID_INSERT_1024_TooltipDescription_RESID: (null) */
+END
+
+ID_INSERT_1024_LargeImages_RESID    BITMAP    ".\\res\\toolbar_insert1024.bmp" /* LargeImages ID_INSERT_1024_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ID_INSERT_2048_LabelTitle_RESID L"Insert 2048" /* LabelTitle ID_INSERT_2048_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_INSERT_2048_TooltipTitle_RESID L"Insert 2048 Bytes" /* TooltipTitle ID_INSERT_2048_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_INSERT_2048_TooltipDescription_RESID L"Insert 2048 Bytes" /* TooltipDescription ID_INSERT_2048_TooltipDescription_RESID: (null) */
+END
+
+ID_INSERT_2048_LargeImages_RESID    BITMAP    ".\\res\\toolbar_insert2048.bmp" /* LargeImages ID_INSERT_2048_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ID_HEX_64_LabelTitle_RESID L"Hex 64" /* LabelTitle ID_HEX_64_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_HEX_64_TooltipTitle_RESID L"Type hex 64" /* TooltipTitle ID_HEX_64_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_HEX_64_TooltipDescription_RESID L"Type hex 64" /* TooltipDescription ID_HEX_64_TooltipDescription_RESID: (null) */
+END
+
+ID_HEX_64_LargeImages_RESID    BITMAP    ".\\res\\toolbar_hex64.bmp" /* LargeImages ID_HEX_64_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ID_HEX_32_LabelTitle_RESID L"Hex 32" /* LabelTitle ID_HEX_32_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_HEX_32_TooltipTitle_RESID L"Type hex 32" /* TooltipTitle ID_HEX_32_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_HEX_32_TooltipDescription_RESID L"Type hex 32" /* TooltipDescription ID_HEX_32_TooltipDescription_RESID: (null) */
+END
+
+ID_HEX_32_LargeImages_RESID    BITMAP    ".\\res\\toolbar_hex32.bmp" /* LargeImages ID_HEX_32_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ID_HEX_16_LabelTitle_RESID L"Hex 16" /* LabelTitle ID_HEX_16_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_HEX_16_TooltipTitle_RESID L"Type hex 16" /* TooltipTitle ID_HEX_16_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_HEX_16_TooltipDescription_RESID L"Type hex 16" /* TooltipDescription ID_HEX_16_TooltipDescription_RESID: (null) */
+END
+
+ID_HEX_16_LargeImages_RESID    BITMAP    ".\\res\\toolbar_hex16.bmp" /* LargeImages ID_HEX_16_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ID_HEX_8_LabelTitle_RESID L"Hex 8" /* LabelTitle ID_HEX_8_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_HEX_8_TooltipTitle_RESID L"Type HEX 8" /* TooltipTitle ID_HEX_8_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_HEX_8_TooltipDescription_RESID L"Type hex 8" /* TooltipDescription ID_HEX_8_TooltipDescription_RESID: (null) */
+END
+
+ID_HEX_8_LargeImages_RESID    BITMAP    ".\\res\\toolbar_hex8.bmp" /* LargeImages ID_HEX_8_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ID_HEX_BITS_LabelTitle_RESID L"Bits" /* LabelTitle ID_HEX_BITS_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_HEX_BITS_TooltipTitle_RESID L"Type Bits" /* TooltipTitle ID_HEX_BITS_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_HEX_BITS_TooltipDescription_RESID L"Type Bits" /* TooltipDescription ID_HEX_BITS_TooltipDescription_RESID: (null) */
+END
+
+ID_HEX_BITS_LargeImages_RESID    BITMAP    ".\\res\\toolbar_bits.bmp" /* LargeImages ID_HEX_BITS_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ID_INT_64_LabelTitle_RESID L"Int 64" /* LabelTitle ID_INT_64_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_INT_64_TooltipTitle_RESID L"Type int 64" /* TooltipTitle ID_INT_64_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_INT_64_TooltipDescription_RESID L"Type int 64" /* TooltipDescription ID_INT_64_TooltipDescription_RESID: (null) */
+END
+
+ID_INT_64_LargeImages_RESID    BITMAP    ".\\res\\toolbar_int64.bmp" /* LargeImages ID_INT_64_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ID_INT_32_LabelTitle_RESID L"Int 32" /* LabelTitle ID_INT_32_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_INT_32_TooltipTitle_RESID L"Type int 32" /* TooltipTitle ID_INT_32_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_INT_32_TooltipDescription_RESID L"Type int 32" /* TooltipDescription ID_INT_32_TooltipDescription_RESID: (null) */
+END
+
+ID_INT_32_LargeImages_RESID    BITMAP    ".\\res\\toolbar_int32.bmp" /* LargeImages ID_INT_32_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ID_INT_16_LabelTitle_RESID L"Int 16" /* LabelTitle ID_INT_16_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_INT_16_TooltipTitle_RESID L"Type int 16" /* TooltipTitle ID_INT_16_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_INT_16_TooltipDescription_RESID L"Type int 16" /* TooltipDescription ID_INT_16_TooltipDescription_RESID: (null) */
+END
+
+ID_INT_16_LargeImages_RESID    BITMAP    ".\\res\\toolbar_int16.bmp" /* LargeImages ID_INT_16_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ID_INT_8_LabelTitle_RESID L"Int 8" /* LabelTitle ID_INT_8_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_INT_8_TooltipTitle_RESID L"Type INT 8" /* TooltipTitle ID_INT_8_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_INT_8_TooltipDescription_RESID L"Type int 8" /* TooltipDescription ID_INT_8_TooltipDescription_RESID: (null) */
+END
+
+ID_INT_8_LargeImages_RESID    BITMAP    ".\\res\\toolbar_int8.bmp" /* LargeImages ID_INT_8_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ID_UINT_64_LabelTitle_RESID L"QWord" /* LabelTitle ID_UINT_64_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_UINT_64_TooltipTitle_RESID L"Type QWord" /* TooltipTitle ID_UINT_64_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_UINT_64_TooltipDescription_RESID L"Type uint 64" /* TooltipDescription ID_UINT_64_TooltipDescription_RESID: (null) */
+END
+
+ID_UINT_64_LargeImages_RESID    BITMAP    ".\\res\\toolbar_qword.bmp" /* LargeImages ID_UINT_64_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ID_UINT_32_LabelTitle_RESID L"DWord" /* LabelTitle ID_UINT_32_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_UINT_32_TooltipTitle_RESID L"Type Dword" /* TooltipTitle ID_UINT_32_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_UINT_32_TooltipDescription_RESID L"Type uint 32" /* TooltipDescription ID_UINT_32_TooltipDescription_RESID: (null) */
+END
+
+ID_UINT_32_LargeImages_RESID    BITMAP    ".\\res\\toolbar_dword.bmp" /* LargeImages ID_UINT_32_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ID_UINT_16_LabelTitle_RESID L"Word" /* LabelTitle ID_UINT_16_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_UINT_16_TooltipTitle_RESID L"Type Word" /* TooltipTitle ID_UINT_16_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_UINT_16_TooltipDescription_RESID L"Type uint 16" /* TooltipDescription ID_UINT_16_TooltipDescription_RESID: (null) */
+END
+
+ID_UINT_16_LargeImages_RESID    BITMAP    ".\\res\\toolbar_word.bmp" /* LargeImages ID_UINT_16_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ID_UINT_8_LabelTitle_RESID L"Byte" /* LabelTitle ID_UINT_8_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_UINT_8_TooltipTitle_RESID L"Type Byte" /* TooltipTitle ID_UINT_8_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_UINT_8_TooltipDescription_RESID L"Type uint 8" /* TooltipDescription ID_UINT_8_TooltipDescription_RESID: (null) */
+END
+
+ID_UINT_8_LargeImages_RESID    BITMAP    ".\\res\\toolbar_byte.bmp" /* LargeImages ID_UINT_8_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ID_SSE_DOUBLE_LabelTitle_RESID L"Double" /* LabelTitle ID_SSE_DOUBLE_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_SSE_DOUBLE_TooltipTitle_RESID L"Type Double" /* TooltipTitle ID_SSE_DOUBLE_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_SSE_DOUBLE_TooltipDescription_RESID L"Type Double" /* TooltipDescription ID_SSE_DOUBLE_TooltipDescription_RESID: (null) */
+END
+
+ID_SSE_DOUBLE_LargeImages_RESID    BITMAP    ".\\res\\toolbar_double.bmp" /* LargeImages ID_SSE_DOUBLE_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ID_SSE_FLOAT_LabelTitle_RESID L"Float" /* LabelTitle ID_SSE_FLOAT_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_SSE_FLOAT_TooltipTitle_RESID L"Type Float" /* TooltipTitle ID_SSE_FLOAT_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_SSE_FLOAT_TooltipDescription_RESID L"Type Float" /* TooltipDescription ID_SSE_FLOAT_TooltipDescription_RESID: (null) */
+END
+
+ID_SSE_FLOAT_LargeImages_RESID    BITMAP    ".\\res\\toolbar_float.bmp" /* LargeImages ID_SSE_FLOAT_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ID_VEC_2_LabelTitle_RESID L"Vec 2" /* LabelTitle ID_VEC_2_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VEC_2_TooltipTitle_RESID L"Type Dword" /* TooltipTitle ID_VEC_2_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VEC_2_TooltipDescription_RESID L"Type vec 2 (x,y)" /* TooltipDescription ID_VEC_2_TooltipDescription_RESID: (null) */
+END
+
+ID_VEC_2_LargeImages_RESID    BITMAP    ".\\res\\toolbar_vec2.bmp" /* LargeImages ID_VEC_2_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ID_VEC_3_LabelTitle_RESID L"Vec 3" /* LabelTitle ID_VEC_3_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VEC_3_TooltipTitle_RESID L"Type Word" /* TooltipTitle ID_VEC_3_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VEC_3_TooltipDescription_RESID L"Type vector 3 (x,y,z)" /* TooltipDescription ID_VEC_3_TooltipDescription_RESID: (null) */
+END
+
+ID_VEC_3_LargeImages_RESID    BITMAP    ".\\res\\toolbar_vec3.bmp" /* LargeImages ID_VEC_3_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ID_VEC_4_LabelTitle_RESID L"Vec 4" /* LabelTitle ID_VEC_4_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VEC_4_TooltipTitle_RESID L"Type Vec 4" /* TooltipTitle ID_VEC_4_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VEC_4_TooltipDescription_RESID L"Type vector 4 (x1,y1) (x2,y2)" /* TooltipDescription ID_VEC_4_TooltipDescription_RESID: (null) */
+END
+
+ID_VEC_4_LargeImages_RESID    BITMAP    ".\\res\\toolbar_vec4.bmp" /* LargeImages ID_VEC_4_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
     ID_TAB_HOME_LabelTitle_RESID L"Home" /* LabelTitle ID_TAB_HOME_LabelTitle_RESID: (null) */
 END
 
@@ -283,6 +731,21 @@ END
 STRINGTABLE 
 BEGIN
     ID_GROUP_TOOLS_LabelTitle_RESID L"Tools" /* LabelTitle ID_GROUP_TOOLS_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_GROUP_ADD_LabelTitle_RESID L"Add" /* LabelTitle ID_GROUP_ADD_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_GROUP_INSERT_LabelTitle_RESID L"Insert" /* LabelTitle ID_GROUP_INSERT_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_GROUP_TYPE_LabelTitle_RESID L"Type" /* LabelTitle ID_GROUP_TYPE_LabelTitle_RESID: (null) */
 END
 
 APPLICATION_RIBBON    UIFILE    "Ribbon.bml"
