@@ -450,8 +450,119 @@
 				<Image Source="./res/toolbar_vec4.bmp"/>
 			</Command.LargeImages>
 		</Command>
-		
-		
+
+		<Command Name="wtl_MATRIX" Symbol="ID_MATRIX" LabelTitle="Matrix">
+			<Command.TooltipTitle>Type Matrix</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Type Matrix
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/toolbar_matrix.bmp"/>
+			</Command.LargeImages>
+		</Command>
+		<Command Name="wtl_ARRAY" Symbol="ID_ARRAY" LabelTitle="Array">
+			<Command.TooltipTitle>Type Array</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Type Array
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/toolbar_array.bmp"/>
+			</Command.LargeImages>
+		</Command>
+		<Command Name="wtl_POINTER_ARRAY" Symbol="ID_POINTER_ARRAY" LabelTitle="Pointer Array">
+			<Command.TooltipTitle>Type Pointer Array</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Type Pointer Array
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/toolbar_parray.bmp"/>
+			</Command.LargeImages>
+		</Command>
+		<Command Name="wtl_CLASS" Symbol="ID_CLASS" LabelTitle="Class">
+			<Command.TooltipTitle>Type Class</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Type class
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/toolbar_class.bmp"/>
+			</Command.LargeImages>
+		</Command>
+
+
+		<Command Name="wtl_VTABLE" Symbol="ID_VTABLE" LabelTitle="VTable">
+			<Command.TooltipTitle>Type Vitual Table</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Type VTable
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/toolbar_vtable.bmp"/>
+			</Command.LargeImages>
+		</Command>
+		<Command Name="wtl_FUNCTION" Symbol="ID_FUNCTION" LabelTitle="Function">
+			<Command.TooltipTitle>Type Function</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Type Function
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/toolbar_function.bmp"/>
+			</Command.LargeImages>
+		</Command>
+		<Command Name="wtl_FUNCTION_PTR" Symbol="ID_FUNCTION_PTR" LabelTitle="Function Ptr">
+			<Command.TooltipTitle>Type Function Ptr</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Type Function Pointer
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/toolbar_function_ptr.bmp"/>
+			</Command.LargeImages>
+		</Command>
+		<Command Name="wtl_POINTER" Symbol="ID_POINTER" LabelTitle="Pointer">
+			<Command.TooltipTitle>Type Pointer</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Type pointer
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/toolbar_pointer.bmp"/>
+			</Command.LargeImages>
+		</Command>
+
+
+		<Command Name="wtl_ASCII" Symbol="ID_ASCII" LabelTitle="ASCII">
+			<Command.TooltipTitle>Type ASCII</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Type ASCII
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/toolbar_ascii.bmp"/>
+			</Command.LargeImages>
+		</Command>
+		<Command Name="wtl_UNICODE" Symbol="ID_UNICODE" LabelTitle="UNICODE">
+			<Command.TooltipTitle>Type UNICODE</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Type Unicode
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/toolbar_unicode.bmp"/>
+			</Command.LargeImages>
+		</Command>
+		<Command Name="wtl_PCHAR" Symbol="ID_PCHAR" LabelTitle="PCHAR">
+			<Command.TooltipTitle>Type PCHAR</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Type PCHAR
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/toolbar_pchar.bmp"/>
+			</Command.LargeImages>
+		</Command>
+		<Command Name="wtl_PWCHAR" Symbol="ID_PWCHAR" LabelTitle="PWCHAR">
+			<Command.TooltipTitle>Type PWCHAR</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Type PWCHAR
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/toolbar_pwchar.bmp"/>
+			</Command.LargeImages>
+		</Command>
 
 		<!-- Tabs -->
 		<Command Name="TabHome" Symbol="ID_TAB_HOME"
@@ -644,6 +755,18 @@
 								<ControlNameDefinition Name="wtl_VEC_2"/>
 								<ControlNameDefinition Name="wtl_VEC_3"/>
 								<ControlNameDefinition Name="wtl_VEC_4"/>
+								<ControlNameDefinition Name="wtl_MATRIX"/>
+								<ControlNameDefinition Name="wtl_ARRAY"/>
+								<ControlNameDefinition Name="wtl_POINTER_ARRAY"/>
+								<ControlNameDefinition Name="wtl_CLASS"/>
+								<ControlNameDefinition Name="wtl_VTABLE"/>
+								<ControlNameDefinition Name="wtl_FUNCTION"/>
+								<ControlNameDefinition Name="wtl_FUNCTION_PTR"/>
+								<ControlNameDefinition Name="wtl_POINTER"/>
+								<ControlNameDefinition Name="wtl_ASCII"/>
+								<ControlNameDefinition Name="wtl_UNICODE"/>
+								<ControlNameDefinition Name="wtl_PCHAR"/>
+								<ControlNameDefinition Name="wtl_PWCHAR"/>
 							</ControlNameMap>
 							<!-- Represents a layout size for a group of controls 
 							in a custom template -->
@@ -744,6 +867,80 @@
 																ImageSize="Small"
 															   IsLabelVisible="true" />
 								<ColumnBreak ShowSeparator="true"/>
+								<Row>
+									<ControlGroup>
+										<ControlSizeDefinition ControlName="wtl_MATRIX"
+															   ImageSize="Small"
+															   IsLabelVisible="true"/>
+										<ControlSizeDefinition ControlName="wtl_CLASS"
+															   ImageSize="Small"
+															   IsLabelVisible="true"/>
+									</ControlGroup>
+								</Row>
+								<Row>
+									<ControlGroup>
+										<ControlSizeDefinition ControlName="wtl_ARRAY"
+															   ImageSize="Small"
+															   IsLabelVisible="true"/>
+									</ControlGroup>
+								</Row>
+								<Row>
+									<ControlGroup>
+										<ControlSizeDefinition ControlName="wtl_POINTER_ARRAY"
+															   ImageSize="Small"
+															   IsLabelVisible="true"/>
+									</ControlGroup>
+								</Row>
+								<ColumnBreak ShowSeparator="true"/>
+								<Row>
+									<ControlGroup>
+										<ControlSizeDefinition ControlName="wtl_VTABLE"
+															   ImageSize="Small"
+															   IsLabelVisible="true"/>
+										<ControlSizeDefinition ControlName="wtl_POINTER"
+															   ImageSize="Small"
+															   IsLabelVisible="true"/>
+									</ControlGroup>
+								</Row>
+								<Row>
+									<ControlGroup>
+										<ControlSizeDefinition ControlName="wtl_FUNCTION"
+															   ImageSize="Small"
+															   IsLabelVisible="true"/>
+									</ControlGroup>
+								</Row>
+								<Row>
+									<ControlGroup>
+										<ControlSizeDefinition ControlName="wtl_FUNCTION_PTR"
+															ImageSize="Small"
+															IsLabelVisible="true"/>
+									</ControlGroup>
+								</Row>
+								<ColumnBreak ShowSeparator="true"/>
+								<Row>
+									<ControlGroup>
+										<ControlSizeDefinition ControlName="wtl_ASCII"
+															   ImageSize="Small"
+															   IsLabelVisible="true"/>
+										<ControlSizeDefinition ControlName="wtl_PWCHAR"
+															   ImageSize="Small"
+															   IsLabelVisible="true"/>
+									</ControlGroup>
+								</Row>
+								<Row>
+									<ControlGroup>
+										<ControlSizeDefinition ControlName="wtl_UNICODE"
+															   ImageSize="Small"
+															   IsLabelVisible="true"/>
+									</ControlGroup>
+								</Row>
+								<Row>
+									<ControlGroup>
+										<ControlSizeDefinition ControlName="wtl_PCHAR"
+															ImageSize="Small"
+															IsLabelVisible="true"/>
+									</ControlGroup>
+								</Row>
 							</GroupSizeDefinition>
 						</SizeDefinition>
 						<Button CommandName="wtl_HEX_64"/>
@@ -764,6 +961,18 @@
 						<Button CommandName="wtl_VEC_2"/>
 						<Button CommandName="wtl_VEC_3"/>
 						<Button CommandName="wtl_VEC_4"/>
+						<Button CommandName="wtl_MATRIX"/>
+						<Button CommandName="wtl_ARRAY"/>
+						<Button CommandName="wtl_POINTER_ARRAY"/>
+						<Button CommandName="wtl_CLASS"/>
+						<Button CommandName="wtl_VTABLE"/>
+						<Button CommandName="wtl_FUNCTION"/>
+						<Button CommandName="wtl_FUNCTION_PTR"/>
+						<Button CommandName="wtl_POINTER"/>
+						<Button CommandName="wtl_ASCII"/>
+						<Button CommandName="wtl_UNICODE"/>
+						<Button CommandName="wtl_PCHAR"/>
+						<Button CommandName="wtl_PWCHAR"/>
 					</Group>
 				</Tab>
 
