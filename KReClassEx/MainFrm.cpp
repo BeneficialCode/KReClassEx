@@ -322,13 +322,17 @@ void CMainFrame::StandardTypeUpdate(CClassView* pClassView) {
 		if (pClassView->m_Selected[0].Object->GetType()
 			== NodeType::Class) {
 			UIEnableAllAdd(true);
+			UIEnableAllType(true);
 		}
 		else {
 			UIEnableAllAdd(false);
+			UIEnableAllType(false);
+
 		}
 	}
 	else {
 		UIEnableAllAdd(false);
+		UIEnableAllType(false);
 	}
 }
 
@@ -337,6 +341,7 @@ void CMainFrame::UpdateUI() {
 	if (nPage == -1) {
 		UIEnableAllAdd(false);
 		UIEnableAllInsert(false);
+		UIEnableAllType(false);
 		return;
 	}
 	CClassView* pClassView = (CClassView*)m_view.GetPageData(nPage);
@@ -362,4 +367,37 @@ void CMainFrame::InsertTypeUpdate(CClassView* pClassView) {
 	else {
 		UIEnableAllInsert(false);
 	}
+}
+
+void CMainFrame::UIEnableAllType(BOOL bEnable) {
+	UIEnable(ID_HEX_64, bEnable);
+	UIEnable(ID_HEX_32, bEnable);
+	UIEnable(ID_HEX_16, bEnable);
+	UIEnable(ID_HEX_8, bEnable);
+	UIEnable(ID_HEX_BITS, bEnable);
+	UIEnable(ID_INT_64, bEnable);
+	UIEnable(ID_INT_32, bEnable);
+	UIEnable(ID_INT_16, bEnable);
+	UIEnable(ID_INT_8, bEnable);
+	UIEnable(ID_UINT_64, bEnable);
+	UIEnable(ID_UINT_32, bEnable);
+	UIEnable(ID_UINT_16, bEnable);
+	UIEnable(ID_UINT_8, bEnable);
+	UIEnable(ID_SSE_DOUBLE, bEnable);
+	UIEnable(ID_SSE_FLOAT, bEnable);
+	UIEnable(ID_VEC_2, bEnable);
+	UIEnable(ID_VEC_3, bEnable);
+	UIEnable(ID_VEC_4, bEnable);
+	UIEnable(ID_MATRIX, bEnable);
+	UIEnable(ID_ARRAY, bEnable);
+	UIEnable(ID_POINTER_ARRAY, bEnable);
+	UIEnable(ID_CLASS, bEnable);
+	UIEnable(ID_VTABLE, bEnable);
+	UIEnable(ID_FUNCTION, bEnable);
+	UIEnable(ID_FUNCTION_PTR, bEnable);
+	UIEnable(ID_POINTER, bEnable);
+	UIEnable(ID_ASCII, bEnable);
+	UIEnable(ID_UNICODE, bEnable);
+	UIEnable(ID_PCHAR, bEnable);
+	UIEnable(ID_PWCHAR, bEnable);
 }

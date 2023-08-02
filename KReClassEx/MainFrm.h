@@ -39,6 +39,7 @@ public:
 	void StandardTypeUpdate(CClassView* pClassView);
 	void InsertTypeUpdate(CClassView* pClassView);
 	void UIEnableAllInsert(BOOL bEnable);
+	void UIEnableAllType(BOOL bEnable);
 
 	BEGIN_UPDATE_UI_MAP(CMainFrame)
 		UPDATE_ELEMENT(ID_ADD_4,UPDUI_RIBBON)
