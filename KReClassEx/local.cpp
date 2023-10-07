@@ -342,11 +342,19 @@ int parse_packet(evutil_socket_t fd, struct evbuffer* buf) {
     case MsgType::MemoryData:
     {
         PMEMORY_DATA pMemData = (PMEMORY_DATA)pBody;
-        printf("Address: %p,Size: %I64u\n", pMemData->Address, pMemData->TotalSize);
+        memcpy(pMemData->Buffer, pMemData->Data, pMemData->TotalSize);
         break;
     }
     case MsgType::HeartBeat:
         break;
+
+    case MsgType::ModuleBaseData:
+    {
+        PMODULE_BASE_INFO pBaseData = (PMODULE_BASE_INFO)pBody;
+        CNodeBase* pClass = (CNodeBase*)pBaseData->pClass;
+        pClass->SetOffset(pBaseData->Base);
+        break;
+    }
     default:
 
         return -1;

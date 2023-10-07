@@ -182,9 +182,6 @@
     <ClInclude Include="local.h">
       <Filter>libevent</Filter>
     </ClInclude>
-    <ClInclude Include="common.h">
-      <Filter>libevent</Filter>
-    </ClInclude>
     <ClInclude Include="utils.h">
       <Filter>libevent</Filter>
     </ClInclude>

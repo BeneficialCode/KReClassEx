@@ -32,7 +32,7 @@ LRESULT CCustomEdit::OnTextChanged(WORD /*wNotifyCode*/, WORD, HWND /*hWndCtl*/,
 
 	GetWindowText(text);
 
-	width = (text.GetLength() + 1) * g_FontHeight;
+	width = (text.GetLength() + 6) * g_FontWidth;
 	if (width > m_MinWidth)
 		SetWindowPos(nullptr, 0, 0, width, g_FontHeight, SWP_NOMOVE);
 

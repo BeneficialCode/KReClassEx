@@ -15,6 +15,7 @@ uint64_t tx = 0;
 uint64_t rx = 0;
 extern PDEBUG_DATA_SPACES g_DebugDataSpaces;
 extern PDEBUG_CONTROL4 g_DebugControl;
+extern PDEBUG_SYMBOLS3 g_DebugSymbols;
 
 std::unordered_map<int, struct evbuffer*> g_mem_map;
 std::unordered_map<int, HANDLE> g_sem_map;
@@ -213,7 +214,7 @@ void server_recv_cb(evutil_socket_t fd, short events, void* arg) {
 			return;
 		}
 		size_t totalSize = pHeader->Length;
-		if (size == totalSize) {
+		if (size >= totalSize) {
 			parse_packet(fd, mem);
 		}
 	}
@@ -289,15 +290,20 @@ int parse_packet(evutil_socket_t fd,struct evbuffer* buf) {
 
 	switch (type)
 	{
-	case MsgType::ReadMemory:
-	{
-		OnReadMemory(fd, (PREAD_MEMORY_INFO)pBody);
-		break;
-	}
-	case MsgType::GetStatus:
-		break;
-	case MsgType::HeartBeat:
-		break;
+		case MsgType::ReadMemory:
+		{
+			OnReadMemory(fd, (PREAD_MEMORY_INFO)pBody);
+			break;
+		}
+		case MsgType::GetStatus:
+			break;
+		case MsgType::HeartBeat:
+			break;
+		case MsgType::GetModuleBase:
+		{
+			OnGetModuleBase(fd, (PGET_MODULE_BASE)pBody);
+			break;
+		}
 	default:
 		
 		return -1;
@@ -309,8 +315,9 @@ int parse_packet(evutil_socket_t fd,struct evbuffer* buf) {
 }
 
 int OnReadMemory(evutil_socket_t fd, PREAD_MEMORY_INFO pInfo) {
-	dprintf("read memory request: Address: %p, IsVirtual: %d, ReadSize: %x\n",
-		pInfo->Address, pInfo->IsVirtual, pInfo->ReadSize);
+	dprintf("read memory request: Address: %p, IsVirtual: %d, ReadSize: %x\
+	Buffer: %p\n",
+		pInfo->Address, pInfo->IsVirtual, pInfo->ReadSize, pInfo->Buffer);
 
 	ULONG bytes = 0;
 	size_t size = sizeof(PACKET_HEADER) + sizeof(MEMORY_DATA) + pInfo->ReadSize;
@@ -338,6 +345,7 @@ int OnReadMemory(evutil_socket_t fd, PREAD_MEMORY_INFO pInfo) {
 		dprintf("status: %d\n", status);
 		PMEMORY_DATA pMemData = (PMEMORY_DATA)((PBYTE)pPacket + sizeof(PACKET_HEADER));
 		pMemData->Address = pInfo->Address;
+		pMemData->Buffer = pInfo->Buffer;
 		pMemData->TotalSize = pInfo->ReadSize;
 		void* pData = pMemData->Data;
 		if (pInfo->IsVirtual) {
@@ -384,4 +392,47 @@ void WritePacket(evutil_socket_t fd, void* pPacket, ULONG length) {
 			return;
 		}
 	} while (length);
+}
+
+int OnGetModuleBase(evutil_socket_t fd, PGET_MODULE_BASE pInfo) {
+	dprintf("Symbol: %s, NameLen: %d pClass: %p\n",
+		pInfo->Symbol, pInfo->NameLen, pInfo->pClass);
+
+	size_t size = sizeof(PACKET_HEADER) + sizeof(MODULE_BASE_INFO);
+	void* pPacket = ::VirtualAlloc(nullptr, size, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
+	if (!pPacket) {
+		dprintf("alloc memory failed!\n");
+		return -1;
+	}
+	PPACKET_HEADER pHeader = (PPACKET_HEADER)pPacket;
+	pHeader->Version = SVERSION;
+	pHeader->Type = MsgType::ModuleBaseData;
+	pHeader->Length = size;
+	do
+	{
+		ULONG status;
+		HRESULT hr = g_DebugControl->GetExecutionStatus(&status);
+		if (FAILED(hr)) {
+			dprintf("get status failed!\n");
+			break;
+		}
+		if (status != DEBUG_STATUS_BREAK) {
+			dprintf("please break the windbg!\n");
+			break;
+		}
+		ULONG64 base = 0;
+		hr = g_DebugSymbols->GetModuleByModuleName(pInfo->Symbol, 0, NULL, &base);
+		if (FAILED(hr)) {
+			dprintf("get symbol module failed!\n");
+			break;
+		}
+		PMODULE_BASE_INFO pBaseInfo = (PMODULE_BASE_INFO)((PBYTE)pPacket + sizeof(PACKET_HEADER));
+		pBaseInfo->Base = base;
+		pBaseInfo->pClass = pInfo->pClass;
+		WritePacket(fd, pPacket, size);
+	} while (FALSE);
+
+	::VirtualFree(pPacket, 0, MEM_RELEASE);
+	pPacket = NULL;
+	return 0;
 }

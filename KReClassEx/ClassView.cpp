@@ -20,9 +20,10 @@ void CClassView::DoPaint(CDCHandle dc, RECT& rect) {
 
 		classSize = m_pClass->GetMemorySize();
 		m_Memory.SetSize(classSize);
-
-		ReClassReadMemory(m_pClass->GetOffset(), m_Memory.Data(), classSize);
-
+		void* buffer = m_Memory.Data();
+		if (classSize > 0 && buffer !=nullptr) {
+			ReClassReadMemory(m_pClass->GetOffset(), buffer, classSize);
+		}
 
 		info.Address = m_pClass->GetOffset();
 		info.Data = m_Memory.Data();
@@ -102,11 +103,9 @@ void CClassView::OnSize(UINT nType, CSize size) {
 
 int CClassView::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 	CRect rect(0, 0, 100, 100);
-	m_Edit.Create(m_hWnd, rect, nullptr, WS_CHILD | WS_TABSTOP);
+	m_Edit.Create(m_hWnd, rect, nullptr, WS_CHILD | WS_TABSTOP, ES_AUTOHSCROLL);
 	m_Edit.ShowWindow(SW_HIDE);
 	m_Edit.SetFont(g_ViewFont);
-	m_Edit.ModifyStyle(0, ES_AUTOHSCROLL);
-
 	m_VScroll.Create(m_hWnd, rect, nullptr, SBS_VERT | WS_CHILD | WS_VISIBLE);
 	m_VScroll.EnableScrollBar(ESB_ENABLE_BOTH);
 	m_VScroll.ShowScrollBar();

@@ -15,7 +15,8 @@ public:
 	BEGIN_MSG_MAP_EX(CCustomEdit)
 		MSG_WM_CHAR(OnChar)
 		MSG_WM_CTLCOLOREDIT(OnCtlColorEdit)
-		COMMAND_CODE_HANDLER(EN_CHANGE,OnTextChanged)
+		REFLECTED_COMMAND_CODE_HANDLER(EN_CHANGE,OnTextChanged) // This is important.
+		DEFAULT_REFLECTION_HANDLER()
 	END_MSG_MAP()
 
 	LRESULT OnTextChanged(WORD /*wNotifyCode*/, WORD, HWND /*hWndCtl*/, BOOL& /*bHandled*/);

@@ -1,5 +1,4 @@
 #include "stdafx.h"
-#include "common.h"
 #include "crypto.h"
 #include "utils.h"
 

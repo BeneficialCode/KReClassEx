@@ -1,5 +1,5 @@
 #pragma once
-#include "common.h"
+#include "stdafx.h"
 
 int balloc(buffer_t*, size_t);
 void bfree(buffer_t* ptr);

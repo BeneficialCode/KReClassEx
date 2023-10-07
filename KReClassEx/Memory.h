@@ -14,6 +14,7 @@ public:
 			if (m_pMemory != nullptr)
 				free(m_pMemory);
 			m_pMemory = (unsigned char*)malloc(size);
+			RtlSecureZeroMemory(m_pMemory, size);
 			m_Size = size;
 		}
 	}

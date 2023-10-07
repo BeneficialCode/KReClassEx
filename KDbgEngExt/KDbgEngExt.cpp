@@ -15,6 +15,7 @@ using json = nlohmann::json;
 PDEBUG_CLIENT g_DebugClient = NULL;
 PDEBUG_CONTROL4 g_DebugControl = NULL;
 PDEBUG_DATA_SPACES g_DebugDataSpaces = NULL;
+PDEBUG_SYMBOLS3 g_DebugSymbols = NULL;
 CHAR g_ConfigPath[MAX_PATH] = { 0 };
 struct event_base* g_base;
 bool g_IsSeverRun = false;
@@ -54,6 +55,10 @@ DebugExtensionInitialize(
 	if (FAILED(hr)) {
 		goto exit;
 	}
+	hr = g_DebugClient->QueryInterface(__uuidof(IDebugSymbols3), (void**)&g_DebugSymbols);
+	if (FAILED(hr)) {
+		goto exit;
+	}
 	dprintf("Initialize success!\n");
 
 
@@ -77,10 +82,15 @@ DebugExtensionUninitialize(void)
 		g_DebugDataSpaces->Release();
 		g_DebugDataSpaces = NULL;
 	}
+	if (g_DebugSymbols != NULL) {
+		g_DebugSymbols->Release();
+		g_DebugSymbols = NULL;
+	}
 	if (g_DebugClient != NULL) {
 		g_DebugClient->Release();
 		g_DebugClient = NULL;
 	}
+	
 }
 
 DBGEXT_DEF runcommand(__in PDEBUG_CLIENT4 client, __in PCSTR args)

@@ -165,6 +165,7 @@ public:
 		COMMAND_ID_HANDLER(ID_MODIFY_SHOW,OnModifyShow)
 		COMMAND_ID_HANDLER(ID_MODIFY_DELETE,OnModifyDelete)
 		CHAIN_MSG_MAP(CBufferedPaintWindowImpl<CClassView>)
+		REFLECT_NOTIFICATIONS() // 为了能让消息反射到控件
 	END_MSG_MAP()
 
 	

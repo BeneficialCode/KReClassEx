@@ -4,7 +4,27 @@
 CNodeClass::CNodeClass() {
 	WCHAR offset[128];
 	m_NodeType = NodeType::Class;
-	m_Offset = 0x140000000;
+	m_Offset = 0;
+
+	int nameLen = strlen("nt") + 1;
+	size_t len = sizeof(PACKET_HEADER) + sizeof(GET_MODULE_BASE) + nameLen;
+	void* pData = malloc(len);
+	if (pData != NULL) {
+		PPACKET_HEADER pHeader = (PPACKET_HEADER)pData;
+		pHeader->Length = len;
+		pHeader->Type = MsgType::GetModuleBase;
+		pHeader->Version = SVERSION;
+		PGET_MODULE_BASE pInfo = (PGET_MODULE_BASE)((PBYTE)pData + sizeof(PACKET_HEADER));
+		pInfo->NameLen = nameLen;
+		pInfo->pClass = this;
+		strcpy_s(pInfo->Symbol, nameLen, "nt");
+		WritePacket(pData, len);
+		free(pData);
+	}
+	do
+	{
+		Sleep(50);
+	} while (m_Offset == 0);
 
 #ifdef _M_AMD64
 	_ui64tot_s(m_Offset, offset, 128, 16);
@@ -18,15 +38,17 @@ CNodeClass::CNodeClass() {
 }
 
 ULONG_PTR CNodeClass::ConvertStrToAddress(CString str) {
-	return 0;
+	ULONG_PTR addr = 0;
+	wchar_t* end;
+	addr = std::wcstoull(str, &end, 16);
+	return addr;
 }
 
 void CNodeClass::Update(const PHOTSPOT spot) {
 	StandardUpdate(spot);
 	if (spot->Id == 0) {
 		m_OffsetText.SetString(spot->Text);	
-		// TODO: m_Offset
-
+		m_Offset = ConvertStrToAddress(m_OffsetText);
 	}
 	else if (spot->Id == 1) {
 		m_RequestPosition = _tcstol(spot->Text, nullptr, 10);

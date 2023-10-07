@@ -224,7 +224,7 @@ int CNodeBase::AddComment(const PVIEWINFO view, int x, int y) {
 
 		if (g_bInt) {
 #ifdef _M_AMD64
-			if (iVal > 0x140000000 && iVal < 0x7FFFFFFFFFFF) // in 64 bit address range
+			if (iVal > 0x140000000) // in 64 bit address range
 				x = AddText(view, x, y, g_clrValue, HS_NONE, _T("(%i|0x%IX)"), iVal, iVal);
 			else if (iVal > 0x400000 && iVal < 0x140000000)
 				x = AddText(view, x, y, g_clrValue, HS_NONE, _T("(%i|0x%X)"), iVal, iVal);

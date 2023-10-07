@@ -11,8 +11,8 @@
 #include "local.h"
 #include "ClassView.h"
 
-int g_socket = 0;
-extern HANDLE g_hSem;
+
+
 
 BOOL CMainFrame::PreTranslateMessage(MSG* pMsg)
 {
@@ -93,20 +93,6 @@ LRESULT CMainFrame::OnAppAbout(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCt
 {
 	/*CAboutDlg dlg;
 	dlg.DoModal();*/
-	size_t len = sizeof(PACKET_HEADER) + sizeof(READ_MEMORY_INFO);
-	void* pData = malloc(len);
-	if (pData != NULL) {
-		PPACKET_HEADER pHeader = (PPACKET_HEADER)pData;
-		pHeader->Length = len;
-		pHeader->Type = MsgType::ReadMemory;
-		pHeader->Version = SVERSION;
-		PREAD_MEMORY_INFO pInfo = (PREAD_MEMORY_INFO)((PBYTE)pData + sizeof(PACKET_HEADER));
-		pInfo->Address = 0x00aa0000;
-		pInfo->ReadSize = 0x257000;
-		pInfo->IsVirtual = true;
-		WritePacket(pData, len);
-		free(pData);
-	}
 	return 0;
 }
 
@@ -128,34 +114,6 @@ DWORD WINAPI CMainFrame::TunnelThread(void* params) {
 	};
 
 	return start_local(profile);
-}
-
-void CMainFrame::WritePacket(void* pPacket, ULONG length) {
-	size_t idx = 0;
-	do
-	{
-		int s = send(g_socket, reinterpret_cast<const char*>((PBYTE)pPacket + idx), 
-			length, 0);
-		if (s == -1) {
-			if (GETSOCKETERRNO() == EAGAIN || GETSOCKETERRNO() == EWOULDBLOCK) {
-				// no data ,wait for send
-				WaitForSingleObject(g_hSem, INFINITE);
-			}
-			else {
-				// error
-				return;
-			}
-		}
-		else if (s < length) {
-			length -= s;
-			idx = s;
-		}
-		else {
-			// ·¢ËÍÍê±Ï
-			return;
-		}
-	} while (length);
-	
 }
 
 LRESULT CMainFrame::OnNewClass(WORD, WORD, HWND, BOOL&)
@@ -302,6 +260,117 @@ LRESULT CMainFrame::OnForwardToActiveView(WORD, WORD, HWND /*hWndCtl*/, BOOL& /*
 	case ID_ADD_4:
 		pClassView->SendMessage(msg->message, ID_ADD_ADD4, msg->lParam);
 		break;
+	case ID_ADD_8:
+		pClassView->SendMessage(msg->message, ID_ADD_ADD8, msg->lParam);
+		break;
+	case ID_ADD_64:
+		pClassView->SendMessage(msg->message, ID_ADD_ADD64, msg->lParam);
+		break;
+	case ID_ADD_1024:
+		pClassView->SendMessage(msg->message, ID_ADD_ADD1024, msg->lParam);
+		break;
+	case ID_ADD_2048:
+		pClassView->SendMessage(msg->message, ID_ADD_ADD2048, msg->lParam);
+		break;
+	case ID_INSERT_4:
+		pClassView->SendMessage(msg->message, ID_INSERT_INSERT4, msg->lParam);
+		break;
+	case ID_INSERT_8:
+		pClassView->SendMessage(msg->message, ID_INSERT_INSERT8, msg->lParam);
+		break;
+	case ID_INSERT_64:
+		pClassView->SendMessage(msg->message, ID_INSERT_INSERT64, msg->lParam);
+		break;
+	case ID_INSERT_1024:
+		pClassView->SendMessage(msg->message, ID_INSERT_INSERT1024, msg->lParam);
+		break;
+	case ID_INSERT_2048:
+		pClassView->SendMessage(msg->message, ID_INSERT_INSERT2048, msg->lParam);
+		break;
+	case ID_HEX_64:
+		pClassView->SendMessage(msg->message, ID_TYPE_HEX64, msg->lParam);
+		break;
+	case ID_HEX_32:
+		pClassView->SendMessage(msg->message, ID_TYPE_HEX32, msg->lParam);
+		break;
+	case ID_HEX_16:
+		pClassView->SendMessage(msg->message, ID_TYPE_HEX16, msg->lParam);
+		break;
+	case ID_HEX_8:
+		pClassView->SendMessage(msg->message, ID_TYPE_HEX8, msg->lParam);
+		break;
+	case ID_HEX_BITS:
+		pClassView->SendMessage(msg->message, ID_TYPE_BITS, msg->lParam);
+		break;
+	case ID_INT_64:
+		pClassView->SendMessage(msg->message, ID_TYPE_INT64, msg->lParam);
+		break;
+	case ID_INT_32:
+		pClassView->SendMessage(msg->message, ID_TYPE_INT32, msg->lParam);
+		break;
+	case ID_INT_16:
+		pClassView->SendMessage(msg->message, ID_TYPE_INT16, msg->lParam);
+		break;
+	case ID_INT_8:
+		pClassView->SendMessage(msg->message, ID_TYPE_INT8, msg->lParam);
+		break;
+	case ID_UINT_64:
+		pClassView->SendMessage(msg->message, ID_TYPE_QWORD, msg->lParam);
+		break;
+	case ID_UINT_32:
+		pClassView->SendMessage(msg->message, ID_TYPE_DWORD, msg->lParam);
+		break;
+	case ID_UINT_16:
+		pClassView->SendMessage(msg->message, ID_TYPE_WORD, msg->lParam);
+		break;
+	case ID_UINT_8:
+		pClassView->SendMessage(msg->message, ID_TYPE_BYTE, msg->lParam);
+		break;
+	case ID_SSE_DOUBLE:
+		pClassView->SendMessage(msg->message, ID_TYPE_DOUBLE, msg->lParam);
+		break;
+	case ID_SSE_FLOAT:
+		pClassView->SendMessage(msg->message, ID_TYPE_FLOAT, msg->lParam);
+		break;
+	case ID_VEC_2:
+		pClassView->SendMessage(msg->message, ID_TYPE_VEC2, msg->lParam);
+		break;
+	case ID_VEC_3:
+		pClassView->SendMessage(msg->message, ID_TYPE_VEC3, msg->lParam);
+		break;
+	case ID_VEC_4:
+		pClassView->SendMessage(msg->message, ID_TYPE_VEC4, msg->lParam);
+		break;
+	case ID_MATRIX:
+		pClassView->SendMessage(msg->message, ID_TYPE_MATRIX, msg->lParam);
+		break;
+	case ID_ARRAY:
+		pClassView->SendMessage(msg->message, ID_TYPE_ARRAY, msg->lParam);
+		break;
+	case ID_CLASS:
+		pClassView->SendMessage(msg->message, ID_TYPE_CLASS, msg->lParam);
+		break;
+	case ID_VTABLE:
+		pClassView->SendMessage(msg->message, ID_TYPE_VTABLE, msg->lParam);
+		break;
+	case ID_FUNCTION:
+		pClassView->SendMessage(msg->message, ID_TYPE_FUNCTION, msg->lParam);
+		break;
+	case ID_POINTER:
+		pClassView->SendMessage(msg->message, ID_TYPE_POINTER, msg->lParam);
+		break;
+	case ID_ASCII:
+		pClassView->SendMessage(msg->message, ID_TYPE_ASCII, msg->lParam);
+		break;
+	case ID_UNICODE:
+		pClassView->SendMessage(msg->message, ID_TYPE_UNICODE, msg->lParam);
+		break;
+	case ID_PCHAR:
+		pClassView->SendMessage(msg->message, ID_TYPE_PCHAR, msg->lParam);
+		break;
+	case ID_PWCHAR:
+		pClassView->SendMessage(msg->message, ID_TYPE_PWCHAR, msg->lParam);
+		break;
 	default:
 		break;
 	}
@@ -322,11 +391,12 @@ void CMainFrame::StandardTypeUpdate(CClassView* pClassView) {
 		if (pClassView->m_Selected[0].Object->GetType()
 			== NodeType::Class) {
 			UIEnableAllAdd(true);
-			UIEnableAllType(true);
+			UIEnableAllType(false);
+			UIEnable(ID_FUNCTION_PTR, true);
 		}
 		else {
-			UIEnableAllAdd(false);
-			UIEnableAllType(false);
+			UIEnableAllAdd(true);
+			UIEnableAllType(true);
 
 		}
 	}

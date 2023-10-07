@@ -34,6 +34,8 @@ extern CAppModule _Module;
 #include <vector>
 #include <memory>
 
+#include "../KDbgEngExt/common.h"
+
 #if defined _M_IX86
   #pragma comment(linker, "/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='x86' publicKeyToken='6595b64144ccf1df' language='*'\"")
 #elif defined _M_IA64
@@ -104,6 +106,7 @@ extern bool g_bResizingFont;
 
 BOOL ReClassReadMemory(ULONG_PTR address, LPVOID buffer, SIZE_T size, PSIZE_T bytesRead = nullptr);
 BOOL ReClassWriteMemory(ULONG_PTR address, LPVOID buffer, SIZE_T size, PSIZE_T bytesWritten = nullptr);
+void WritePacket(void* pPacket, ULONG length);
 
 #include "Nodes.h"
 #if defined(_M_AMD64)

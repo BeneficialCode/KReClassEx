@@ -62,6 +62,44 @@ public:
 		COMMAND_ID_HANDLER(ID_BTN_CONNECT,OnConnect)
 		COMMAND_ID_HANDLER(ID_BTN_NEW,OnNewClass)
 		COMMAND_ID_HANDLER(ID_ADD_4,OnForwardToActiveView)
+		COMMAND_ID_HANDLER(ID_ADD_8,OnForwardToActiveView)
+		COMMAND_ID_HANDLER(ID_ADD_64,OnForwardToActiveView)
+		COMMAND_ID_HANDLER(ID_ADD_1024,OnForwardToActiveView)
+		COMMAND_ID_HANDLER(ID_ADD_2048,OnForwardToActiveView)
+		COMMAND_ID_HANDLER(ID_INSERT_4,OnForwardToActiveView)
+		COMMAND_ID_HANDLER(ID_INSERT_8,OnForwardToActiveView)
+		COMMAND_ID_HANDLER(ID_INSERT_64,OnForwardToActiveView)
+		COMMAND_ID_HANDLER(ID_INSERT_1024,OnForwardToActiveView)
+		COMMAND_ID_HANDLER(ID_HEX_64,OnForwardToActiveView)
+		COMMAND_ID_HANDLER(ID_HEX_32,OnForwardToActiveView)
+		COMMAND_ID_HANDLER(ID_HEX_16,OnForwardToActiveView)
+		COMMAND_ID_HANDLER(ID_HEX_8,OnForwardToActiveView)
+		COMMAND_ID_HANDLER(ID_HEX_BITS,OnForwardToActiveView)
+		COMMAND_ID_HANDLER(ID_INT_64,OnForwardToActiveView)
+		COMMAND_ID_HANDLER(ID_INT_32,OnForwardToActiveView)
+		COMMAND_ID_HANDLER(ID_INT_16,OnForwardToActiveView)
+		COMMAND_ID_HANDLER(ID_INT_8,OnForwardToActiveView)
+		COMMAND_ID_HANDLER(ID_UINT_64,OnForwardToActiveView)
+		COMMAND_ID_HANDLER(ID_UINT_32,OnForwardToActiveView)
+		COMMAND_ID_HANDLER(ID_UINT_16,OnForwardToActiveView)
+		COMMAND_ID_HANDLER(ID_UINT_8,OnForwardToActiveView)
+		COMMAND_ID_HANDLER(ID_SSE_DOUBLE,OnForwardToActiveView)
+		COMMAND_ID_HANDLER(ID_SSE_FLOAT,OnForwardToActiveView)
+		COMMAND_ID_HANDLER(ID_VEC_2,OnForwardToActiveView)
+		COMMAND_ID_HANDLER(ID_VEC_3,OnForwardToActiveView)
+		COMMAND_ID_HANDLER(ID_VEC_4,OnForwardToActiveView)
+		COMMAND_ID_HANDLER(ID_MATRIX,OnForwardToActiveView)
+		COMMAND_ID_HANDLER(ID_ARRAY,OnForwardToActiveView)
+		COMMAND_ID_HANDLER(ID_POINTER_ARRAY,OnForwardToActiveView)
+		COMMAND_ID_HANDLER(ID_CLASS,OnForwardToActiveView)
+		COMMAND_ID_HANDLER(ID_VTABLE,OnForwardToActiveView)
+		COMMAND_ID_HANDLER(ID_FUNCTION,OnForwardToActiveView)
+		COMMAND_ID_HANDLER(ID_FUNCTION_PTR,OnForwardToActiveView)
+		COMMAND_ID_HANDLER(ID_POINTER,OnForwardToActiveView)
+		COMMAND_ID_HANDLER(ID_ASCII,OnForwardToActiveView)
+		COMMAND_ID_HANDLER(ID_UNICODE,OnForwardToActiveView)
+		COMMAND_ID_HANDLER(ID_PCHAR,OnForwardToActiveView)
+		COMMAND_ID_HANDLER(ID_PWCHAR,OnForwardToActiveView)
 		CHAIN_MSG_MAP(CRibbonFrameWindowImpl<CMainFrame>)
 	END_MSG_MAP()
 
@@ -82,7 +120,7 @@ public:
 
 	static DWORD WINAPI TunnelThread(void* params);
 
-	void WritePacket(void* pPacket, ULONG length);
+	
 
 private:
 

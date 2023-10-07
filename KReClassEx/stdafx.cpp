@@ -3,6 +3,7 @@
 //	stdafx.obj will contain the pre-compiled type information
 
 #include "stdafx.h"
+#include "local.h"
 
 std::vector<HICON> g_Icons;
 
@@ -49,9 +50,52 @@ bool g_bPointers = true;
 bool g_bUnsignedHex = true;
 
 DWORD g_NodeCreateIndex = 0;
+int g_socket = 0;
+extern HANDLE g_hSem;
+
+void WritePacket(void* pPacket, ULONG length) {
+	size_t idx = 0;
+	do
+	{
+		int s = send(g_socket, reinterpret_cast<const char*>((PBYTE)pPacket + idx),
+			length, 0);
+		if (s == -1) {
+			if (GETSOCKETERRNO() == EAGAIN || GETSOCKETERRNO() == EWOULDBLOCK) {
+				// no data ,wait for send
+				WaitForSingleObject(g_hSem, INFINITE);
+			}
+			else {
+				// error
+				return;
+			}
+		}
+		else if (s < length) {
+			length -= s;
+			idx = s;
+		}
+		else {
+			// ·¢ËÍÍê±Ï
+			return;
+		}
+	} while (length);
+}
 
 BOOL ReClassReadMemory(ULONG_PTR address, LPVOID buffer, SIZE_T size, PSIZE_T bytesRead) {
-	SecureZeroMemory(buffer, size);
+	size_t len = sizeof(PACKET_HEADER) + sizeof(READ_MEMORY_INFO);
+	void* pData = malloc(len);
+	if (pData != NULL) {
+		PPACKET_HEADER pHeader = (PPACKET_HEADER)pData;
+		pHeader->Length = len;
+		pHeader->Type = MsgType::ReadMemory;
+		pHeader->Version = SVERSION;
+		PREAD_MEMORY_INFO pInfo = (PREAD_MEMORY_INFO)((PBYTE)pData + sizeof(PACKET_HEADER));
+		pInfo->Address = address;
+		pInfo->Buffer = buffer;
+		pInfo->ReadSize = size;
+		pInfo->IsVirtual = true;
+		WritePacket(pData, len);
+		free(pData);
+	}
 	return FALSE;
 }
 
