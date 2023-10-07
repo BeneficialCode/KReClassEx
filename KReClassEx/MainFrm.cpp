@@ -407,6 +407,18 @@ void CMainFrame::StandardTypeUpdate(CClassView* pClassView) {
 }
 
 void CMainFrame::UpdateUI() {
+	if (m_Classes.size() > 0) {
+		UIEnable(ID_BTN_EDIT, TRUE);
+		UIEnable(ID_BTN_DELETE, TRUE);
+		UIEnable(ID_BTN_CLEAN_UP, TRUE);
+		UIEnable(ID_BTN_CODE, TRUE);
+	}
+	else {
+		UIEnable(ID_BTN_EDIT, FALSE);
+		UIEnable(ID_BTN_DELETE, FALSE);
+		UIEnable(ID_BTN_CLEAN_UP, FALSE);
+		UIEnable(ID_BTN_CODE, FALSE);
+	}
 	int nPage = m_view.GetActivePage();
 	if (nPage == -1) {
 		UIEnableAllAdd(false);
