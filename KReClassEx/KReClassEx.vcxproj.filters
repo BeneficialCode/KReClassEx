@@ -19,6 +19,12 @@
     <Filter Include="Nodes">
       <UniqueIdentifier>{fe8a52a1-985d-4507-b11a-a4e09b691694}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Dialogs">
+      <UniqueIdentifier>{4ccf37d6-e0d0-47f5-b9e1-fe7dd188f8d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Views">
+      <UniqueIdentifier>{cfc383a1-6904-442b-921e-eb66c9d3dcca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -158,6 +164,12 @@
     </ClCompile>
     <ClCompile Include="NodeArray.cpp">
       <Filter>Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassesDlg.cpp">
+      <Filter>Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="ScintillaView.cpp">
+      <Filter>Views</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -319,6 +331,15 @@
     </ClInclude>
     <ClInclude Include="NodeCustom.h">
       <Filter>Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassesDlg.h">
+      <Filter>Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="ScintillaCtrl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ScintillaView.h">
+      <Filter>Views</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

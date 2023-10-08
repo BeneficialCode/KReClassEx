@@ -133,6 +133,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_WINDOWS;STRICT;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>..\Lexilla\lexlib;..\Lexilla\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -218,6 +219,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AboutDlg.cpp" />
+    <ClCompile Include="ClassesDlg.cpp" />
     <ClCompile Include="ClassView.cpp" />
     <ClCompile Include="crypto.cpp" />
     <ClCompile Include="CustomEdit.cpp" />
@@ -260,6 +262,7 @@
     <ClCompile Include="NodeVTable.cpp" />
     <ClCompile Include="NodeWCharPtr.cpp" />
     <ClCompile Include="NodeWORD.cpp" />
+    <ClCompile Include="ScintillaView.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -272,6 +275,7 @@
   <ItemGroup>
     <ClInclude Include="AboutDlg.h" />
     <ClInclude Include="BitArray.h" />
+    <ClInclude Include="ClassesDlg.h" />
     <ClInclude Include="ClassView.h" />
     <ClInclude Include="crypto.h" />
     <ClInclude Include="CustomEdit.h" />
@@ -320,6 +324,8 @@
     <ClInclude Include="NodeWORD.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Ribbon.h" />
+    <ClInclude Include="ScintillaCtrl.h" />
+    <ClInclude Include="ScintillaView.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="winsock.h" />

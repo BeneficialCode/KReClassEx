@@ -29,10 +29,16 @@ extern CAppModule _Module;
 #include <strsafe.h>
 #include <atlribbon.h>
 #include <atlcrack.h>
+#include <atlddx.h>
 
 #include <algorithm>
 #include <vector>
 #include <memory>
+#include <string>
+
+#include <scintilla/Scintilla.h>
+#include <scintilla/ILexer.h>
+#include <scintilla/SciLexer.h>
 
 #include "../KDbgEngExt/common.h"
 

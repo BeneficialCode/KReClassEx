@@ -171,7 +171,7 @@ public:
 	
 public:
 	void SetClass(CNodeClass* pClass) { m_pClass = pClass; }
-
+	CNodeClass* GetClass() { return m_pClass; }
 	
 
 private:

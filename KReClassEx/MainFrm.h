@@ -22,6 +22,7 @@ public:
 	void ClearHidden();
 	bool IsNodeValid(CNodeBase* pCheckNode);
 	CNodeBase* CreateNewNode(NodeType type);
+	void SwitchPage(size_t id);
 
 	//TODO: Declare ribbon controls
 	LRESULT OnForwardToActiveView(WORD /*wNotifyCode*/, WORD wID, HWND /*hWndCtl*/, BOOL& /*bHandled*/);
@@ -100,6 +101,8 @@ public:
 		COMMAND_ID_HANDLER(ID_UNICODE,OnForwardToActiveView)
 		COMMAND_ID_HANDLER(ID_PCHAR,OnForwardToActiveView)
 		COMMAND_ID_HANDLER(ID_PWCHAR,OnForwardToActiveView)
+		COMMAND_ID_HANDLER(ID_BTN_EDIT,OnEditClass)
+		COMMAND_ID_HANDLER(ID_BTN_GENERATE,OnGenerate)
 		CHAIN_MSG_MAP(CRibbonFrameWindowImpl<CMainFrame>)
 	END_MSG_MAP()
 
@@ -116,6 +119,8 @@ public:
 	LRESULT OnAppAbout(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/);
 	LRESULT OnConnect(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/);
 	LRESULT OnNewClass(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/);
+	LRESULT OnEditClass(WORD, WORD, HWND, BOOL&);
+	LRESULT OnGenerate(WORD, WORD, HWND, BOOL&);
 
 
 	static DWORD WINAPI TunnelThread(void* params);
@@ -124,6 +129,6 @@ public:
 
 private:
 
-	CTabView m_view;
 	
+	bool _connected = false;
 };

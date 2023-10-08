@@ -10,6 +10,7 @@
 #include "MainFrm.h"
 #include "local.h"
 #include "ClassView.h"
+#include "ClassesDlg.h"
 
 
 
@@ -102,7 +103,7 @@ LRESULT CMainFrame::OnConnect(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl
 	);
 	if (hThread != NULL)
 		::CloseHandle(hThread);
-
+	_connected = true;
 	return 0;
 }
 
@@ -118,7 +119,11 @@ DWORD WINAPI CMainFrame::TunnelThread(void* params) {
 
 LRESULT CMainFrame::OnNewClass(WORD, WORD, HWND, BOOL&)
 {
-	// AtlMessageBox(m_hWnd, L"I'm comming!", L"Info", MB_OK);
+	if (!_connected) {
+		AtlMessageBox(m_hWnd, L"Please connect to windbg first!", L"Info", MB_OK);
+		return 1;
+	}
+	
 	auto pView = new CClassView(this);
 	auto hWnd = pView->Create(m_view, rcDefault, nullptr, 
 		WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | WS_CLIPCHILDREN,
@@ -141,6 +146,7 @@ LRESULT CMainFrame::OnNewClass(WORD, WORD, HWND, BOOL&)
 	}
 	
 	CalcOffsets(pClass);
+
 	return 0;
 }
 
@@ -482,4 +488,42 @@ void CMainFrame::UIEnableAllType(BOOL bEnable) {
 	UIEnable(ID_UNICODE, bEnable);
 	UIEnable(ID_PCHAR, bEnable);
 	UIEnable(ID_PWCHAR, bEnable);
+}
+
+LRESULT CMainFrame::OnEditClass(WORD, WORD, HWND, BOOL&) {
+	CClassesDlg dlg(this);
+	dlg.DoModal();
+	return TRUE;
+}
+
+void CMainFrame::SwitchPage(size_t id) {
+	int count = m_view.GetPageCount();
+	CNodeClass* pClass = m_Classes[id];
+	if (id < count) {
+		for (int i = 0; i < count; i++) {
+			CClassView* pData = (CClassView*)m_view.GetPageData(i);
+			if (pData->GetClass() == pClass) {
+				m_view.SetActivePage(i);
+				return;
+			}
+		}
+	}
+	auto pView = new CClassView(this);
+	auto hWnd = pView->Create(m_view, rcDefault, nullptr,
+		WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | WS_CLIPCHILDREN,
+		WS_EX_STATICEDGE);
+	if (!hWnd) {
+		delete pView;
+		return;
+	}
+	pView->SetClass(pClass);
+	m_view.AddPage(hWnd, m_Classes[id]->GetName(), -1, pView);
+}
+
+LRESULT CMainFrame::OnGenerate(WORD, WORD, HWND, BOOL&) {
+	CString generatedText, text;
+	generatedText += L"// Generated using KReClassEx\r\n\r\n";
+
+	
+	return TRUE;
 }
