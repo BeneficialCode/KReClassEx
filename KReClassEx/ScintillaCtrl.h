@@ -605,6 +605,141 @@ public:
 		Execute(SCI_STYLESETFONT, style, reinterpret_cast<LPARAM>(fontName));
 	}
 
+	void SetKeywords(int index, char const* keywords) {
+		// 设置关键字
+		Execute(SCI_SETKEYWORDS, index, reinterpret_cast<LPARAM>(keywords));
+	}
+
+	void SetLexer(Scintilla::ILexer5* lexer) {
+		// 设置词法
+		Execute(SCI_SETILEXER, 0, reinterpret_cast<LPARAM>(lexer));
+	}
+	void StartLexer() {
+		Execute(SCI_LEXER_START);
+	}
+
+	void StyleResetDefault() {
+		// 重置为默认风格
+		Execute(SCI_STYLERESETDEFAULT);
+	}
+
+	void SetWhitespaceBack(bool useSetting, Colour back) {
+		// 设置空白区域背景色
+		Execute(SCI_SETWHITESPACEBACK, useSetting, back);
+	}
+
+	Position Column(Position pos) const {
+		// 获取所在位置的所处列
+		return (Position)Execute(SCI_GETCOLUMN, pos);
+	}
+
+	bool IsReadOnly() const {
+		// 判断文本是否只读
+		return Execute(SCI_GETREADONLY);
+	}
+
+	void SetCurrentPos(Position caret) {
+		// 设置当前位置
+		Execute(SCI_SETCURRENTPOS, caret);
+	}
+
+	void SetSelectionStart(Position anchor) {
+		// 设置锚点开始位置
+		Execute(SCI_SETSELECTIONSTART, anchor);
+	}
+
+	Position SelectionStart() const {
+		// 获取选中起始位置
+		return (Position)Execute(SCI_GETSELECTIONNANCHOR);
+	}
+
+	Position SetSelectionEnd(Position caret) {
+		// 设置选中结束位置
+		Execute(SCI_SETSELECTIONEND, caret);
+	}
+
+	// 查找文本
+	Position SciFindText(Scintilla::FindOption searchFlags, char const* text) {
+		Sci_TextToFind ttf{};
+		ttf.chrg.cpMax = (long)Length();
+		ttf.lpstrText = text;
+		return (Position)Execute(SCI_FINDTEXT, static_cast<WPARAM>(searchFlags),
+			reinterpret_cast<LPARAM>(&ttf));
+	}
+
+	// 获取指定行的文本
+	std::string GetLine(Line line) const {
+		std::string text;
+		auto len = GetLineLength(line);
+		if (len == 0)
+			return "";
+		text.resize(len);
+		Execute(SCI_GETLINE, line, reinterpret_cast<LPARAM>(text.data()));
+		return text;
+	}
+
+	// 获取选中的文本
+	std::string GetSelText() {
+		auto len = Execute(SCI_GETTEXTLENGTH);
+		std::string text;
+		text.resize(len);
+		Execute(SCI_GETSELTEXT, len, reinterpret_cast<LPARAM>(text.data()));
+		return text;
+	}
+
+	// 根据位置获取所在行
+	Position PositionFromLine(Line line) const {
+		return (Position)Execute(SCI_POSITIONFROMLINE, line);
+	}
+
+	void SetReadOnly(bool readOnly) {
+		Execute(SCI_SETREADONLY, readOnly);
+	}
+
+	bool CanPaste() const {
+		return Execute(SCI_CANPASTE);
+	}
+
+	bool CanUndo() const {
+		return Execute(SCI_CANUNDO);
+	}
+
+	bool CanRedo() const {
+		return Execute(SCI_CANREDO);
+	}
+
+	bool CanCopy() const {
+		return !Execute(SCI_GETSELECTIONEMPTY);
+	}
+
+	bool CanCut() const {
+		return !Execute(SCI_GETSELECTIONEMPTY) && !IsReadOnly();
+	}
+
+	void EmptyUndoBuffer() {
+		Execute(SCI_EMPTYUNDOBUFFER);
+	}
+
+	void Undo() {
+		Execute(SCI_UNDO);
+	}
+
+	void Cut() {
+		Execute(SCI_CUT);
+	}
+
+	void Copy() {
+		Execute(SCI_COPY);
+	}
+
+	void Paste() {
+		Execute(SCI_PASTE);
+	}
+
+	void Clear() {
+		Execute(SCI_CLEAR);
+	}
+
 	SciFnDirect m_Sci;
 	sptr_t m_SciWndData;
 };
