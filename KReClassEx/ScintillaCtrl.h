@@ -340,7 +340,9 @@ namespace Scintilla {
 	};
 }
 
-class CScintillaCtrlT :public CWindow {
+template<typename T>
+class CScintillaCtrlT :public T {
+
 	using Position = Sci_Position;
 	using Line = intptr_t;
 	using Colour = int;
@@ -740,6 +742,82 @@ public:
 		Execute(SCI_CLEAR);
 	}
 
+	void SetText(const char* text) {
+		Execute(SCI_SETTEXT, 0, reinterpret_cast<LPARAM>(text));
+	}
+
+	Position GetText(Position length, char* text) const {
+		return (Position)Execute(SCI_GETTEXT, length, reinterpret_cast<LPARAM>(text));
+	}
+
+	std::string GetText(Position length) const {
+		std::string text;
+		text.resize((size_t)length);
+		GetText(length + 1, text.data());
+		return text;
+	}
+
+	Position GetTextLength() const {
+		return Execute(SCI_GETTEXTLENGTH);
+	}
+
+	std::string GetAllText() const {
+		std::string text;
+		text.resize(GetTextLength());
+		return GetText(text.length());
+	}
+
 	SciFnDirect m_Sci;
 	sptr_t m_SciWndData;
+};
+
+using CScintillaCtrl = CScintillaCtrlT<CWindow>;
+
+template<typename T>
+class CScintillaCommands {
+	BEGIN_MSG_MAP(CScintillaCommands)
+		COMMAND_ID_HANDLER(ID_EDIT_COPY, OnCopy)
+		COMMAND_ID_HANDLER(ID_EDIT_PASTE, OnPaste)
+		COMMAND_ID_HANDLER(ID_EDIT_CUT, OnCut)
+		COMMAND_ID_HANDLER(ID_EDIT_UNDO, OnUndo)
+		COMMAND_ID_HANDLER(ID_EDIT_REDO, OnRedo)
+		COMMAND_ID_HANDLER(ID_EDIT_CLEAR_ALL, OnClearAll)
+		ALT_MSG_MAP(1)
+		COMMAND_ID_HANDLER(ID_EDIT_COPY, OnCopy)
+		COMMAND_ID_HANDLER(ID_EDIT_PASTE, OnPaste)
+		COMMAND_ID_HANDLER(ID_EDIT_CUT, OnCut)
+		COMMAND_ID_HANDLER(ID_EDIT_UNDO, OnUndo)
+		COMMAND_ID_HANDLER(ID_EDIT_REDO, OnRedo)
+		COMMAND_ID_HANDLER(ID_EDIT_CLEAR_ALL, OnClearAll)
+	END_MSG_MAP()
+
+	LRESULT OnPaste(WORD, WORD, HWND, BOOL&) {
+		static_cast<T*>(this)->Paste();
+		return 0;
+	}
+
+	LRESULT OnCopy(WORD, WORD, HWND, BOOL&) {
+		static_cast<T*>(this)->Copy();
+		return 0;
+	}
+
+	LRESULT OnCut(WORD, WORD, HWND, BOOL&) {
+		static_cast<T*>(this)->Cut();
+		return 0;
+	}
+
+	LRESULT OnUndo(WORD, WORD, HWND, BOOL&) {
+		static_cast<T*>(this)->Undo();
+		return 0;
+	}
+
+	LRESULT OnRedo(WORD, WORD, HWND, BOOL&) {
+		static_cast<T*>(this)->Redo();
+		return 0;
+	}
+
+	LRESULT OnClearAll(WORD, WORD, HWND, BOOL&) {
+		static_cast<T*>(this)->ClearAll();
+		return 0;
+	}
 };
