@@ -84,6 +84,33 @@ const char* KeyWords_ASM[] = {
 	"ucomisd ucomiss unpckhpd unpckhps unpcklpd unpcklps xorpd xorps",
 };
 
+const char* KeyWords_CPP[] = {
+	// Standard
+	"asm auto bool break case catch char class const "
+	"const_cast continue default delete do double "
+	"dynamic_cast else enum explicit extern false finally "
+	"float for friend goto if inline int long mutable "
+	"namespace new operator private protected public "
+	"register reinterpret_cast register return short signed "
+	"sizeof static static_cast struct switch template "
+	"this throw true try typedef typeid typename "
+	"union unsigned using virtual void volatile "
+	"wchar_t while "
+
+	// Specific
+	"__int32 __int16 __int8 DWORD WORD BYTE D3DXVECTOR2 D3DXVECTOR3 D3DXQUATERNION D3DXMATRIX "
+
+	// Extended
+	"__asm __asume __based __box __cdecl __declspec "
+	"__delegate delegate depreciated dllexport dllimport "
+	"event __event __except __fastcall __finally __forceinline "
+	"__int8 __int16 __int32 __int64 __int128 __interface "
+	"interface __leave naked noinline __noop noreturn "
+	"nothrow novtable nullptr safecast __stdcall "
+	"__try __except __finally __unaligned uuid __uuidof "
+	"__virtual_inheritance"
+};
+
 CScintillaView::CScintillaView(IMainFrame* frame, PCWSTR title):m_pFrame(frame),m_Title(title){
 }
 
@@ -136,7 +163,7 @@ LRESULT CScintillaView::OnSetFocus(UINT, WPARAM, LPARAM, BOOL&) {
 }
 
 LRESULT CScintillaView::OnCreate(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/) {
-	m_Sci.Create(m_hWnd, rcDefault, nullptr, WS_CHILD | WS_VISIBLE | WS_CLIPCHILDREN);
+	HWND hWnd = m_Sci.Create(m_hWnd, rcDefault, nullptr, WS_CHILD | WS_VISIBLE | WS_CLIPCHILDREN);
 
 	m_Sci.StyleSetFont(STYLE_DEFAULT, "Consolas");
 	m_Sci.StyleSetSize(STYLE_DEFAULT, 11);

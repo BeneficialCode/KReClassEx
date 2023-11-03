@@ -133,7 +133,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_WINDOWS;STRICT;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>..\Lexilla\lexlib;..\Lexilla\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Lexilla\lexers;..\Lexilla\lexlib;..\Lexilla\Include;..\Scintilla\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -219,11 +219,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AboutDlg.cpp" />
+    <ClCompile Include="ClassDependencyGraph.cpp" />
     <ClCompile Include="ClassesDlg.cpp" />
     <ClCompile Include="ClassView.cpp" />
     <ClCompile Include="crypto.cpp" />
     <ClCompile Include="CustomEdit.cpp" />
     <ClCompile Include="CustomToolTip.cpp" />
+    <ClCompile Include="EditDlg.cpp" />
     <ClCompile Include="KReClassEx.cpp" />
     <ClCompile Include="local.cpp" />
     <ClCompile Include="MainFrm.cpp" />
@@ -275,11 +277,13 @@
   <ItemGroup>
     <ClInclude Include="AboutDlg.h" />
     <ClInclude Include="BitArray.h" />
+    <ClInclude Include="ClassDependencyGraph.h" />
     <ClInclude Include="ClassesDlg.h" />
     <ClInclude Include="ClassView.h" />
     <ClInclude Include="crypto.h" />
     <ClInclude Include="CustomEdit.h" />
     <ClInclude Include="CustomToolTip.h" />
+    <ClInclude Include="EditDlg.h" />
     <ClInclude Include="HotSpot.h" />
     <ClInclude Include="Interfaces.h" />
     <ClInclude Include="jconf.h" />

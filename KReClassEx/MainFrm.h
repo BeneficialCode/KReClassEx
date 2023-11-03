@@ -128,7 +128,12 @@ public:
 	
 
 private:
+	CString m_Header;
+	CString m_Footer;
+	CString m_Notes;
+	CString m_ParserInput;
 
+	CString m_CurrentFilePath;
 	
 	bool _connected = false;
 };

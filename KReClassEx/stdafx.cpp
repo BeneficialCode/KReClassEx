@@ -53,6 +53,8 @@ DWORD g_NodeCreateIndex = 0;
 int g_socket = 0;
 extern HANDLE g_hSem;
 
+RCTYPEDEFS g_Typedefs;
+
 void WritePacket(void* pPacket, ULONG length) {
 	size_t idx = 0;
 	do

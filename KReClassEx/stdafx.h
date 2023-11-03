@@ -10,6 +10,7 @@
 #define _WIN32_WINNT	0x0601
 #define _WIN32_IE	0x0700
 #define _RICHEDIT_VER	0x0500
+#define NOMINMAX
 
 #include <atlbase.h>
 #include <atlapp.h>
@@ -35,10 +36,12 @@ extern CAppModule _Module;
 #include <vector>
 #include <memory>
 #include <string>
-
-#include <scintilla/Scintilla.h>
-#include <scintilla/ILexer.h>
-#include <scintilla/SciLexer.h>
+#include <set>
+#include <map>
+#include <sstream>
+#include <ILexer.h>
+#include <Scintilla.h>
+#include <SciLexer.h>
 
 #include "../KDbgEngExt/common.h"
 
@@ -126,3 +129,24 @@ extern bool g_bInt;
 extern bool g_bString;
 extern bool g_bPointers;
 extern bool g_bUnsignedHex;
+
+typedef struct _RCTYPEDEFS {
+    CString Hex;
+    CString Int64;
+    CString Int32;
+    CString Int16;
+    CString Int8;
+    CString Qword;
+    CString Dword;
+    CString Word;
+    CString Byte;
+    CString Float;
+    CString Double;
+    CString Vec2;   // D3DXVECTOR2
+    CString Vec3;   // D3DXVECTOR3
+    CString Quat;   // D3DXQUATERNION
+    CString Matrix; // D3DXMATRIX
+    CString PChar;
+    CString PWChar;
+}RCTYPEDEFS,*PRCTYPEDEFS;
+extern RCTYPEDEFS g_Typedefs;

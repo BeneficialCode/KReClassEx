@@ -11,6 +11,9 @@
 #include "aboutdlg.h"
 #include "MainFrm.h"
 
+extern "C" int Scintilla_RegisterClasses(void* hInstance);
+
+#pragma comment(lib, "imm32")
 
 typedef enum PROCESS_DPI_AWARENESS {
 	PROCESS_DPI_UNAWARE = 0,
@@ -40,6 +43,8 @@ CAppModule _Module;
 
 BOOL InitApp(HINSTANCE hInst);
 void ResizeMemoryFont(HWND hWnd, int width, int height);
+
+
 
 int Run(LPTSTR /*lpstrCmdLine*/ = NULL, int nCmdShow = SW_SHOWDEFAULT)
 {
@@ -82,6 +87,8 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPTSTR lp
 
 	InitApp(hInstance);
 
+	//Scintilla_RegisterClasses(hInstance);
+
 	int nRet = 0;
 	if (RunTimeHelper::IsRibbonUIAvailable())
 		nRet = Run(lpstrCmdLine, nCmdShow);
@@ -90,6 +97,8 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPTSTR lp
 
 	_Module.Term();
 	::CoUninitialize();
+
+	//Scintilla_ReleaseResources();
 
 	return nRet;
 }
@@ -136,6 +145,25 @@ BOOL InitApp(HINSTANCE hInst) {
 	IDI_ICON_TEXT ,IDI_ICON_UNSIGNED ,IDI_ICON_VECTOR ,IDI_ICON_CHANGE ,IDI_ICON_CAMERA };
 	for (auto id : icons)
 		g_Icons.emplace_back(::LoadIcon(hInst, MAKEINTRESOURCE(id)));
+
+	g_Typedefs.Hex = L"char";
+	g_Typedefs.Int64 = L"__int64";
+	g_Typedefs.Int32 = L"__int32";
+	g_Typedefs.Int16 = L"__int16";
+	g_Typedefs.Int8 = L"__int8";
+	g_Typedefs.Qword = L"DWORD64";
+	g_Typedefs.Dword = L"DWORD";
+	g_Typedefs.Word = L"WORD";
+	g_Typedefs.Byte = L"unsigned char";
+	g_Typedefs.Float = L"float";
+	g_Typedefs.Double = L"double";
+	g_Typedefs.Vec2 = L"Vector2"; // xy
+	g_Typedefs.Vec3 = L"Vector3"; // xyz
+	g_Typedefs.Quat = L"Vector4"; // xyzw
+	// matrix3x4_t is a C++ class that represents a matrix.
+	g_Typedefs.Matrix = L"matrix3x4_t"; // float m_matrix[3][4];
+	g_Typedefs.PChar = L"char*";
+	g_Typedefs.PWChar = L"wchar_t*";
 
 	return TRUE;
 }

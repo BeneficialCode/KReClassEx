@@ -11,6 +11,8 @@
 #include "local.h"
 #include "ClassView.h"
 #include "ClassesDlg.h"
+#include "ClassDependencyGraph.h"
+#include "EditDlg.h"
 
 
 
@@ -38,7 +40,7 @@ LRESULT CMainFrame::OnCreate(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/
 	UISetCheck(ID_VIEW_STATUS_BAR, 1);
 
 	m_view.m_bDestroyImageList = false;
-	
+
 	m_hWndClient = m_view.Create(m_hWnd, rcDefault, nullptr,
 		WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | WS_CLIPCHILDREN);
 
@@ -123,16 +125,16 @@ LRESULT CMainFrame::OnNewClass(WORD, WORD, HWND, BOOL&)
 		AtlMessageBox(m_hWnd, L"Please connect to windbg first!", L"Info", MB_OK);
 		return 1;
 	}
-	
+
 	auto pView = new CClassView(this);
-	auto hWnd = pView->Create(m_view, rcDefault, nullptr, 
+	auto hWnd = pView->Create(m_view, rcDefault, nullptr,
 		WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | WS_CLIPCHILDREN,
 		WS_EX_STATICEDGE);
 	if (!hWnd) {
 		delete pView;
 		return 0;
 	}
-	
+
 	CNodeClass* pClass = new CNodeClass;
 	pView->SetClass(pClass);
 	m_Classes.push_back(pClass);
@@ -144,7 +146,7 @@ LRESULT CMainFrame::OnNewClass(WORD, WORD, HWND, BOOL&)
 		pNode->SetParent(pClass);
 		pClass->AddNode(pNode);
 	}
-	
+
 	CalcOffsets(pClass);
 
 	return 0;
@@ -260,7 +262,7 @@ CNodeBase* CMainFrame::CreateNewNode(NodeType type) {
 LRESULT CMainFrame::OnForwardToActiveView(WORD, WORD, HWND /*hWndCtl*/, BOOL& /*bHandled*/) {
 	int nPage = m_view.GetActivePage();
 	auto msg = GetCurrentMessage();
-	CClassView* pClassView = (CClassView * )m_view.GetPageData(nPage);
+	CClassView* pClassView = (CClassView*)m_view.GetPageData(nPage);
 	switch (msg->wParam)
 	{
 	case ID_ADD_4:
@@ -524,6 +526,264 @@ LRESULT CMainFrame::OnGenerate(WORD, WORD, HWND, BOOL&) {
 	CString generatedText, text;
 	generatedText += L"// Generated using KReClassEx\r\n\r\n";
 
-	
+	if (!m_Header.IsEmpty())
+		generatedText += m_Header + L"\r\n\r\n";
+
+	std::set<const CNodeClass*> forwardDeclarations;
+	std::vector<const CNodeClass*> orderedClassDefinitions;
+	ClassDependencyGraph depGraph;
+	// Add each class as a node to the graph before adding dependency edges
+	for (auto node : m_Classes) {
+		depGraph.AddNode(node);
+	}
+
+	for (auto node : m_Classes) {
+		for (size_t idx = 0; idx < node->NodeCount(); idx++)
+		{
+			CNodeBase* pNode = (CNodeBase*)node->GetNode(idx);
+			NodeType type = pNode->GetType();
+			switch (type)
+			{
+			case NodeType::Pointer:
+			{
+				CNodePtr* pPointer = (CNodePtr*)pNode;
+				CNodeClass* pClass = pPointer->GetClass();
+				depGraph.AddEdge(node, pClass, DependencyType::Pointer);
+				break;
+			}
+			case NodeType::Instance:
+			{
+				CNodeClassInstance* pClassInstance = (CNodeClassInstance*)pNode;
+				CNodeClass* pInstance = pClassInstance->GetClass();
+				depGraph.AddEdge(node, pInstance, DependencyType::Instance);
+				break;
+			}
+			case NodeType::Array:
+			{
+				CNodeArray* pClassInstance = (CNodeArray*)pNode;
+				CNodeClass* pInstance = pClassInstance->GetClass();
+				depGraph.AddEdge(node, pInstance, DependencyType::Instance);
+				break;
+			}
+			case NodeType::PtrArray:
+			{
+				CNodePtrArray* pClassInstance = (CNodePtrArray*)pNode;
+				CNodeClass* pClass = pClassInstance->GetClass();
+				depGraph.AddEdge(node, pClass, DependencyType::Pointer);
+				break;
+			}
+			default:
+				break;
+			}
+		}
+	}
+	depGraph.OrderClassesForGeneration(forwardDeclarations, orderedClassDefinitions);
+
+	for (auto forwardDeclared : forwardDeclarations) {
+		CNodeClass* pClass = (CNodeClass*)forwardDeclared;
+		text.Format(L"class %s;\r\n", pClass->GetName());
+		generatedText += text;
+	}
+
+	generatedText += L"\r\n";
+
+	std::vector<CString> vfun;
+	std::vector<CString> var;
+
+	CString className;
+
+	for (auto constantClass : orderedClassDefinitions) {
+		CNodeClass* pClass = (CNodeClass*)constantClass;
+
+		CalcOffsets(pClass);
+
+		vfun.clear();
+		var.clear();
+
+		className.Format(L"class %s", pClass->GetName());
+
+		int fill = 0;
+		int fillStart = 0;
+
+		for (size_t idx = 0; idx < pClass->NodeCount(); idx++) {
+			CNodeBase* pNode = (CNodeBase*)pClass->GetNode(idx);
+			NodeType type = pNode->GetType();
+
+			if (type == NodeType::Hex64 || type == NodeType::Hex32 || 
+				type == NodeType::Hex16 || type == NodeType::Hex8) {
+				if (fill == 0)
+					fillStart = pNode->GetOffset();
+				fill += pNode->GetMemorySize();
+			}
+			else {
+				if (fill > 0) {
+					text.Format(L"\t%s pad_0x%0.4X[0x%X]; //0x%0.4X\r\n", g_Typedefs.Hex, fillStart, fill, fillStart);
+					var.push_back(text);
+				}
+				fill = 0;
+
+				if (type == NodeType::VTable) {
+					CNodeVTable* pVTable = (CNodeVTable*)pNode;
+					for (size_t f = 0; f < pVTable->NodeCount(); f++) {
+						CString fn(pVTable->GetNode(f)->GetName());
+						if (fn.GetLength() == 0)
+							fn.Format(L"void Function%i()", f);
+						text.Format(L"\tvirtual %s; //%s\r\n", fn, pVTable->GetNode(f)->GetComment());
+						vfun.push_back(text);
+					}
+				}
+				else if (type == NodeType::Int64) {
+					text.Format(L"\t%s %s; //0x%0.4X %s\r\n", g_Typedefs.Int64, pNode->GetName(), pNode->GetOffset(),
+						pNode->GetComment());
+					var.push_back(text);
+				}
+				else if (type == NodeType::Int32) {
+					text.Format(L"\t%s %s; //0x%0.4X %s\r\n", g_Typedefs.Int32, pNode->GetName(), pNode->GetOffset(),
+						pNode->GetComment());
+					var.push_back(text);
+				}
+				else if (type == NodeType::Int16) {
+					text.Format(L"\t%s %s; //0x%0.4X %s\r\n", g_Typedefs.Int16, pNode->GetName(), pNode->GetOffset(),
+						pNode->GetComment());
+					var.push_back(text);
+				}
+				else if (type == NodeType::Int8) {
+					text.Format(L"\t%s %s; //0x%0.4X %s\r\n", g_Typedefs.Int8, pNode->GetName(), pNode->GetOffset(),
+						pNode->GetComment());
+					var.push_back(text);
+				}
+				else if (type == NodeType::UINT64) {
+					text.Format(L"\t%s %s; //0x%0.4X %s\r\n", g_Typedefs.Qword, pNode->GetName(), pNode->GetOffset(),
+						pNode->GetComment());
+					var.push_back(text);
+				}
+				else if (type == NodeType::UINT32) {
+					text.Format(L"\t%s %s; //0x%0.4X %s\r\n", g_Typedefs.Dword, pNode->GetName(), pNode->GetOffset(),
+						pNode->GetComment());
+					var.push_back(text);
+				}
+				else if (type == NodeType::UINT16) {
+					text.Format(L"\t%s %s; //0x%0.4X %s\r\n", g_Typedefs.Word, pNode->GetName(), pNode->GetOffset(),
+						pNode->GetComment());
+					var.push_back(text);
+				}
+				else if (type == NodeType::UINT8) {
+					text.Format(L"\t%s %s; //0x%0.4X %s\r\n", g_Typedefs.Byte, pNode->GetName(), pNode->GetOffset(),
+						pNode->GetComment());
+					var.push_back(text);
+				}
+				else if (type == NodeType::PChar) {
+					text.Format(L"\t%s %s; //0x%0.4X %s\r\n", g_Typedefs.PChar, pNode->GetName(), pNode->GetOffset(),
+						pNode->GetComment());
+					var.push_back(text);
+				}
+				else if (type == NodeType::PWChar) {
+					text.Format(L"\t%s %s; //0x%0.4X %s\r\n", g_Typedefs.PWChar, pNode->GetName(), pNode->GetOffset(),
+						pNode->GetComment());
+					var.push_back(text);
+				}
+				else if (type == NodeType::Text) {
+					CNodeText* pText = (CNodeText*)pNode;
+					text.Format(L"\tchar %s[%i]; //0x%0.4X %s\r\n", pText->GetName(),pText->GetMemorySize(),
+						pText->GetOffset(),pText->GetComment());
+					var.push_back(text);
+				}
+				else if (type == NodeType::Unicode) {
+					CNodeUnicode* pUnicode = (CNodeUnicode*)pNode;
+					text.Format(L"\twchar_t %s[%i]; //0x%0.4X %s\r\n", pUnicode->GetName(),
+						pUnicode->GetMemorySize() / sizeof(wchar_t),
+						pUnicode->GetOffset(), pUnicode->GetComment());
+					var.push_back(text);
+				}
+				else if (type == NodeType::Float) {
+					text.Format(L"\t%s %s; //0x%0.4X %s\r\n", g_Typedefs.Float, pNode->GetName(), pNode->GetOffset(),
+						pNode->GetComment());
+					var.push_back(text);
+				}
+				else if (type == NodeType::Double) {
+					text.Format(L"\t%s %s; //0x%0.4X %s\r\n", g_Typedefs.Double, pNode->GetName(), pNode->GetOffset(),
+						pNode->GetComment());
+					var.push_back(text);
+				}
+				else if (type == NodeType::Custom) {
+					text.Format(L"\t%s; //0x%0.4X %s\r\n", pNode->GetName(), pNode->GetOffset(), pNode->GetComment());
+					var.push_back(text);
+				}
+				else if (type == NodeType::FunctionPtr) {
+					text.Format(L"\t%s; //0x%0.4X %s\r\n", pNode->GetName(), pNode->GetOffset(), pNode->GetComment());
+					var.push_back(text);
+				}
+				else if (type == NodeType::Pointer) {
+					CNodePtr* pPointer = (CNodePtr*)pNode;
+					text.Format(L"\t%s* %s; //0x%0.4X %s\r\n", pPointer->GetClass()->GetName(), pPointer->GetName(),
+						pPointer->GetOffset(), pPointer->GetComment());
+					var.push_back(text);
+				}
+				else if (type == NodeType::Instance) {
+					CNodeClassInstance* pInstance = (CNodeClassInstance*)pNode;
+					if (pInstance->GetOffset() == 0) {
+						// Inheritance
+						text.Format(L" : public %s", pInstance->GetClass()->GetName());
+						className += text;
+					}
+					else {
+						text.Format(L"\t%s %s; //0x%0.4X %s\r\n", pInstance->GetClass()->GetName(),
+							pInstance->GetName(), pInstance->GetOffset(), pInstance->GetComment());
+						var.push_back(text);
+					}
+				}
+				else if (type == NodeType::Array) {
+					CNodeArray* pArray = (CNodeArray*)pNode;
+					text.Format(L"\t%s %s[%i]; //0x%0.4X %s\r\n", pArray->GetClass()->GetName(), pArray->GetName(),
+						pArray->GetTotal(),pArray->GetOffset(),pArray->GetComment());
+					var.push_back(text);
+				}
+				else if (type == NodeType::PtrArray) 
+				{
+					CNodePtrArray* pArray = (CNodePtrArray*)pNode;
+					text.Format(L"\t%s* %s[%i]; //0x%0.4X %s\r\n", pArray->GetClass()->GetName(),
+						pArray->GetName(), pArray->Count(), pArray->GetOffset(), pArray->GetComment());
+					var.push_back(text);
+				}
+			}
+		}
+
+		if (fill > 0) {
+			text.Format(L"\t%s pad_0x%0.4X[0x%X]; //0x%0.4X\r\n", g_Typedefs.Hex, fillStart, fill, fillStart);
+			var.push_back(text);
+		}
+
+		text.Format(L"%s\r\n{\r\npublic:\r\n", className);
+		generatedText += text;
+
+		for (size_t i = 0; i < vfun.size(); i++)
+			generatedText += vfun[i];
+
+		if (vfun.size() > 0)
+			generatedText += L"\r\n";
+
+		for (size_t i = 0; i < var.size(); i++)
+			generatedText += var[i];
+
+		if (var.size() > 0)
+			generatedText += L"\r\n";
+
+		if (pClass->m_Code.GetLength() > 0)
+		{
+			generatedText += pClass->m_Code;
+			generatedText += L"\r\n";
+		}
+
+		text.Format(L"}; //Size=0x%0.4X\r\n\r\n", pClass->GetMemorySize());
+		generatedText += text;
+	}
+
+	if (!m_Footer.IsEmpty()) {
+		generatedText += (m_Footer + L"\r\n");
+	}
+
+	CEditDlg dlg(this, L"Class Code Generated", generatedText);
+	dlg.DoModal();
+
 	return TRUE;
 }

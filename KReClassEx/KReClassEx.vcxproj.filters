@@ -171,6 +171,12 @@
     <ClCompile Include="ScintillaView.cpp">
       <Filter>Views</Filter>
     </ClCompile>
+    <ClCompile Include="ClassDependencyGraph.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EditDlg.cpp">
+      <Filter>Dialogs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -340,6 +346,12 @@
     </ClInclude>
     <ClInclude Include="ScintillaView.h">
       <Filter>Views</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassDependencyGraph.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EditDlg.h">
+      <Filter>Dialogs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

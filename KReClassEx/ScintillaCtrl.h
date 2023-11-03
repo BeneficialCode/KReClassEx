@@ -350,13 +350,10 @@ class CScintillaCtrlT :public T {
 
 public:
 	HWND Create(HWND hWndParent, _U_RECT rect = nullptr, LPCTSTR szWindowName = nullptr,
-		DWORD dwStyle = WS_CHILD | WS_VISIBLE | WS_CLIPCHILDREN, DWORD dwExStyle = 0,
-		_U_MENUorID MenuOrID = 0U, PVOID lpCreateParam = nullptr) {
-		auto hWnd = CWindow::Create(GetWndClassName(), hWndParent, rect.m_lpRect,
-			szWindowName, dwStyle, dwExStyle, MenuOrID.m_hMenu, lpCreateParam);
+		DWORD dwStyle = WS_CHILD | WS_VISIBLE | WS_CLIPCHILDREN, DWORD dwExStyle = 0, _U_MENUorID MenuOrID = 0U, PVOID lpCreateParam = nullptr) {
+		auto hWnd = CWindow::Create(GetWndClassName(), hWndParent, rect.m_lpRect, szWindowName, dwStyle, dwExStyle, MenuOrID.m_hMenu, lpCreateParam);
 		if (!hWnd)
 			return nullptr;
-
 		// 取得直接控制函数
 		m_Sci = (decltype(m_Sci))::SendMessage(hWnd, SCI_GETDIRECTFUNCTION, 0, 0);
 		ATLASSERT(m_Sci);

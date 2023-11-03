@@ -165,6 +165,13 @@ BEGIN
     LTEXT           "Match %QUERY%",IDC_STATIC,238,17,60,8,WS_DISABLED
 END
 
+IDD_EDIT DIALOGEX 0, 0, 405, 276
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -181,6 +188,14 @@ BEGIN
         TOPMARGIN, 7
         BOTTOMMARGIN, 229
     END
+
+    IDD_EDIT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 398
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 269
+    END
 END
 #endif    // APSTUDIO_INVOKED
 
@@ -191,6 +206,11 @@ END
 //
 
 IDD_CLASSES AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_EDIT AFX_DIALOG_LAYOUT
 BEGIN
     0
 END
