@@ -787,3 +787,23 @@ LRESULT CMainFrame::OnGenerate(WORD, WORD, HWND, BOOL&) {
 
 	return TRUE;
 }
+
+LRESULT CMainFrame::OnEditCopy(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/) {
+	int nPage = m_view.GetActivePage();
+	CClassView* pClassView = (CClassView*)m_view.GetPageData(nPage);
+	if (pClassView != nullptr) {
+		pClassView->m_Edit.Copy();
+	}
+
+	return TRUE;
+}
+
+LRESULT CMainFrame::OnEditPaste(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/) {
+	int nPage = m_view.GetActivePage();
+	CClassView* pClassView = (CClassView*)m_view.GetPageData(nPage);
+	if (pClassView != nullptr) {
+		pClassView->m_Edit.Paste();
+	}
+
+	return TRUE;
+}

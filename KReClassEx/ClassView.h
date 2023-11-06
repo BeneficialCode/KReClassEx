@@ -98,6 +98,9 @@ public:
 	LRESULT OnTypeInstance(WORD, WORD, HWND, BOOL&);
 
 	
+
+
+	
 public:
 	void OnSize(UINT nType, CSize size);
 	int OnCreate(LPCREATESTRUCT lpCreateStruct);

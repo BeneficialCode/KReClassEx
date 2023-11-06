@@ -103,6 +103,8 @@ public:
 		COMMAND_ID_HANDLER(ID_PWCHAR,OnForwardToActiveView)
 		COMMAND_ID_HANDLER(ID_BTN_EDIT,OnEditClass)
 		COMMAND_ID_HANDLER(ID_BTN_GENERATE,OnGenerate)
+		COMMAND_ID_HANDLER(ID_EDIT_COPY,OnEditCopy)
+		COMMAND_ID_HANDLER(ID_EDIT_PASTE,OnEditPaste)
 		CHAIN_MSG_MAP(CRibbonFrameWindowImpl<CMainFrame>)
 	END_MSG_MAP()
 
@@ -121,6 +123,9 @@ public:
 	LRESULT OnNewClass(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/);
 	LRESULT OnEditClass(WORD, WORD, HWND, BOOL&);
 	LRESULT OnGenerate(WORD, WORD, HWND, BOOL&);
+	LRESULT OnEditCopy(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/);
+	LRESULT OnEditPaste(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/);
+
 
 
 	static DWORD WINAPI TunnelThread(void* params);

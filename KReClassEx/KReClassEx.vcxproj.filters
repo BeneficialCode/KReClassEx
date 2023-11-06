@@ -60,9 +60,6 @@
     <ClCompile Include="CustomToolTip.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ClassView.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="NodeBase.cpp">
       <Filter>Nodes</Filter>
     </ClCompile>
@@ -177,6 +174,9 @@
     <ClCompile Include="EditDlg.cpp">
       <Filter>Dialogs</Filter>
     </ClCompile>
+    <ClCompile Include="ClassView.cpp">
+      <Filter>Views</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -211,9 +211,6 @@
     </ClInclude>
     <ClInclude Include="crypto.h">
       <Filter>libevent</Filter>
-    </ClInclude>
-    <ClInclude Include="ClassView.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Memory.h">
       <Filter>Header Files</Filter>
@@ -352,6 +349,9 @@
     </ClInclude>
     <ClInclude Include="EditDlg.h">
       <Filter>Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassView.h">
+      <Filter>Views</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

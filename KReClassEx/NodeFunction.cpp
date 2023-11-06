@@ -27,7 +27,6 @@ NODESIZE CNodeFunction::Draw(const PVIEWINFO pView, int x, int y) {
     AddSelection(pView, 0, y, g_FontHeight);
     AddDelete(pView, x, y);
     AddTypeDrop(pView, x, y);
-    //AddAdd(View,x,y);
 
     int tx = x + TXOFFSET;
     int ax = 0;
