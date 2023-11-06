@@ -196,6 +196,7 @@
       <DebugInformationFormat />
       <PreprocessorDefinitions>_WINDOWS;STRICT;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>..\Lexilla\Include;..\Lexilla\lexers;..\Lexilla\lexlib;..\Scintilla\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

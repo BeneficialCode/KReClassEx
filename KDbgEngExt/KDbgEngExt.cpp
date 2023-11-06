@@ -108,11 +108,13 @@ DBGEXT_DEF runcommand(__in PDEBUG_CLIENT4 client, __in PCSTR args)
 void __cdecl
 dprintf(PCSTR Format, ...)
 {
+#ifdef _DEBUG
 	va_list Args;
 
 	va_start(Args, Format);
 	g_DebugControl->OutputVaList(DEBUG_OUTPUT_ERROR, Format, Args);
 	va_end(Args);
+#endif // DEBUG
 }
 
 DWORD WINAPI TunnelThread(void* params) {
