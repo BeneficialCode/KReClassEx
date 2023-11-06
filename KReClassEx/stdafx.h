@@ -40,6 +40,7 @@ extern CAppModule _Module;
 #include <map>
 #include <sstream>
 #include <ILexer.h>
+#include <Lexilla.h>
 #include <Scintilla.h>
 #include <SciLexer.h>
 

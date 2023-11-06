@@ -7,17 +7,16 @@ LRESULT CEditDlg::OnInitDialog(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam
 	
 	RECT rect;
 	GetClientRect(&rect);
-	_view->Create(m_hWnd, rect, nullptr, WS_CHILD | WS_VSCROLL | WS_HSCROLL | WS_BORDER | WS_EX_LAYERED);
-	int iHorizontalUnit = LOWORD(GetDialogBaseUnits());
-	int iVerticalUnit = HIWORD(GetDialogBaseUnits());
+	_view->Create(m_hWnd, rect, nullptr, WS_CHILD | WS_VISIBLE | WS_CLIPCHILDREN);
 	int width, height;
-	height = rect.bottom - rect.top - 3 * iHorizontalUnit;
-	width = rect.right - rect.left - 2 * iHorizontalUnit;
-	::MoveWindow(_view->m_hWnd, iHorizontalUnit, iVerticalUnit, width, height, false);
+	height = rect.bottom - rect.top;
+	width = rect.right - rect.left;
+	::MoveWindow(_view->m_hWnd, 0, 0, width, height, false);
 
 	_view->SetLanguage(LexLanguage::CPP);
-	_view->GetCtrl().SetReadOnly(true);
+	_view->GetCtrl().SetReadOnly(false);
 	_view->SetText(_text);
+	_view->GetCtrl().SetReadOnly(true);
 
 	return TRUE;
 }

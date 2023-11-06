@@ -11,7 +11,6 @@
 #include "aboutdlg.h"
 #include "MainFrm.h"
 
-extern "C" int Scintilla_RegisterClasses(void* hInstance);
 
 #pragma comment(lib, "imm32")
 
@@ -87,7 +86,7 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPTSTR lp
 
 	InitApp(hInstance);
 
-	//Scintilla_RegisterClasses(hInstance);
+	Scintilla_RegisterClasses(hInstance);
 
 	int nRet = 0;
 	if (RunTimeHelper::IsRibbonUIAvailable())
@@ -98,7 +97,7 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPTSTR lp
 	_Module.Term();
 	::CoUninitialize();
 
-	//Scintilla_ReleaseResources();
+	Scintilla_ReleaseResources();
 
 	return nRet;
 }

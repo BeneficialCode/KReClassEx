@@ -111,7 +111,11 @@ const char* KeyWords_CPP[] = {
 	"__virtual_inheritance"
 };
 
-CScintillaView::CScintillaView(IMainFrame* frame, PCWSTR title):m_pFrame(frame),m_Title(title){
+extern Lexilla::LexerModule lmXML;
+extern Lexilla::LexerModule lmAsm;
+extern Lexilla::LexerModule lmCPP;
+
+CScintillaView::CScintillaView(IMainFrame* frame, PCWSTR title) :m_pFrame(frame), m_Title(title) {
 }
 
 CString CScintillaView::GetTitle() const {
@@ -132,27 +136,33 @@ void CScintillaView::SetText(PCSTR text) {
 
 void CScintillaView::SetLanguage(LexLanguage language) {
 	m_Language = language;
-	extern Lexilla::LexerModule lmXML;
-	extern Lexilla::LexerModule lmAsm;
-	extern Lexilla::LexerModule lmCPP;
 
-	switch (language) {
-	case LexLanguage::Asm:
+
+	switch (language)
 	{
-		auto lexer = lmAsm.Create();
-		for (int i = 0; i < _countof(KeyWords_ASM); i++)
-			lexer->WordListSet(i, KeyWords_ASM[i]);
-		m_Sci.SetLexer(lexer);
-		break;
-	}
+		case LexLanguage::Asm:
+		{
+			auto lexer = lmAsm.Create();
+			for (int i = 0; i < _countof(KeyWords_ASM); i++)
+				lexer->WordListSet(i, KeyWords_ASM[i]);
+			m_Sci.SetLexer(lexer);
+			break;
+		}
 
-	case LexLanguage::Xml:
-		m_Sci.SetLexer(lmXML.Create());
-		break;
+		case LexLanguage::Xml:
+			m_Sci.SetLexer(lmXML.Create());
+			break;
 
-	case LexLanguage::CPP:
-		m_Sci.SetLexer(lmCPP.Create());
+		case LexLanguage::CPP:
+		{
+			auto lexer = lmCPP.Create();
+			for (int i = 0; i < _countof(KeyWords_CPP); i++)
+				lexer->WordListSet(i, KeyWords_CPP[i]);
+			m_Sci.SetLexer(lexer);
+			break;
+		}
 	}
+	UpdateColors();
 }
 
 LRESULT CScintillaView::OnSetFocus(UINT, WPARAM, LPARAM, BOOL&) {
@@ -163,11 +173,60 @@ LRESULT CScintillaView::OnSetFocus(UINT, WPARAM, LPARAM, BOOL&) {
 }
 
 LRESULT CScintillaView::OnCreate(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/) {
-	HWND hWnd = m_Sci.Create(m_hWnd, rcDefault, nullptr, WS_CHILD | WS_VISIBLE | WS_CLIPCHILDREN);
+	CRect rect;
+	GetClientRect(rect);
+	HWND hWnd = m_Sci.Create(m_hWnd, rect, nullptr, WS_CHILD | WS_VISIBLE | WS_CLIPCHILDREN);
 
 	m_Sci.StyleSetFont(STYLE_DEFAULT, "Consolas");
 	m_Sci.StyleSetSize(STYLE_DEFAULT, 11);
 	m_Sci.UsePopup(SC_POPUP_NEVER);
 
 	return 0;
+}
+
+LRESULT CScintillaView::OnSize(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/) {
+	RECT rect;
+	GetClientRect(&rect);
+	int width, height;
+	height = rect.bottom - rect.top;
+	width = rect.right - rect.left;
+	::MoveWindow(m_Sci.m_hWnd, 0, 0, width, height, false);
+	RedrawWindow(nullptr, nullptr, RDW_INVALIDATE | RDW_ERASE | RDW_ALLCHILDREN);
+	return TRUE;
+}
+
+void CScintillaView::UpdateColors() {
+	m_Sci.StyleSetFore(STYLE_DEFAULT, ::GetSysColor(COLOR_WINDOWTEXT));
+	m_Sci.StyleSetBack(STYLE_DEFAULT, ::GetSysColor(COLOR_WINDOW));
+	m_Sci.StyleClearAll();
+
+	switch (m_Language)
+	{
+		case LexLanguage::Xml:
+			m_Sci.StyleSetFore(SCE_H_TAG, RGB(0, 0, 240));
+			m_Sci.StyleSetFore(SCE_H_ATTRIBUTE, RGB(128, 0, 0));
+			break;
+		case LexLanguage::Asm:
+			m_Sci.StyleSetFore(SCE_ASM_COMMENT, RGB(0, 128, 0));
+			m_Sci.StyleSetFore(SCE_ASM_CPUINSTRUCTION, RGB(160, 0, 0));
+			m_Sci.StyleSetFore(SCE_ASM_NUMBER, RGB(0, 0, 255));
+			m_Sci.StyleSetFore(SCE_ASM_STRING, RGB(128, 0, 64));
+			m_Sci.StyleSetFore(SCE_ASM_REGISTER, RGB(255, 128, 0));
+			m_Sci.StyleSetFore(SCE_ASM_DIRECTIVE, RGB(128, 128, 128));
+			break;
+		case LexLanguage::CPP:
+			m_Sci.StyleSetFore(SCE_C_COMMENT, RGB(0, 200, 0));
+			m_Sci.StyleSetFore(SCE_C_COMMENTLINE, RGB(0, 200, 0));
+			m_Sci.StyleSetFore(SCE_C_COMMENTDOC, RGB(0, 100, 0));
+			m_Sci.StyleSetFore(SCE_C_NUMBER, RGB(0, 0, 150));
+			m_Sci.StyleSetFore(SCE_C_STRING, RGB(255, 175, 65));
+			m_Sci.StyleSetFore(SCE_C_CHARACTER, RGB(255, 255, 0));
+			m_Sci.StyleSetFore(SCE_C_UUID, RGB(0, 255, 255));
+			m_Sci.StyleSetFore(SCE_C_OPERATOR, RGB(255, 0, 0));
+			m_Sci.StyleSetFore(SCE_C_PREPROCESSOR, RGB(128, 0, 255));
+			m_Sci.StyleSetFore(SCE_C_WORD, RGB(0, 0, 255));
+			break;
+		default:
+			break;
+	}
 }
