@@ -928,3 +928,14 @@ void CClassView::ResizeNode(CNodeClass* pClass, UINT index, DWORD before, DWORD 
 
 	m_pFrame->CalcAllOffsets();
 }
+
+LRESULT CClassView::OnTypeFunction(WORD, WORD, HWND, BOOL&) {
+	ReplaceSelectedWithType(NodeType::Function);
+	return TRUE;
+}
+
+LRESULT CClassView::OnTypeFunctionPtr(WORD, WORD, HWND, BOOL&) {
+	ReplaceSelectedWithType(NodeType::FunctionPtr);
+	return TRUE;
+
+}

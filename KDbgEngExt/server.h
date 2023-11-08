@@ -45,3 +45,4 @@ int parse_packet(evutil_socket_t fd,struct evbuffer* buf);
 int OnReadMemory(evutil_socket_t fd, PREAD_MEMORY_INFO pInfo);
 void WritePacket(evutil_socket_t fd, void* pPacket, ULONG length);
 int OnGetModuleBase(evutil_socket_t fd, PGET_MODULE_BASE pInfo);
+int OnLookupByAddress(evutil_socket_t fd, PLOOKUP_BY_ADDRESS pInfo);

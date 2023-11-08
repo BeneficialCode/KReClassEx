@@ -11,8 +11,27 @@ CNodeFunctionPtr::CNodeFunctionPtr(CWindow* pParentWindow, ULONG_PTR address) {
 	Initialize(pParentWindow, address);
 }
 
-void CNodeFunctionPtr::Initialize(CWindow* pParentWindow, ULONG_PTR Address) {
-	
+void CNodeFunctionPtr::Initialize(CWindow* pParentWindow, ULONG_PTR addr) {
+    m_pParentWindow = pParentWindow;
+    ULONG_PTR va = 0;
+
+    ReClassReadMemory(addr, &va, sizeof(ULONG_PTR));
+
+    size_t len = sizeof(PACKET_HEADER) + sizeof(LOOKUP_BY_ADDRESS);
+    void* pData = malloc(len);
+    if (pData != NULL) {
+        PPACKET_HEADER pHeader = (PPACKET_HEADER)pData;
+        pHeader->Length = len;
+        pHeader->Type = MsgType::LookupByAddress;
+        pHeader->Version = SVERSION;
+        PLOOKUP_BY_ADDRESS pAddInfo = (PLOOKUP_BY_ADDRESS)((PBYTE)pData + sizeof(PACKET_HEADER));
+        pAddInfo->Address = va;
+        pAddInfo->pNode = this;
+        WritePacket(pData, len);
+        free(pData);
+    }
+
+    m_bRedrawNeeded = TRUE;
 }
 
 void CNodeFunctionPtr::Update(const PHOTSPOT pSpot) {

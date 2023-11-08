@@ -345,7 +345,7 @@ int parse_packet(evutil_socket_t fd, struct evbuffer* buf) {
         memcpy(pMemData->Buffer, pMemData->Data, pMemData->TotalSize);
         break;
     }
-    case MsgType::HeartBeat:
+    case MsgType::HeartBeatData:
         break;
 
     case MsgType::ModuleBaseData:
@@ -355,6 +355,16 @@ int parse_packet(evutil_socket_t fd, struct evbuffer* buf) {
         pClass->SetOffset(pBaseData->Base);
         break;
     }
+
+    case MsgType::AddressData:
+    {
+        PADDRESS_INFO pData = (PADDRESS_INFO)pBody;
+        CNodeBase* pNode = (CNodeBase*)pData->pNode;
+        CString name = CString(pData->Name, pData->NameLen);
+        pNode->SetName(name);
+        break;
+    }
+
     default:
 
         return -1;

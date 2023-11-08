@@ -80,3 +80,7 @@ NODESIZE CNodeFunction::Draw(const PVIEWINFO pView, int x, int y) {
     drawSize.y = y;
     return drawSize;
 }
+
+void CNodeFunction::Initialize(CWindow* pParentWindow, ULONG_PTR Address) {
+
+}

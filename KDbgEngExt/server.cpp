@@ -8,6 +8,7 @@
 #include "jconf.h"
 #include <event2/buffer.h>
 
+
 std::list<server_t*> g_connections;
 
 static int server_conn = 0;
@@ -304,6 +305,11 @@ int parse_packet(evutil_socket_t fd,struct evbuffer* buf) {
 			OnGetModuleBase(fd, (PGET_MODULE_BASE)pBody);
 			break;
 		}
+		case MsgType::LookupByAddress:
+		{
+			OnLookupByAddress(fd, (PLOOKUP_BY_ADDRESS)pBody);
+			break;
+		}
 	default:
 		
 		return -1;
@@ -429,6 +435,52 @@ int OnGetModuleBase(evutil_socket_t fd, PGET_MODULE_BASE pInfo) {
 		PMODULE_BASE_INFO pBaseInfo = (PMODULE_BASE_INFO)((PBYTE)pPacket + sizeof(PACKET_HEADER));
 		pBaseInfo->Base = base;
 		pBaseInfo->pClass = pInfo->pClass;
+		WritePacket(fd, pPacket, size);
+	} while (FALSE);
+
+	::VirtualFree(pPacket, 0, MEM_RELEASE);
+	pPacket = NULL;
+	return 0;
+}
+
+int OnLookupByAddress(evutil_socket_t fd, PLOOKUP_BY_ADDRESS pInfo) {
+	dprintf("Offset: %p, pNode: %p\n",
+		pInfo->Address, pInfo->pNode);
+
+	ULONG64 disp = 0;
+	char buf[MAX_PATH] = "";
+
+	HRESULT hr = g_DebugSymbols->GetNameByOffset(pInfo->Address, buf, sizeof(buf), 0, &disp);
+	if (hr != S_OK) {
+		return 0;
+	}
+	int nameLen = strlen(buf) + 1;
+	size_t size = sizeof(PACKET_HEADER) + sizeof(ADDRESS_INFO) + nameLen;
+	void* pPacket = ::VirtualAlloc(nullptr, size, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
+	if (!pPacket) {
+		dprintf("alloc memory failed!\n");
+		return -1;
+	}
+	PPACKET_HEADER pHeader = (PPACKET_HEADER)pPacket;
+	pHeader->Version = SVERSION;
+	pHeader->Type = MsgType::LookupByAddress;
+	pHeader->Length = size;
+	do
+	{
+		ULONG status;
+		HRESULT hr = g_DebugControl->GetExecutionStatus(&status);
+		if (FAILED(hr)) {
+			dprintf("get status failed!\n");
+			break;
+		}
+		if (status != DEBUG_STATUS_BREAK) {
+			dprintf("please break the windbg!\n");
+			break;
+		}
+		PADDRESS_INFO pAddrInfo = (PADDRESS_INFO)((PBYTE)pPacket + sizeof(PACKET_HEADER));
+		pAddrInfo->pNode = pInfo->pNode;
+		pAddrInfo->NameLen = nameLen;
+		strcpy_s(pAddrInfo->Name, buf);
 		WritePacket(fd, pPacket, size);
 	} while (FALSE);
 

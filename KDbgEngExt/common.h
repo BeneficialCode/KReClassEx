@@ -30,9 +30,13 @@ enum class MsgType {
     ReadMemory,
     GetStatus,
     HeartBeat,
-    MemoryData,
     GetModuleBase,
+    LookupByAddress,
+
+    MemoryData,
+    HeartBeatData,
     ModuleBaseData,
+    AddressData,
 };
 
 typedef struct _PACKET_HEADER {
@@ -65,3 +69,14 @@ typedef struct _MODULE_BASE_INFO {
     void* pClass;
     ULONG64 Base;
 }MODULE_BASE_INFO, * PMODULE_BASE_INFO;
+
+typedef struct _LOOKUP_BY_ADDRESS {
+    void* pNode;
+    ULONG64 Address;
+}LOOKUP_BY_ADDRESS, * PLOOKUP_BY_ADDRESS;
+
+typedef struct _ADDRESS_INFO {
+    void* pNode;
+    ULONG NameLen;
+    CHAR Name[1];
+}ADDRESS_INFO,*PADDRESS_INFO;

@@ -16,6 +16,8 @@ public:
 
 	inline void SetSize(ULONG Size) { m_MemorySize = Size; }
 
+	void Initialize(CWindow* pParentWindow, ULONG_PTR Address);
+
 private:
 	DWORD m_MemorySize;
 	std::vector<CStringA> m_Assembly;
