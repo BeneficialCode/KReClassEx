@@ -5,7 +5,7 @@
 class CNodeFunctionPtr : public CNodeBase {
 public:
 	CNodeFunctionPtr();
-	CNodeFunctionPtr(CWindow* pParentWindow, ULONG_PTR address);
+	CNodeFunctionPtr(CWindow* pParentWindow, ULONG_PTR address,ULONG_PTR value);
 
 	virtual void Update(const PHOTSPOT pSpot);
 
@@ -18,7 +18,7 @@ public:
 		return false;
 	}
 
-	void Initialize(CWindow* pParentWindow, ULONG_PTR Address);
+	void Initialize(CWindow* pParentWindow, ULONG_PTR Address,ULONG_PTR value);
 
 	inline void HideAssemblyWindow() {
 

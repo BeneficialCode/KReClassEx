@@ -7,15 +7,13 @@ CNodeFunctionPtr::CNodeFunctionPtr() {
 	m_Name = L"";
 }
 
-CNodeFunctionPtr::CNodeFunctionPtr(CWindow* pParentWindow, ULONG_PTR address) {
-	Initialize(pParentWindow, address);
+CNodeFunctionPtr::CNodeFunctionPtr(CWindow* pParentWindow, ULONG_PTR address,ULONG_PTR value) {
+    Initialize(pParentWindow, address, value);
 }
 
-void CNodeFunctionPtr::Initialize(CWindow* pParentWindow, ULONG_PTR addr) {
+void CNodeFunctionPtr::Initialize(CWindow* pParentWindow, ULONG_PTR addr,ULONG_PTR value) {
     m_pParentWindow = pParentWindow;
-    ULONG_PTR va = 0;
-
-    ReClassReadMemory(addr, &va, sizeof(ULONG_PTR));
+   
 
     size_t len = sizeof(PACKET_HEADER) + sizeof(LOOKUP_BY_ADDRESS);
     void* pData = malloc(len);
@@ -25,7 +23,7 @@ void CNodeFunctionPtr::Initialize(CWindow* pParentWindow, ULONG_PTR addr) {
         pHeader->Type = MsgType::LookupByAddress;
         pHeader->Version = SVERSION;
         PLOOKUP_BY_ADDRESS pAddInfo = (PLOOKUP_BY_ADDRESS)((PBYTE)pData + sizeof(PACKET_HEADER));
-        pAddInfo->Address = va;
+        pAddInfo->Address = value;
         pAddInfo->pNode = this;
         WritePacket(pData, len);
         free(pData);

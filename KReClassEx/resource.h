@@ -29,7 +29,6 @@
 #define IDI_ICON_VECTOR                 226
 #define IDR_MENU_QUICKMODIFY            228
 #define IDD_CLASSES                     229
-#define IDD_DIALOG1                     231
 #define IDD_EDIT                        231
 #define IDC_CLASS_LIST                  1000
 #define IDC_CLASS_NAME                  1001
@@ -87,13 +86,15 @@
 #define ID_TYPE_TEXT                    32826
 #define ID_TYPE_PWCHAR                  32827
 #define ID_TYPE_ARRAY                   32828
+#define ID_TYPE_FUNCTIONPTR             32829
+#define ID_TYPE_FUNCTION_PTR            32830
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        233
-#define _APS_NEXT_COMMAND_VALUE         32829
+#define _APS_NEXT_COMMAND_VALUE         32831
 #define _APS_NEXT_CONTROL_VALUE         1002
 #define _APS_NEXT_SYMED_VALUE           101
 #endif

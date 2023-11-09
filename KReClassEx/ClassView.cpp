@@ -600,7 +600,10 @@ void CClassView::ReplaceSelectedWithType(NodeType type) {
 				CNodeVTable* pVTable = (CNodeVTable*)pNewNode;
 				pVTable->Initialize(this);
 
-				CNodeFunctionPtr* pFunctionPtr = new CNodeFunctionPtr(this, pVTable->GetOffset() + (i * sizeof(size_t)));
+				PUCHAR pMem = m_Memory.Data();
+				size_t offset = i * sizeof(ULONG_PTR);
+				ULONG_PTR value = *(PULONG_PTR)(pMem + offset);
+				CNodeFunctionPtr* pFunctionPtr = new CNodeFunctionPtr(this, pVTable->GetOffset() + offset, value);
 				pFunctionPtr->SetOffset(pVTable->GetOffset() + (i * sizeof(size_t)));
 				pFunctionPtr->SetParent(pVTable);
 
@@ -642,7 +645,11 @@ void CClassView::ReplaceSelectedWithType(NodeType type) {
 		if (type == NodeType::FunctionPtr)
 		{
 			CNodeFunctionPtr* pFunctionPtr = (CNodeFunctionPtr*)pNewNode;
-			pFunctionPtr->Initialize(this, m_Selected[i].Object->GetParent()->GetOffset() + m_Selected[i].Object->GetOffset());
+			PUCHAR pMem = m_Memory.Data();
+			size_t offset = m_Selected[i].Object->GetOffset();
+			ULONG_PTR value = *(PULONG_PTR)(pMem + offset);
+			pFunctionPtr->Initialize(this, m_Selected[i].Object->GetParent()->GetOffset()
+				+ offset, value);
 		}
 
 		ReplaceNode((CNodeClass*)m_Selected[i].Object->GetParent(),

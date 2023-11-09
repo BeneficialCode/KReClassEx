@@ -63,8 +63,12 @@ NODESIZE CNodeVTable::Draw(const PVIEWINFO view, int x, int y)
 
             pFunctionPtrNode->SetOffset(i * sizeof(ULONG_PTR));
 
-            if (!pFunctionPtrNode->IsInitialized())
-                pFunctionPtrNode->Initialize(m_pParentWindow, newView.Address + i * sizeof(ULONG_PTR));
+            if (!pFunctionPtrNode->IsInitialized()) {
+                PUCHAR pMem = m_Memory.Data();
+                size_t offset = i * sizeof(ULONG_PTR);
+                ULONG_PTR value = *(PULONG_PTR)(pMem + offset);
+                pFunctionPtrNode->Initialize(m_pParentWindow, newView.Address + offset, value);
+            }
 
             childDrawSize = pFunctionPtrNode->Draw(&newView, tx, y);
 

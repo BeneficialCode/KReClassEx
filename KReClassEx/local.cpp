@@ -361,7 +361,13 @@ int parse_packet(evutil_socket_t fd, struct evbuffer* buf) {
         PADDRESS_INFO pData = (PADDRESS_INFO)pBody;
         CNodeBase* pNode = (CNodeBase*)pData->pNode;
         CString name = CString(pData->Name, pData->NameLen);
-        pNode->SetName(name);
+        int idx = name.Find(L"!");
+        if (idx != -1) {
+            CString functionName = L"p";
+            functionName += name.Right(name.GetLength() - idx - 1);
+            pNode->SetName(functionName);
+        }
+        pNode->SetComment(name);
         break;
     }
 

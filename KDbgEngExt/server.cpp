@@ -463,7 +463,7 @@ int OnLookupByAddress(evutil_socket_t fd, PLOOKUP_BY_ADDRESS pInfo) {
 	}
 	PPACKET_HEADER pHeader = (PPACKET_HEADER)pPacket;
 	pHeader->Version = SVERSION;
-	pHeader->Type = MsgType::LookupByAddress;
+	pHeader->Type = MsgType::AddressData;
 	pHeader->Length = size;
 	do
 	{
@@ -480,7 +480,7 @@ int OnLookupByAddress(evutil_socket_t fd, PLOOKUP_BY_ADDRESS pInfo) {
 		PADDRESS_INFO pAddrInfo = (PADDRESS_INFO)((PBYTE)pPacket + sizeof(PACKET_HEADER));
 		pAddrInfo->pNode = pInfo->pNode;
 		pAddrInfo->NameLen = nameLen;
-		strcpy_s(pAddrInfo->Name, buf);
+		memcpy_s(pAddrInfo->Name, nameLen, buf, nameLen);
 		WritePacket(fd, pPacket, size);
 	} while (FALSE);
 

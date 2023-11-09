@@ -114,6 +114,7 @@ BEGIN
             MENUITEM "Class",                       ID_TYPE_CLASS
             MENUITEM "VTable",                      ID_TYPE_VTABLE
             MENUITEM "Function",                    ID_TYPE_FUNCTION
+            MENUITEM "FunctionPtr",                 ID_TYPE_FUNCTION_PTR
         END
         POPUP "Add"
         BEGIN

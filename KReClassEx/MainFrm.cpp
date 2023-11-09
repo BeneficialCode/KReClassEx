@@ -379,6 +379,9 @@ LRESULT CMainFrame::OnForwardToActiveView(WORD, WORD, HWND /*hWndCtl*/, BOOL& /*
 	case ID_PWCHAR:
 		pClassView->SendMessage(msg->message, ID_TYPE_PWCHAR, msg->lParam);
 		break;
+	case ID_FUNCTION_PTR:
+		pClassView->SendMessage(msg->message, ID_TYPE_FUNCTION_PTR, msg->lParam);
+		break;
 	default:
 		break;
 	}
@@ -710,7 +713,7 @@ LRESULT CMainFrame::OnGenerate(WORD, WORD, HWND, BOOL&) {
 					var.push_back(text);
 				}
 				else if (type == NodeType::FunctionPtr) {
-					text.Format(L"\t%s; //0x%0.4X %s\r\n", pNode->GetName(), pNode->GetOffset(), pNode->GetComment());
+					text.Format(L"\tvoid* %s; //0x%0.4X %s\r\n", pNode->GetName(), pNode->GetOffset(), pNode->GetComment());
 					var.push_back(text);
 				}
 				else if (type == NodeType::Pointer) {
