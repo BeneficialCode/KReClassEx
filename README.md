@@ -39,7 +39,8 @@ The main UI. This example shows the WdFilter's MpData memory.
 
 ![Main](ida.png)
 
-The memory view. If the node is a function pointer, Kernel ReClassEx will auto get the function name.
+The memory view. If the node is a function pointer, Kernel ReClassEx will auto get the function name. (Sometimes you should execute the .reload to get the pdb info.)
+
 
 ![Main](Main.png)
 
