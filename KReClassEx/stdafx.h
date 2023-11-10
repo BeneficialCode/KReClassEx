@@ -39,12 +39,15 @@ extern CAppModule _Module;
 #include <set>
 #include <map>
 #include <sstream>
+#include <fstream>
+
 #include <ILexer.h>
 #include <Lexilla.h>
 #include <Scintilla.h>
 #include <SciLexer.h>
 
 #include "../KDbgEngExt/common.h"
+#include "nlohmann/json.hpp"
 
 #if defined _M_IX86
   #pragma comment(linker, "/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='x86' publicKeyToken='6595b64144ccf1df' language='*'\"")

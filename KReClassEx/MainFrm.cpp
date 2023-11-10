@@ -108,12 +108,34 @@ LRESULT CMainFrame::OnConnect(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl
 	return 0;
 }
 
+using json = nlohmann::json;
+
 DWORD WINAPI CMainFrame::TunnelThread(void* params) {
-	const profile_t profile = {
+	profile_t profile = {
 		.remote_host = const_cast<char*>("127.0.0.1"),
 		.remote_port = 9000,
 		.timeout = 5000
 	};
+
+	WCHAR path[MAX_PATH] = L"";
+	GetCurrentDirectory(MAX_PATH, path);
+	wcscat_s(path, L"\\config.json");
+
+	std::ifstream f(path);
+	json data;
+	try
+	{
+		data = json::parse(f);
+		std::string host = data["server"].get<std::string>();
+		std::string port = data["server_port"].get<std::string>();
+		int timeout = data["timeout"].get<int>();
+		profile.remote_port = std::stoi(port);
+		profile.timeout = timeout;
+	}
+	catch (json::parse_error& ex)
+	{
+		
+	}
 
 	return start_local(profile);
 }
