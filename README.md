@@ -54,6 +54,8 @@ The KReClass only read kernel memory when windbg is in break status.
 
 # References and acknowledgement
 
+[ReClassEx](https://github.com/ajkhoury/ReClassEx)
+
 [lexilla 5.2.6](https://github.com/ScintillaOrg/lexilla)
 
 [scintilla 5.3.6](https://www.scintilla.org/)
