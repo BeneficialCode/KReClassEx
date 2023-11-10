@@ -31,11 +31,11 @@ bu WdFilter!DriverEntry
 
 The config file should be put in the KReClassEx.exe's directory.
 
-Connect to the Windbg.
+The main UI. Connect to the Windbg.
 
 ![Connect](Connect.png)
 
-The main UI. This example shows the WdFilter's MpData memory.
+The following simple example shows the WdFilter's MpData memory in KReClassEx.
 
 ![Main](ida.png)
 
