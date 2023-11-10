@@ -282,6 +282,35 @@
 			</Command.LargeImages>
 		</Command>
 
+		<Command Name="wtl_MODIFY_DELETE" Symbol="ID_SELECTED_DELETE" LabelTitle="Delete">
+			<Command.TooltipTitle>Delete the current node</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Delete the current node.
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/toolbar_delete.bmp"/>
+			</Command.LargeImages>
+		</Command>
+		<Command Name="wtl_MODIFY_SHOW" Symbol="ID_SELECTED_SHOW" LabelTitle="Show">
+			<Command.TooltipTitle>Show nodes</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Show all nodes.
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/toolbar_show.bmp"/>
+			</Command.LargeImages>
+		</Command>
+		<Command Name="wtl_MODIFY_HIDE" Symbol="ID_SELECTED_HIDE" LabelTitle="Hide">
+			<Command.TooltipTitle>Hide the node</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Hide the current node.
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/toolbar_hide.bmp"/>
+			</Command.LargeImages>
+		</Command>
+		
+
 
 		<Command Name="wtl_HEX_64" Symbol="ID_HEX_64" LabelTitle="Hex 64">
 			<Command.TooltipTitle>Type hex 64</Command.TooltipTitle>
@@ -590,8 +619,8 @@
 				 LabelTitle="Add"/>
 		<Command Name="GroupInsert" Symbol="ID_GROUP_INSERT"
 				 LabelTitle="Insert"/>
-		<!--<Command Name="GroupSelected" Symbol="ID_GROUP_SELECTED"
-				 LabelTitle="Selected"/>-->
+		<Command Name="GroupSelected" Symbol="ID_GROUP_SELECTED"
+				 LabelTitle="Selected"/>
 		<Command Name="GroupType" Symbol="ID_GROUP_TYPE"
 				 LabelTitle="Type"/>
 
@@ -710,6 +739,7 @@
 							<ScalingPolicy.IdealSizes>
 								<Scale Group="GroupAdd" Size="Medium"/>
 								<Scale Group="GroupInsert" Size="Medium"/>
+								<Scale Group="GroupSelected" Size="Large"/>
 							</ScalingPolicy.IdealSizes>
 						</ScalingPolicy>
 					</Tab.ScalingPolicy>
@@ -728,6 +758,12 @@
 						<Button CommandName="wtl_INSERT_64"/>
 						<Button CommandName="wtl_INSERT_1024"/>
 						<Button CommandName="wtl_INSERT_2048"/>
+					</Group>
+					
+					<Group CommandName="GroupSelected" SizeDefinition="ThreeButtons-OneBigAndTwoSmall">
+						<Button CommandName="wtl_MODIFY_DELETE"/>
+						<Button CommandName="wtl_MODIFY_SHOW"/>
+						<Button CommandName="wtl_MODIFY_HIDE"/>
 					</Group>
 					
 					<Group CommandName="GroupType">

@@ -85,6 +85,8 @@ typedef struct _NODESIZE {
 	INT y;
 } NODESIZE, * PNODESIZE;
 
+extern HANDLE g_hMutex;
+
 class CNodeBase {
 public:
 	CNodeBase();
@@ -103,12 +105,28 @@ public:
 	void SetOffsetText(WCHAR* text) { m_OffsetText = text; }
 
 	const CString& GetName() const { return m_Name; }
-	void SetName(const CString& name) { m_Name = name; }
-	void SetName(WCHAR* name) { m_Name = name; }
+	void SetName(const CString& name) { 
+		::WaitForSingleObject(g_hMutex, INFINITE);
+		m_Name = name; 
+		::ReleaseMutex(g_hMutex);
+	}
+	void SetName(WCHAR* name) { 
+		::WaitForSingleObject(g_hMutex, INFINITE);
+		m_Name = name; 
+		::ReleaseMutex(g_hMutex);
+	}
 
 	const CString& GetComment() const { return m_Comment; }
-	void SetComment(const CString& comment) { m_Comment = comment; }
-	void SetComment(WCHAR* comment) { m_Comment = comment; }
+	void SetComment(const CString& comment) { 
+		::WaitForSingleObject(g_hMutex, INFINITE);
+		m_Comment = comment; 
+		::ReleaseMutex(g_hMutex);
+	}
+	void SetComment(WCHAR* comment) { 
+		::WaitForSingleObject(g_hMutex, INFINITE);
+		m_Comment = comment;
+		::ReleaseMutex(g_hMutex);
+	}
 
 	CNodeBase* GetParent() const { return m_pParentNode; }
 	void SetParent(CNodeBase* node) { m_pParentNode = node; }

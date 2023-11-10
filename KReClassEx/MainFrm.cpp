@@ -52,7 +52,6 @@ LRESULT CMainFrame::OnCreate(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/
 
 	ShowRibbonUI(true);
 
-	UIEnable(ID_ADD_4, false);
 
 
 	return 0;
@@ -382,6 +381,15 @@ LRESULT CMainFrame::OnForwardToActiveView(WORD, WORD, HWND /*hWndCtl*/, BOOL& /*
 	case ID_FUNCTION_PTR:
 		pClassView->SendMessage(msg->message, ID_TYPE_FUNCTION_PTR, msg->lParam);
 		break;
+	case ID_SELECTED_DELETE:
+		pClassView->SendMessage(msg->message, ID_MODIFY_DELETE, msg->lParam);
+		break;
+	case ID_SELECTED_HIDE:
+		pClassView->SendMessage(msg->message, ID_MODIFY_HIDE, msg->lParam);
+		break;
+	case ID_SELECTED_SHOW:
+		pClassView->SendMessage(msg->message, ID_MODIFY_SHOW, msg->lParam);
+		break;
 	default:
 		break;
 	}
@@ -397,6 +405,12 @@ void CMainFrame::UIEnableAllAdd(BOOL bEnable) {
 	UIEnable(ID_ADD_2048, bEnable);
 }
 
+void CMainFrame::UIEnableAllSelected(BOOL bEnable) {
+	UIEnable(ID_SELECTED_DELETE, bEnable);
+	UIEnable(ID_SELECTED_SHOW, bEnable);
+	UIEnable(ID_SELECTED_HIDE, bEnable);
+}
+
 void CMainFrame::StandardTypeUpdate(CClassView* pClassView) {
 	if (pClassView->m_Selected.size() > 0) {
 		if (pClassView->m_Selected[0].Object->GetType()
@@ -404,20 +418,26 @@ void CMainFrame::StandardTypeUpdate(CClassView* pClassView) {
 			UIEnableAllAdd(true);
 			UIEnableAllType(false);
 			UIEnable(ID_FUNCTION_PTR, true);
+			UIEnableAllSelected(false);
 		}
 		else {
 			UIEnableAllAdd(true);
 			UIEnableAllType(true);
-
+			UIEnableAllSelected(true);
 		}
 	}
 	else {
 		UIEnableAllAdd(false);
 		UIEnableAllType(false);
+		UIEnableAllSelected(false);
 	}
 }
 
 void CMainFrame::UpdateUI() {
+	if (_connected) {
+		UIEnable(ID_BTN_CONNECT, FALSE);
+	}
+
 	if (m_Classes.size() > 0) {
 		UIEnable(ID_BTN_EDIT, TRUE);
 		UIEnable(ID_BTN_DELETE, TRUE);
@@ -435,6 +455,7 @@ void CMainFrame::UpdateUI() {
 		UIEnableAllAdd(false);
 		UIEnableAllInsert(false);
 		UIEnableAllType(false);
+		UIEnableAllSelected(false);
 		return;
 	}
 	CClassView* pClassView = (CClassView*)m_view.GetPageData(nPage);

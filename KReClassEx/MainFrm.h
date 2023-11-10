@@ -41,6 +41,7 @@ public:
 	void InsertTypeUpdate(CClassView* pClassView);
 	void UIEnableAllInsert(BOOL bEnable);
 	void UIEnableAllType(BOOL bEnable);
+	void UIEnableAllSelected(BOOL bEnable);
 
 	BEGIN_UPDATE_UI_MAP(CMainFrame)
 		UPDATE_ELEMENT(ID_ADD_4,UPDUI_RIBBON)
@@ -105,6 +106,9 @@ public:
 		COMMAND_ID_HANDLER(ID_BTN_GENERATE,OnGenerate)
 		COMMAND_ID_HANDLER(ID_EDIT_COPY,OnEditCopy)
 		COMMAND_ID_HANDLER(ID_EDIT_PASTE,OnEditPaste)
+		COMMAND_ID_HANDLER(ID_SELECTED_DELETE,OnForwardToActiveView)
+		COMMAND_ID_HANDLER(ID_SELECTED_SHOW,OnForwardToActiveView)
+		COMMAND_ID_HANDLER(ID_SELECTED_HIDE,OnForwardToActiveView)
 		CHAIN_MSG_MAP(CRibbonFrameWindowImpl<CMainFrame>)
 	END_MSG_MAP()
 

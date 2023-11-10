@@ -407,6 +407,54 @@ END
 ID_INSERT_2048_LargeImages_RESID    BITMAP    ".\\res\\toolbar_insert2048.bmp" /* LargeImages ID_INSERT_2048_LargeImages_RESID: (null) */
 STRINGTABLE 
 BEGIN
+    ID_SELECTED_DELETE_LabelTitle_RESID L"Delete" /* LabelTitle ID_SELECTED_DELETE_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_SELECTED_DELETE_TooltipTitle_RESID L"Delete the current node" /* TooltipTitle ID_SELECTED_DELETE_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_SELECTED_DELETE_TooltipDescription_RESID L"Delete the current node." /* TooltipDescription ID_SELECTED_DELETE_TooltipDescription_RESID: (null) */
+END
+
+ID_SELECTED_DELETE_LargeImages_RESID    BITMAP    ".\\res\\toolbar_delete.bmp" /* LargeImages ID_SELECTED_DELETE_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ID_SELECTED_SHOW_LabelTitle_RESID L"Show" /* LabelTitle ID_SELECTED_SHOW_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_SELECTED_SHOW_TooltipTitle_RESID L"Show nodes" /* TooltipTitle ID_SELECTED_SHOW_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_SELECTED_SHOW_TooltipDescription_RESID L"Show all nodes." /* TooltipDescription ID_SELECTED_SHOW_TooltipDescription_RESID: (null) */
+END
+
+ID_SELECTED_SHOW_LargeImages_RESID    BITMAP    ".\\res\\toolbar_show.bmp" /* LargeImages ID_SELECTED_SHOW_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
+    ID_SELECTED_HIDE_LabelTitle_RESID L"Hide" /* LabelTitle ID_SELECTED_HIDE_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_SELECTED_HIDE_TooltipTitle_RESID L"Hide the node" /* TooltipTitle ID_SELECTED_HIDE_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_SELECTED_HIDE_TooltipDescription_RESID L"Hide the current node." /* TooltipDescription ID_SELECTED_HIDE_TooltipDescription_RESID: (null) */
+END
+
+ID_SELECTED_HIDE_LargeImages_RESID    BITMAP    ".\\res\\toolbar_hide.bmp" /* LargeImages ID_SELECTED_HIDE_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
     ID_HEX_64_LabelTitle_RESID L"Hex 64" /* LabelTitle ID_HEX_64_LabelTitle_RESID: (null) */
 END
 
@@ -933,6 +981,11 @@ END
 STRINGTABLE 
 BEGIN
     ID_GROUP_INSERT_LabelTitle_RESID L"Insert" /* LabelTitle ID_GROUP_INSERT_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_GROUP_SELECTED_LabelTitle_RESID L"Selected" /* LabelTitle ID_GROUP_SELECTED_LabelTitle_RESID: (null) */
 END
 
 STRINGTABLE 

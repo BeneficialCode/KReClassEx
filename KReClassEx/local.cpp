@@ -24,6 +24,7 @@ extern int g_socket;
 HANDLE g_hSem = NULL;
 struct evbuffer* g_buf;
 uint64_t rx = 0;
+HANDLE g_hMutex = NULL;
 
 int start_local(profile_t profile) {
 	char* remote_host = profile.remote_host;
@@ -41,6 +42,11 @@ int start_local(profile_t profile) {
 
     g_hSem = ::CreateSemaphore(nullptr, 0, 1, nullptr);
     if (g_hSem == NULL) {
+        return -1;
+    }
+
+    g_hMutex = ::CreateMutex(nullptr, FALSE, nullptr);
+    if (g_hMutex == NULL) {
         return -1;
     }
     
@@ -362,12 +368,14 @@ int parse_packet(evutil_socket_t fd, struct evbuffer* buf) {
         CNodeBase* pNode = (CNodeBase*)pData->pNode;
         CString name = CString(pData->Name, pData->NameLen);
         int idx = name.Find(L"!");
+        ::WaitForSingleObject(g_hMutex, INFINITE);
         if (idx != -1) {
             CString functionName = L"p";
             functionName += name.Right(name.GetLength() - idx - 1);
             pNode->SetName(functionName);
         }
         pNode->SetComment(name);
+        ::ReleaseMutex(g_hMutex);
         break;
     }
 

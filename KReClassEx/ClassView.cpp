@@ -946,3 +946,8 @@ LRESULT CClassView::OnTypeFunctionPtr(WORD, WORD, HWND, BOOL&) {
 	return TRUE;
 
 }
+
+LRESULT CClassView::OnTypePointer(WORD, WORD, HWND, BOOL&) {
+	ReplaceSelectedWithType(NodeType::Pointer);
+	return TRUE;
+}
