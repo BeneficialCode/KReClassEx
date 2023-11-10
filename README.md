@@ -20,13 +20,13 @@ config.json
 
 
 ```c
-.load Yourpath\KDbgEngExt.dll
-!runserver Yourpath\config.json
+.load YourPath\KDbgEngExt.dll
+!runserver YourPath\config.json
 bu WdFilter!DriverEntry
 
-.load F:\cpp\KReClassEx\x64\Debug\KDbgEngExt.dll
+.load YourPath\KDbgEngExt.dll
 .unload KDbgEngExt.dll
-!runserver F:\cpp\KReClassEx\KDbgEngExt\config.json
+!runserver YourPath\config.json
 ```
 
 The config file should be put in the KReClassEx.exe's directory.
