@@ -1,8 +1,6 @@
 # KReClassEx
 
-Kernel ReClassEx
-
-The Windbg extension that implements gui to reverse struct in Windows Kernel.
+Kernel ReClassEx is a WinDbg extension that implements gui to reverse struct in Windows Kernel.
 
 ## Usage
 
@@ -63,3 +61,5 @@ The KReClass only read kernel memory when windbg is in break status.
 [TotalPE2](https://github.com/zodiacon/TotalPE2)
 
 [nlohmann json](https://github.com/nlohmann/json)
+
+[libevent](https://github.com/libevent/libevent)
