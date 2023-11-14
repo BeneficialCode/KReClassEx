@@ -389,7 +389,7 @@ LRESULT CMainFrame::OnForwardToActiveView(WORD, WORD, HWND /*hWndCtl*/, BOOL& /*
 		pClassView->SendMessage(msg->message, ID_TYPE_POINTER, msg->lParam);
 		break;
 	case ID_ASCII:
-		pClassView->SendMessage(msg->message, ID_TYPE_ASCII, msg->lParam);
+		pClassView->SendMessage(msg->message, ID_TYPE_TEXT, msg->lParam);
 		break;
 	case ID_UNICODE:
 		pClassView->SendMessage(msg->message, ID_TYPE_UNICODE, msg->lParam);

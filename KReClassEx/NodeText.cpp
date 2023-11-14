@@ -45,7 +45,7 @@ NODESIZE CNodeText::Draw(const PVIEWINFO view, int x, int y)
     tx = x + TXOFFSET;
     tx = AddIcon(view, tx, y, ICON_TEXT, HS_NONE, HS_NONE);
     tx = AddAddressOffset(view, tx, y);
-    tx = AddText(view, tx, y, g_clrType, HS_NONE, _T("Text "));
+    tx = AddText(view, tx, y, g_clrType, HS_NONE, _T("char "));
     tx = AddText(view, tx, y, g_clrName, HS_NAME, _T("%s"), m_Name);
     tx = AddText(view, tx, y, g_clrIndex, HS_NONE, _T("["));
     tx = AddText(view, tx, y, g_clrIndex, HS_EDIT, _T("%i"), GetMemorySize());
@@ -53,7 +53,7 @@ NODESIZE CNodeText::Draw(const PVIEWINFO view, int x, int y)
 
     if (pData!=nullptr)
     {
-        CStringA MemoryString(GetStringFromMemoryA(pData, GetMemorySize()));
+        CStringA MemoryString(GetStringFromMemoryA(pData, GetMemorySize(), true));
         tx = AddText(view, tx, y, g_clrChar, HS_NONE, _T(" = '"));
         tx = AddText(view, tx, y, g_clrChar, 1, "%.150s", MemoryString.GetBuffer());
         tx = AddText(view, tx, y, g_clrChar, HS_NONE, _T("' ")) + g_FontWidth;

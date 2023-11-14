@@ -556,7 +556,7 @@
 		</Command>
 
 
-		<Command Name="wtl_ASCII" Symbol="ID_ASCII" LabelTitle="ASCII">
+		<Command Name="wtl_ASCII" Symbol="ID_ASCII" LabelTitle="CHAR[ ]">
 			<Command.TooltipTitle>Type ASCII</Command.TooltipTitle>
 			<Command.TooltipDescription>
 				Type ASCII
@@ -565,7 +565,7 @@
 				<Image Source="./res/toolbar_ascii.bmp"/>
 			</Command.LargeImages>
 		</Command>
-		<Command Name="wtl_UNICODE" Symbol="ID_UNICODE" LabelTitle="UNICODE">
+		<Command Name="wtl_UNICODE" Symbol="ID_UNICODE" LabelTitle="WCHAR[ ]">
 			<Command.TooltipTitle>Type UNICODE</Command.TooltipTitle>
 			<Command.TooltipDescription>
 				Type Unicode

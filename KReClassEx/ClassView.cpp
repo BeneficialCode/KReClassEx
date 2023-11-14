@@ -589,10 +589,15 @@ void CClassView::ReplaceSelectedWithType(NodeType type) {
 			((CNodeCustom*)pNewNode)->SetSize(m_Selected[i].Object->GetMemorySize());
 		}
 		if (type == NodeType::Text) {
-			((CNodeText*)pNewNode)->SetSize(m_Selected[i].Object->GetMemorySize());
+			char* pData = (char*)m_Memory.Data() + m_Selected[i].Object->GetOffset();
+			ULONG size = strlen(pData) + 1;
+			((CNodeText*)pNewNode)->SetSize(size);
 		}
 		if (type == NodeType::Unicode) {
-			((CNodeUnicode*)pNewNode)->SetSize(m_Selected[i].Object->GetMemorySize());
+			wchar_t* Data = (wchar_t*)m_Memory.Data() + m_Selected[i].Object->GetOffset();
+			// Calculate the string length
+			ULONG size = (wcslen(Data) + 1) * sizeof(wchar_t);
+			((CNodeUnicode*)pNewNode)->SetSize(size);
 		}
 		if (type == NodeType::VTable) {
 			for (int i = 0; i < 10; i++)

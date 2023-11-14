@@ -195,8 +195,8 @@ public:
 
 	NODESIZE DrawHidden(const PVIEWINFO view, int x, int y);
 
-	CStringA GetStringFromMemoryA(const char* pMemory, int length);
-	CStringW GetStringFromMemoryW(const wchar_t* pMemory, int length);
+	CStringA GetStringFromMemoryA(const char* pMemory, int length, bool parse = false);
+	CStringW GetStringFromMemoryW(const wchar_t* pMemory, int length, bool parse = false);
 
 	BOOLEAN IsMemory(ULONG_PTR address);
 

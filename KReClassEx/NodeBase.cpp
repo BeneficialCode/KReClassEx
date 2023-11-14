@@ -265,9 +265,11 @@ NODESIZE CNodeBase::DrawHidden(const PVIEWINFO view, int x, int y) {
 	return size;
 }
 
-CStringA CNodeBase::GetStringFromMemoryA(const char* pMemory, int length) {
+CStringA CNodeBase::GetStringFromMemoryA(const char* pMemory, int length, bool parse) {
 	CStringA str;
 	for (int i = 0; i < length; i++) {
+		if (pMemory[i] == '\0' && parse)
+			break;
 		if (pMemory[i] > 0x1F && pMemory[i] < 0xFF && pMemory[i] != 0x7F) {
 			str += pMemory[i];
 		}
@@ -277,11 +279,18 @@ CStringA CNodeBase::GetStringFromMemoryA(const char* pMemory, int length) {
 	return str;
 }
 
-CStringW CNodeBase::GetStringFromMemoryW(const wchar_t* pMemory, int length) {
+CStringW CNodeBase::GetStringFromMemoryW(const wchar_t* pMemory, int length, bool parse) {
 	CStringW str;
 	for (int i = 0; i < length; i++)
 	{
-		str += (pMemory[i] > 0x1F && pMemory[i] < 0xFF && pMemory[i] != 0x7F) ? (wchar_t)pMemory[i] : (wchar_t)(L'.');
+		if (pMemory[i] == L'\0' && parse)
+			break;
+		if (pMemory[i] > 0x1F && pMemory[i] < 0xFF && pMemory[i] != 0x7F) {
+			str += (wchar_t)pMemory[i];
+		}
+		else {
+			str += (wchar_t)(L'.');
+		}
 	}
 	return str;
 }

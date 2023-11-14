@@ -871,7 +871,7 @@ END
 ID_POINTER_LargeImages_RESID    BITMAP    ".\\res\\toolbar_pointer.bmp" /* LargeImages ID_POINTER_LargeImages_RESID: (null) */
 STRINGTABLE 
 BEGIN
-    ID_ASCII_LabelTitle_RESID L"ASCII" /* LabelTitle ID_ASCII_LabelTitle_RESID: (null) */
+    ID_ASCII_LabelTitle_RESID L"CHAR[ ]" /* LabelTitle ID_ASCII_LabelTitle_RESID: (null) */
 END
 
 STRINGTABLE 
@@ -887,7 +887,7 @@ END
 ID_ASCII_LargeImages_RESID    BITMAP    ".\\res\\toolbar_ascii.bmp" /* LargeImages ID_ASCII_LargeImages_RESID: (null) */
 STRINGTABLE 
 BEGIN
-    ID_UNICODE_LabelTitle_RESID L"UNICODE" /* LabelTitle ID_UNICODE_LabelTitle_RESID: (null) */
+    ID_UNICODE_LabelTitle_RESID L"WCHAR[ ]" /* LabelTitle ID_UNICODE_LabelTitle_RESID: (null) */
 END
 
 STRINGTABLE 

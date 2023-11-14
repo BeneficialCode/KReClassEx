@@ -4,7 +4,7 @@
 CNodeUnicode::CNodeUnicode()
 {
     m_NodeType = NodeType::Unicode;
-    m_Name = _T("Unicode");
+    m_Name = _T("WCHAR");
     m_MemorySize = 8 * sizeof(wchar_t);
 }
 
@@ -52,12 +52,11 @@ NODESIZE CNodeUnicode::Draw(const PVIEWINFO view, int x, int y)
     AddSelection(view, 0, y, g_FontHeight);
     AddDelete(view, x, y);
     AddTypeDrop(view, x, y);
-    //AddAdd(View,x,y);
 
     tx = x + TXOFFSET;
     tx = AddIcon(view, tx, y, ICON_TEXT, HS_NONE, HS_NONE);
     tx = AddAddressOffset(view, tx, y);
-    tx = AddText(view, tx, y, g_clrType, HS_NONE, _T("Unicode "));
+    tx = AddText(view, tx, y, g_clrType, HS_NONE, _T("WCHAR "));
     tx = AddText(view, tx, y, g_clrName, HS_NAME, _T("%s"), m_Name);
     tx = AddText(view, tx, y, g_clrIndex, HS_NONE, _T("["));
     tx = AddText(view, tx, y, g_clrIndex, HS_EDIT, _T("%i"), m_MemorySize / sizeof(wchar_t));
@@ -65,7 +64,7 @@ NODESIZE CNodeUnicode::Draw(const PVIEWINFO view, int x, int y)
 
     if (data!=nullptr)
     {
-        CStringW memStr(GetStringFromMemoryW(data, m_MemorySize / sizeof(wchar_t)));
+        CStringW memStr(GetStringFromMemoryW(data, m_MemorySize / sizeof(wchar_t), true));
         tx = AddText(view, tx, y, g_clrChar, HS_NONE, _T(" = '"));
         tx = AddText(view, tx, y, g_clrChar, HS_OPENCLOSE, _T("%.150ws"), memStr.GetString()); // ws cause its unicode
         tx = AddText(view, tx, y, g_clrChar, HS_NONE, _T("' ")) + g_FontWidth;
