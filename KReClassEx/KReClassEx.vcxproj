@@ -252,6 +252,7 @@
     <ClCompile Include="NodeInt32.cpp" />
     <ClCompile Include="NodeInt64.cpp" />
     <ClCompile Include="NodeInt8.cpp" />
+    <ClCompile Include="NodeListEntry.cpp" />
     <ClCompile Include="NodeMatrix.cpp" />
     <ClCompile Include="NodePtr.cpp" />
     <ClCompile Include="NodePtrArray.cpp" />
@@ -313,6 +314,7 @@
     <ClInclude Include="NodeInt32.h" />
     <ClInclude Include="NodeInt64.h" />
     <ClInclude Include="NodeInt8.h" />
+    <ClInclude Include="NodeListEntry.h" />
     <ClInclude Include="NodeMatrix.h" />
     <ClInclude Include="NodePtr.h" />
     <ClInclude Include="NodePtrArray.h" />
@@ -354,6 +356,7 @@
     <Image Include="res\icons\general_method_VS.ico" />
     <Image Include="res\icons\icon.png" />
     <Image Include="res\icons\left.ico" />
+    <Image Include="res\icons\list_entry.ico" />
     <Image Include="res\icons\matrix.ico" />
     <Image Include="res\icons\open.ico" />
     <Image Include="res\icons\pointer.ico" />

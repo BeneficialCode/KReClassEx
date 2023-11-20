@@ -30,6 +30,7 @@
 #define IDR_MENU_QUICKMODIFY            228
 #define IDD_CLASSES                     229
 #define IDD_EDIT                        231
+#define IDI_ICON_LIST_ENTRY             233
 #define IDC_CLASS_LIST                  1000
 #define IDC_CLASS_NAME                  1001
 #define ID_QUICKMODIFY_TYPE             32775
@@ -88,13 +89,15 @@
 #define ID_TYPE_ARRAY                   32828
 #define ID_TYPE_FUNCTIONPTR             32829
 #define ID_TYPE_FUNCTION_PTR            32830
+#define ID_TYPE_LISTENTRY               32831
+#define ID_TYPE_LIST_ENTRY              32832
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        233
-#define _APS_NEXT_COMMAND_VALUE         32831
+#define _APS_NEXT_RESOURCE_VALUE        234
+#define _APS_NEXT_COMMAND_VALUE         32833
 #define _APS_NEXT_CONTROL_VALUE         1002
 #define _APS_NEXT_SYMED_VALUE           101
 #endif

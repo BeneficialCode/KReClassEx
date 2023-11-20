@@ -35,7 +35,8 @@ enum class NodeType {
 	Bits,
 	UINT64, // qword
 	Function,
-	PtrArray
+	PtrArray,
+	ListEntry,
 };
 
 

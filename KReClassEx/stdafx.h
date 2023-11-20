@@ -116,6 +116,7 @@ extern bool g_bResizingFont;
 #define ICON_VECTOR 20
 #define ICON_CHANGE 21
 #define ICON_CAMERA 22
+#define ICON_LIST_ENTRY 23
 
 BOOL ReClassReadMemory(ULONG_PTR address, LPVOID buffer, SIZE_T size, PSIZE_T bytesRead = nullptr);
 BOOL ReClassWriteMemory(ULONG_PTR address, LPVOID buffer, SIZE_T size, PSIZE_T bytesWritten = nullptr);
@@ -152,5 +153,6 @@ typedef struct _RCTYPEDEFS {
     CString Matrix; // D3DXMATRIX
     CString PChar;
     CString PWChar;
+    CString ListEntry;
 }RCTYPEDEFS,*PRCTYPEDEFS;
 extern RCTYPEDEFS g_Typedefs;

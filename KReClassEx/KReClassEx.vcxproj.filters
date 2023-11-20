@@ -177,6 +177,9 @@
     <ClCompile Include="ClassView.cpp">
       <Filter>Views</Filter>
     </ClCompile>
+    <ClCompile Include="NodeListEntry.cpp">
+      <Filter>Nodes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -353,6 +356,9 @@
     <ClInclude Include="ClassView.h">
       <Filter>Views</Filter>
     </ClInclude>
+    <ClInclude Include="NodeListEntry.h">
+      <Filter>Nodes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="KReClassEx.rc">
@@ -440,6 +446,9 @@
     </Image>
     <Image Include="res\icons\icon.png" />
     <Image Include="res\KReClassEx.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\icons\list_entry.ico">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

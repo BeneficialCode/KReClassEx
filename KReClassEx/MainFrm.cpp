@@ -274,7 +274,7 @@ CNodeBase* CMainFrame::CreateNewNode(NodeType type) {
 	case NodeType::PtrArray:	return new CNodePtrArray;
 
 	case NodeType::Instance:	return new CNodeClassInstance;
-
+	case NodeType::ListEntry:	return new CNodeListEntry;
 	}
 
 	return nullptr;
@@ -412,6 +412,9 @@ LRESULT CMainFrame::OnForwardToActiveView(WORD, WORD, HWND /*hWndCtl*/, BOOL& /*
 	case ID_SELECTED_SHOW:
 		pClassView->SendMessage(msg->message, ID_MODIFY_SHOW, msg->lParam);
 		break;
+	case ID_LIST_ENTRY:
+		pClassView->SendMessage(msg->message, ID_TYPE_LIST_ENTRY, msg->lParam);
+		break;
 	default:
 		break;
 	}
@@ -536,6 +539,7 @@ void CMainFrame::UIEnableAllType(BOOL bEnable) {
 	UIEnable(ID_UNICODE, bEnable);
 	UIEnable(ID_PCHAR, bEnable);
 	UIEnable(ID_PWCHAR, bEnable);
+	UIEnable(ID_LIST_ENTRY, bEnable);
 }
 
 LRESULT CMainFrame::OnEditClass(WORD, WORD, HWND, BOOL&) {
@@ -789,6 +793,12 @@ LRESULT CMainFrame::OnGenerate(WORD, WORD, HWND, BOOL&) {
 					CNodePtrArray* pArray = (CNodePtrArray*)pNode;
 					text.Format(L"\t%s* %s[%i]; //0x%0.4X %s\r\n", pArray->GetClass()->GetName(),
 						pArray->GetName(), pArray->Count(), pArray->GetOffset(), pArray->GetComment());
+					var.push_back(text);
+				}
+				else if (type == NodeType::ListEntry) 
+				{
+					text.Format(L"\t%s %s; //0x%0.4X %s\r\n", g_Typedefs.ListEntry, pNode->GetName(), pNode->GetOffset(),
+					pNode->GetComment());
 					var.push_back(text);
 				}
 			}

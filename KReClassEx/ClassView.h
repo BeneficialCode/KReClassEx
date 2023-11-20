@@ -101,6 +101,8 @@ public:
 	LRESULT OnTypeFunction(WORD, WORD, HWND, BOOL&);
 	LRESULT OnTypeFunctionPtr(WORD, WORD, HWND, BOOL&);
 	LRESULT OnTypePointer(WORD, WORD, HWND, BOOL&);
+	LRESULT OnTypeListEntry(WORD, WORD, HWND, BOOL&);
+
 
 	
 public:
@@ -172,6 +174,7 @@ public:
 		COMMAND_ID_HANDLER(ID_MODIFY_DELETE,OnModifyDelete)
 		COMMAND_ID_HANDLER(ID_TYPE_FUNCTION,OnTypeFunction)
 		COMMAND_ID_HANDLER(ID_TYPE_FUNCTION_PTR,OnTypeFunctionPtr)
+		COMMAND_ID_HANDLER(ID_TYPE_LIST_ENTRY,OnTypeListEntry)
 		CHAIN_MSG_MAP(CBufferedPaintWindowImpl<CClassView>)
 		REFLECT_NOTIFICATIONS() // 为了能让消息反射到控件
 	END_MSG_MAP()

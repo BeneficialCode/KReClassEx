@@ -554,6 +554,15 @@
 				<Image Source="./res/toolbar_pointer.bmp"/>
 			</Command.LargeImages>
 		</Command>
+		<Command Name="wtl_LIST_ENTRY" Symbol="ID_LIST_ENTRY" LabelTitle="List">
+			<Command.TooltipTitle>Type list entry</Command.TooltipTitle>
+			<Command.TooltipDescription>
+				Type list entry
+			</Command.TooltipDescription>
+			<Command.LargeImages>
+				<Image Source="./res/toolbar_list_entry.bmp"/>
+			</Command.LargeImages>
+		</Command>
 
 
 		<Command Name="wtl_ASCII" Symbol="ID_ASCII" LabelTitle="CHAR[ ]">
@@ -799,6 +808,7 @@
 								<ControlNameDefinition Name="wtl_FUNCTION"/>
 								<ControlNameDefinition Name="wtl_FUNCTION_PTR"/>
 								<ControlNameDefinition Name="wtl_POINTER"/>
+								<ControlNameDefinition Name="wtl_LIST_ENTRY"/>
 								<ControlNameDefinition Name="wtl_ASCII"/>
 								<ControlNameDefinition Name="wtl_UNICODE"/>
 								<ControlNameDefinition Name="wtl_PCHAR"/>
@@ -943,6 +953,9 @@
 										<ControlSizeDefinition ControlName="wtl_FUNCTION"
 															   ImageSize="Small"
 															   IsLabelVisible="true"/>
+										<ControlSizeDefinition ControlName="wtl_LIST_ENTRY"
+															   ImageSize="Small"
+															   IsLabelVisible="true"/>
 									</ControlGroup>
 								</Row>
 								<Row>
@@ -1005,6 +1018,7 @@
 						<Button CommandName="wtl_FUNCTION"/>
 						<Button CommandName="wtl_FUNCTION_PTR"/>
 						<Button CommandName="wtl_POINTER"/>
+						<Button CommandName="wtl_LIST_ENTRY"/>
 						<Button CommandName="wtl_ASCII"/>
 						<Button CommandName="wtl_UNICODE"/>
 						<Button CommandName="wtl_PCHAR"/>

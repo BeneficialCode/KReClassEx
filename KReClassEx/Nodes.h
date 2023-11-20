@@ -32,3 +32,4 @@
 #include "NodeClassInstance.h"
 #include "NodePtrArray.h"
 #include "NodeCustom.h"
+#include "NodeListEntry.h"

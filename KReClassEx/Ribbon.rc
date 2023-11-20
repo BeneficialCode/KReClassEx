@@ -871,6 +871,22 @@ END
 ID_POINTER_LargeImages_RESID    BITMAP    ".\\res\\toolbar_pointer.bmp" /* LargeImages ID_POINTER_LargeImages_RESID: (null) */
 STRINGTABLE 
 BEGIN
+    ID_LIST_ENTRY_LabelTitle_RESID L"List" /* LabelTitle ID_LIST_ENTRY_LabelTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_LIST_ENTRY_TooltipTitle_RESID L"Type list entry" /* TooltipTitle ID_LIST_ENTRY_TooltipTitle_RESID: (null) */
+END
+
+STRINGTABLE 
+BEGIN
+    ID_LIST_ENTRY_TooltipDescription_RESID L"Type list entry" /* TooltipDescription ID_LIST_ENTRY_TooltipDescription_RESID: (null) */
+END
+
+ID_LIST_ENTRY_LargeImages_RESID    BITMAP    ".\\res\\toolbar_list_entry.bmp" /* LargeImages ID_LIST_ENTRY_LargeImages_RESID: (null) */
+STRINGTABLE 
+BEGIN
     ID_ASCII_LabelTitle_RESID L"CHAR[ ]" /* LabelTitle ID_ASCII_LabelTitle_RESID: (null) */
 END
 
