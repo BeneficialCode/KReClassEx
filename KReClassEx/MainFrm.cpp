@@ -104,7 +104,7 @@ LRESULT CMainFrame::OnConnect(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl
 	);
 	if (hThread != NULL)
 		::CloseHandle(hThread);
-	_connected = true;
+	g_connected = true;
 	return 0;
 }
 
@@ -142,7 +142,7 @@ DWORD WINAPI CMainFrame::TunnelThread(void* params) {
 
 LRESULT CMainFrame::OnNewClass(WORD, WORD, HWND, BOOL&)
 {
-	if (!_connected) {
+	if (!g_connected) {
 		AtlMessageBox(m_hWnd, L"Please connect to windbg first!", L"Info", MB_OK);
 		return 1;
 	}
@@ -459,8 +459,11 @@ void CMainFrame::StandardTypeUpdate(CClassView* pClassView) {
 }
 
 void CMainFrame::UpdateUI() {
-	if (_connected) {
+	if (g_connected) {
 		UIEnable(ID_BTN_CONNECT, FALSE);
+	}
+	else {
+		UIEnable(ID_BTN_CONNECT, TRUE);
 	}
 
 	if (m_Classes.size() > 0) {

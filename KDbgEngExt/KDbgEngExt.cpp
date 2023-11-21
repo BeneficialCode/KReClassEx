@@ -181,7 +181,8 @@ DWORD WINAPI TunnelThread(void* params) {
 
 	free_connections();
 
-	winsock_cleanup();
+	// avoid effecting the windbg
+	// winsock_cleanup();
 
 	return ret;
 }

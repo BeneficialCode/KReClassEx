@@ -6,6 +6,8 @@
 
 #include "Interfaces.h"
 
+extern bool g_connected;
+
 class CMainFrame : 
 	public CRibbonFrameWindowImpl<CMainFrame>, 
 	public CMessageFilter, public CIdleHandler,
@@ -144,6 +146,4 @@ private:
 	CString m_ParserInput;
 
 	CString m_CurrentFilePath;
-	
-	bool _connected = false;
 };

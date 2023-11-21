@@ -25,6 +25,7 @@ HANDLE g_hSem = NULL;
 struct evbuffer* g_buf;
 uint64_t rx = 0;
 HANDLE g_hMutex = NULL;
+bool g_connected = false;
 
 int start_local(profile_t profile) {
 	char* remote_host = profile.remote_host;
@@ -312,6 +313,7 @@ void remote_timeout_cb(evutil_socket_t sock, short which, void* arg) {
 
 void close_and_free_remote(remote_t* remote) {
     if (remote != nullptr) {
+        g_connected = false;
         evtimer_del(remote->send_ctx->watcher);
         event_del(remote->send_ctx->io);
         event_del(remote->recv_ctx->io);
